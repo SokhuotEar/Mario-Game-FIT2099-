@@ -35,7 +35,7 @@ Date by which deliverable must be completed:
 
 ### Deliverable 4: Design Documentation
 
-Person(s) responsible for production:
+Person(s) responsible for production: Klarissa Jutivannadevi
 
 Person(s) responsible for testing/reviewing:
 
