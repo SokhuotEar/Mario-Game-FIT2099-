@@ -10,35 +10,35 @@
 
 ### Deliverable 1: Work Breakdown Agreement (This document)
 
-Person(s) responsible for production:
+Person(s) responsible for production: Sok Huot Ear, Satya Jhaveri, Klarissa Jutivannadevi
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Satya Jhaveri, Klarissa Jutivannadevi
 
-Date by which deliverable must be completed:
+Date by which deliverable must be completed: 11 April 2022
 
 ### Deliverable 2: UML Class Diagrams
 
-Person(s) responsible for production:
+Person(s) responsible for production: Satya Jhaveri 
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Klarissa Jutivannadevi
 
-Date by which deliverable must be completed:
+Date by which deliverable must be completed: 11 April 2022
 
 ### Deliverable 3: UML Interaction Diagrams
 
-Person(s) responsible for production:
+Person(s) responsible for production: Sok Huot Ear
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Satya Jhaveri, Klarissa Jutivannadevi
 
-Date by which deliverable must be completed:
+Date by which deliverable must be completed: 11 April 2022
 
 ### Deliverable 4: Design Documentation
 
 Person(s) responsible for production: Klarissa Jutivannadevi
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Satya Jhaveri
 
-Date by which deliverable must be completed:
+Date by which deliverable must be completed: 11 April 2022
 
 ### Deliverable 5: Jump Up
 
