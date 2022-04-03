@@ -1,0 +1,133 @@
+General List of Classes, Enums and Interfaces:
+Classes:
+	Req 1: Trees
+		Tree extends Ground
+		Coin extends Ground
+
+	Req 2: Jump ability
+		Player extends Actor
+
+	Req 3: Enemies
+		Enemy(abstract) extends Actor
+		Goomba extends Enemy
+		Koopa extends Enemy
+
+	Req 4: Magic Items
+		MagicItem(abstract) extends Ground
+		SuperMushroom extends MagicItem
+		PowerStar extends MagicItem
+
+	Req 5: Trading
+		Toad extends Actor
+
+	Req 6: Monologue
+		Probably no actual classes needed for this, just implement text feedback for speech/actions using println (from the Display class in the game engine, not the System.out one)
+
+	Req 7: Reset game
+		Once again, no new classes needed, but just implement methods in already existing classes that allow this to be implemented.
+
+
+
+Enums:
+	TreeType (implements the 3 stages of tree lifetime, sprout(+), sapling (t), Mature (T))
+
+Interfaces:
+	Jumpable
+
+
+
+##########################
+
+
+Detailed Desc of Each Interface:
+	Jumpable:
+		The implementing class will override the getFallDamage method
+
+		Methods:
+			int getFallDamage() - returns 0 if the jump was successful, otherwise returns the repsective amount of fall damage
+
+
+##########################
+
+
+Detailed Desc of Each class:
+	Tree: extends Ground implements Jumpable
+		Attributes:
+			TreeType type - enum describing the state of the tree's growth
+			int turnsUntilGrowth - the number of game rounds until the tree grows
+			int turnsUntilSprout - if the tree is Mature(T), represents the number of turns until a new sprout is spawned adjacent to the tree
+			static final int maxTreeCount - the maximum number of trees allowed on the map
+			static int treeCount - the current number of trees on the map
+
+		Methods:
+			Tree() - constructor that intialises the state to sprout(+), and increments the treeCount
+			void grow() - advances the tree one state of growth
+			void update() - is run once every round, performs menial tasks such as the % chance to spawn enemies/coins, decrements turnsUntilGrowth, calls grow if necessary, decrements
+			void spawnAdjacentTree() - spawns a sprout if there is fertile dirt near the tree
+			int getFallDamage() - overrides for the Jumpable interface, returns 0 if the jump was successful, otherwise returns the repsective amount of fall damage
+			void spawnDrop() - spawns an enemy on the tree (goomba if sprout(10%), coin if sapling(10%), and koopa if Mature(15%))
+			void die() - decrements the treeCount and turns the tree into dirt
+
+
+	Coin: extends Ground
+		Attributes:
+			final static int value = 20 - represents the amount of money gained from picking up the coin
+		Methods:
+			Coin() - constructor that sets the display character to '$'
+			int getValue() - returns the value of the coin
+
+
+	Player: extends Actor
+		Attributes:
+
+		Methods:
+			void jump() - tries to jump to a given direction, if successful, the player moves, if unsuccesful, the player loses health and does not move, prints messages to te console (using println from the Display class)
+
+
+## enemy class that goomba and koopa will extend, also makes it easier for if there needed to be another enemy added in the future
+	Enemy: extends Actor
+		Attributes:
+			boolean engagedInAttack - initialised to false, but once engaged in a fight with player, is set to true
+		Methods:
+			void move() - moves randomly if has not engaged in fight yet, otherwise follows the player.
+
+
+	Goomba: extends Enemy
+		Attributes:
+
+		Methods:
+			Goomba() - constructor that initialises health to 20, and engagedInAttack to false
+			void update() - called once per round, calls Enemy move method, Also 10% chance to suicide
+
+
+	Koopa: extends Enemy
+		Attributes:
+			boolean dormant - initialised to be false, but once defeated, will turn true
+			boolean engagedInAttack - initialised to false, but once engaged in a fight with player, is set to true
+		Methods:
+			Koopa() - constructor tha initialises health to 100, engagedInAttack to false, and dormant to false
+			void update() - called once per round, calls Enemy move method if dormant is false
+			void goDormant() - called if the Koopa loses all it's health, turns into a shell(change display character to 'D') and does nothing
+			void die() - called if the player hits the Koopa with a wrench, destroys the Koopa and puts a super mushroom in its place
+
+
+	# Not super confident on how to go about implementing the magic items section, since it's so closely connected to the Abilities and Capabilities classes which are imlemented by the game engine I'll look more into it, but should be fine leaving it unfinished for A1
+	MagicItem: extends Ground
+		Attributes:
+		Methods:
+
+
+	SuperMushroom: extends MagicItem
+		Attributes:
+		Methods:
+
+
+	PowerStar: extends MagicItem
+		Attributes:
+		Methods:
+
+
+	Toad: extends Actor (could implement Toad as a Singleton, since there will only ever be one toad?)
+		Attributes:
+		Methods:
+
