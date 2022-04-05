@@ -2,7 +2,7 @@ General List of Classes, Enums and Interfaces:
 Classes:
 	Req 1: Trees
 		Tree extends Ground
-		Coin extends Ground
+		Coin extends Item
 
 	Req 2: Jump ability
 		Player extends Actor
@@ -27,17 +27,41 @@ Classes:
 		Once again, no new classes needed, but just implement methods in already existing classes that allow this to be implemented.
 
 
+Explanation of parts of the UML diagram:
+	Enemies Explanation:
+		The abstract enemy class has a map of behaviours. There are currently 3 behaviours implemented, Wander, Attack and Follow.
+		The abstract enemy class exists so that if we need to add more enemies in the future, it will be relatively easy.
+		The Goomba and Koopa classes extend the Enemy class.
+		Since enemies cannot move through 'Floor', there is a dependency from Enemy to Floor, so that if the surroundings of the Enemy are Floor objects, the Enemy does not see that as a valid move.
+		GampMap is the class that manages all actors
+		The Wrench class extends Item.
+
+	Tree Explanation:
+		The Tree class extends Ground
+		The Tree has a dependency on Goomba and Koopa directly (not the enemy class) since it needs to instantiate the Goombas (sprout) and Koopa (mature)
+		The Tree has a dependency on Dirt since it has the chance to wither and die and turn to dirt
+
+	Player Explanation:
+		Player depends on Tree and Wall due to the %chances of failure to jump walls/trees
+
+	Trading Explanation:
+		Toad extends Actor
+		Toad will handle all of the trading logic, so depends on Player to see the player's money
+		Toad depends on Wrench and MagicalItem since Toad sells those
+
+
+
 
 Enums:
 	TreeType (implements the 3 stages of tree lifetime, sprout(+), sapling (t), Mature (T))
 
 Interfaces:
-	Jumpable
+	Jumpable (implemented by stuff like Walls, Trees, etc that can be jumped over/onto)
 
 
 
 ##########################
-
+the following is super rough notes I made while trying to make sense of / connect all the classes together, some methods may be outdated/unnecessary
 
 Detailed Desc of Each Interface:
 	Jumpable:
@@ -53,7 +77,7 @@ Detailed Desc of Each Interface:
 Detailed Desc of Each class:
 	Tree: extends Ground implements Jumpable
 		Attributes:
-			TreeType type - enum describing the state of the tree's growth
+			enum TreeType type - enum describing the state of the tree's growth
 			int turnsUntilGrowth - the number of game rounds until the tree grows
 			int turnsUntilSprout - if the tree is Mature(T), represents the number of turns until a new sprout is spawned adjacent to the tree
 			static final int maxTreeCount - the maximum number of trees allowed on the map
@@ -69,7 +93,7 @@ Detailed Desc of Each class:
 			void die() - decrements the treeCount and turns the tree into dirt
 
 
-	Coin: extends Ground
+	Coin: extends Item
 		Attributes:
 			final static int value = 20 - represents the amount of money gained from picking up the coin
 		Methods:
@@ -87,25 +111,22 @@ Detailed Desc of Each class:
 ## enemy class that goomba and koopa will extend, also makes it easier for if there needed to be another enemy added in the future
 	Enemy: extends Actor
 		Attributes:
-			boolean engagedInAttack - initialised to false, but once engaged in a fight with player, is set to true
-		Methods:
-			void move() - moves randomly if has not engaged in fight yet, otherwise follows the player.
+			Map<int, Behaviour> behaviours - map of behaviours that the enemy can have (incl wander, attack, follow)
 
 
 	Goomba: extends Enemy
 		Attributes:
 
 		Methods:
-			Goomba() - constructor that initialises health to 20, and engagedInAttack to false
+			Goomba() - constructor that initialises health to 20
 			void update() - called once per round, calls Enemy move method, Also 10% chance to suicide
 
 
 	Koopa: extends Enemy
 		Attributes:
-			boolean dormant - initialised to be false, but once defeated, will turn true
-			boolean engagedInAttack - initialised to false, but once engaged in a fight with player, is set to true
+			boolean dormant - initialised to be false, but once HP == 0, will turn true
 		Methods:
-			Koopa() - constructor tha initialises health to 100, engagedInAttack to false, and dormant to false
+			Koopa() - constructor tha initialises health to 100, and dormant to false
 			void update() - called once per round, calls Enemy move method if dormant is false
 			void goDormant() - called if the Koopa loses all it's health, turns into a shell(change display character to 'D') and does nothing
 			void die() - called if the player hits the Koopa with a wrench, destroys the Koopa and puts a super mushroom in its place
@@ -130,4 +151,3 @@ Detailed Desc of Each class:
 	Toad: extends Actor (could implement Toad as a Singleton, since there will only ever be one toad?)
 		Attributes:
 		Methods:
-
