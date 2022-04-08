@@ -44,7 +44,7 @@ Date by which deliverable must be completed: 11 April 2022 (A1)
 
 Person(s) responsible for production: Satya Jhaveri
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Klarissa Jutivannadevi
 
 Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
@@ -52,7 +52,7 @@ Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
 Person(s) responsible for production: Satya Jhaveri
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Klarissa Jutivannadevi
 
 Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
@@ -60,7 +60,7 @@ Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
 Person(s) responsible for production: Klarissa Jutivannadevi
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Satya Jhaveri, Sok Huot Ear
 
 Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
@@ -68,7 +68,7 @@ Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
 Person(s) responsible for production: Satya Jhaveri
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Klarissa Jutivannadevi
 
 Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
@@ -76,7 +76,7 @@ Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
 Person(s) responsible for production: Sok Huot Ear
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Klarissa Jutivannadevi, Satya Jhaveri
 
 Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
@@ -84,7 +84,7 @@ Date by which deliverable must be completed: 20/04/2022 (a week before A2 due)
 
 Person(s) responsible for production: Sok Huot Ear
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Klarissa Jutivannadevi, Satya Jhaveri
 
 Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
@@ -92,8 +92,9 @@ Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
 Person(s) responsible for production: Klarissa Jutivannadevi
 
-Person(s) responsible for testing/reviewing:
+Person(s) responsible for testing/reviewing: Satya Jhaveri, Sok Huot Ear
 
 Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
 ## Signatures:
+Klarissa Jutivannadevi accepted this WBA
