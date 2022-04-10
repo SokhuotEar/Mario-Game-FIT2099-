@@ -1,3 +1,4 @@
+Edit: This doc is very outdated. Please refer to project/docs/FIT2099_Assignment_1_-_Design_Rationale.pdf for updated info on design
 General List of Classes, Enums and Interfaces:
 Classes:
 	Req 1: Trees
