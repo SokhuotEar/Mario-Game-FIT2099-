@@ -268,4 +268,8 @@ public abstract class Actor implements Capable, Printable {
 	 * @return a list of unmodifiable capabilities
 	 */
 	public List<Enum<?>> capabilitiesList() { return capabilitySet.capabilitiesList();	}
+
+
 }
+
+

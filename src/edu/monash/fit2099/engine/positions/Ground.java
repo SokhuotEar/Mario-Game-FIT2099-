@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.capabilities.CapabilitySet;
 import edu.monash.fit2099.engine.capabilities.Capable;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Printable;
 
 import java.util.List;
