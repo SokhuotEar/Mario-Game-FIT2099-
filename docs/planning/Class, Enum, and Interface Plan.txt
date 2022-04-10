@@ -132,7 +132,7 @@ Detailed Desc of Each class:
 			void die() - called if the player hits the Koopa with a wrench, destroys the Koopa and puts a super mushroom in its place
 
 
-	# Not super confident on how to go about implementing the magic items section, since it's so closely connected to the Abilities and Capabilities classes which are imlemented by the game engine I'll look more into it, but should be fine leaving it unfinished for A1
+	# Not super confident on how to go about implementing the magic items section, since it's so closely connected to the Abilities and Capabilities classes which are implemented by the game engine I'll look more into it, but should be fine leaving it unfinished for A1
 	MagicItem: extends Ground
 		Attributes:
 		Methods:
