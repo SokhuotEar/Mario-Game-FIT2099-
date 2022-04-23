@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.capabilities.CapabilitySet;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -48,6 +49,11 @@ public class Application {
 			// Adding player:
 			Actor mario = new Player("Player", 'm', 100);
 			world.addPlayer(mario, gameMap.at(42, 10));
+
+			//Adding SuperMushroom and PowerStar
+			gameMap.at(42, 10).addItem(new SuperMushroom());
+			gameMap.at(42, 10).addItem(new PowerStar());
+
 
 			// Adding Toad:
 			Toad toad = new Toad();
