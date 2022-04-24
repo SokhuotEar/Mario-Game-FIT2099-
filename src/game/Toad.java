@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Character.toLowerCase;
+
 public class Toad extends Actor {
 
     /**
@@ -48,7 +50,7 @@ public class Toad extends Actor {
         ActionList actions =  new ActionList();
 
         // Adding the SpeakAction:
-        if (otherActor.getDisplayChar() == 'm' || otherActor.getDisplayChar() == 'M') {  // Check actor is player
+        if (otherActor.getDisplayChar() == 'm') {  // Check actor is player TODO: fix this
             List<String> lines = new ArrayList<>();
 
             lines.add("The Princess is depending on you! You are our only hope.");
@@ -59,8 +61,8 @@ public class Toad extends Actor {
                 lines.add("You might need a wrench to smash Koopa's hard shells.");
             }
 
-            // TODO: Add powerstar line only if actor does not have powerstar ability (powerups not implemented yet)
-            if (true) {
+            // Add powerstar line only if actor does not have power star ability
+            if (otherActor.hasCapability(Status.INVINCIBLE)) {
                 lines.add("You better get back to finding the Power Stars.");
             }
             Random rand = new Random();

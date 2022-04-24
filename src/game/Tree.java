@@ -11,6 +11,8 @@ public class Tree extends Ground {
     //attribute
     private int age;
     private TreeType treeType;
+    private static int treeCount = 0;
+    private static final int maxTreeCount = 40; // new sprouts will only grow if there are less than this number of trees
 
     /**
      * Constructor.
@@ -19,6 +21,7 @@ public class Tree extends Ground {
         super('+');
         this.age = 0;
         this.treeType = TreeType.SPROUT;
+        treeCount++;
     }
 
     //getters
@@ -127,7 +130,7 @@ public class Tree extends Ground {
     //method for growing new sprout
     private void growNewSprout(Location location){
         // TODO: fix the way we check if location is ground since checking displaychar is a code smell
-        if ((getTreeType() == TreeType.MATURE) && this.getAge()%5 == 0) {
+        if ((getTreeType() == TreeType.MATURE) && this.getAge()%5 == 0 && treeCount <= maxTreeCount) {
             // new sprouts are grown
             //check if the location has an actor and if there is already a tree
 
@@ -142,7 +145,6 @@ public class Tree extends Ground {
                     //check if actor the location is clear
                     if (location.map().at(newX, newY).getDisplayChar() == '.') {
                         location.map().at(newX, newY).setGround(new Tree());
-                        return;
                     }
                 }
 
@@ -160,7 +162,7 @@ public class Tree extends Ground {
 
     public void tick(Location location){
         grow();                     // trees can grow
-        spawnEnemy(location);       // trees can spawn enemies
+        //spawnEnemy(location);       // trees can spawn enemies
         dropCoin(location);         // trees can drop coins
         growNewSprout(location);        // trees can grow new sprout
         wither(location);

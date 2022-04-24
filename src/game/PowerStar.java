@@ -41,7 +41,7 @@ public class PowerStar extends Item implements Consumable {
     @Override
     public void consume(Actor actor) {
         //Give the invisible buff:
-        actor.addCapability(Status.INVISIBLE);
+        actor.addCapability(Status.INVINCIBLE);
 
         // Heal by 200 points:
         actor.heal(hpToHealBy);
