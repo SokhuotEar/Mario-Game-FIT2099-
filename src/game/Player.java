@@ -62,7 +62,6 @@ public class Player extends Actor  {
 		if (hasCapability(Status.TALL)) {
 			removeCapability(Status.TALL);
 		}
-		super.hurt(points);
 	}
 
 	@Override
