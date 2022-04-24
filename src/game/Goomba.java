@@ -13,15 +13,14 @@ import java.util.Map;
 /**
  * A little fungus guy.
  */
-public class Goomba extends Actor {
-	private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
 
+public class Goomba extends Enemy {
 	/**
-	 * Constructor.
+	 * Constructor
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 50);
-		this.behaviours.put(10, new WanderBehaviour());
+		addBehaviour(10, new WanderBehaviour());
 	}
 
 	/**
@@ -49,12 +48,11 @@ public class Goomba extends Actor {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		for(Behaviour Behaviour : behaviours.values()) {
+		for(Behaviour Behaviour : getBehaviours().values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
 				return action;
 		}
 		return new DoNothingAction();
 	}
-
 }
