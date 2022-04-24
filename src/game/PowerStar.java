@@ -10,4 +10,8 @@ public class PowerStar extends Item implements Consumable {
     public PowerStar() {
         super("Power Star", '*', true);
     }
+
+    public void checkLifetime() {
+
+    }
 }
