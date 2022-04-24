@@ -37,7 +37,7 @@ public class ConsumeAction extends Action {
             actor.removeItemFromInventory(consumableItem.getItem());
         }
         else {  // Else if the item is on the ground, remove it from the ground
-            // Todo not sure on this bit
+            map.locationOf(actor).removeItem(consumableItem.getItem());
         }
 
 
