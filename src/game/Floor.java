@@ -20,11 +20,7 @@ public class Floor extends Ground {
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
-		boolean res = true;
 
-		if (Enemy.isInstance(actor)) {
-			res = false;
-		}
-		return res;
+		return !Enemy.isInstance(actor);
 	}
 }

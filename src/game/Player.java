@@ -36,10 +36,30 @@ public class Player extends Actor  {
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * Do some damage to the current Actor.
+	 * <p>
+	 * If the Actor's hitpoints go down to zero, it will be knocked out.
+	 *
+	 * @param points number of hitpoints to deduct.
+	 */
+	@Override
+	public void hurt(int points) {
+		// If the player has the tall status, remove the tall status:
+		if (hasCapability(Status.TALL)) {
+			removeCapability(Status.TALL);
+		}
+		super.hurt(points);
+	}
+
 	@Override
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
+
+
+
+
 
 
 }

@@ -2,10 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-
-import java.util.List;
 
 /**
  * Special Action that allows Actors to drop items.
@@ -15,20 +12,19 @@ public class ConsumeAction extends Action {
     /**
      * Current item
      */
-    private final Item item;
+    private final Consumable consumableItem;
 
     /**
      * Constructor.
      *
-     * @param item the item to drop
+     * @param consumableItem the item to drop
      */
-    public ConsumeAction(Item item) {
-        this.item = item;
-        System.out.println(item);
+    public ConsumeAction(Consumable consumableItem) {
+        this.consumableItem = consumableItem;
     }
 
     /**
-     * Drop the item.
+     * Consume the item.
      *
      * @param actor The actor performing the action
      * @param map The map the actor is on
@@ -36,8 +32,18 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.removeItemFromInventory(item);
-        map.locationOf(actor).addItem(item);
+        // IF actor has consumable item in inventory, remove it:
+        if (actor.getInventory().contains(consumableItem)) {
+            actor.removeItemFromInventory(consumableItem.getItem());
+        }
+        else {  // Else if the item is on the ground, remove it from the ground
+            // Todo not sure on this bit
+        }
+
+
+        // Add the power ups:
+        consumableItem.consume(actor);
+
         return menuDescription(actor);
     }
 
@@ -49,6 +55,6 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consumes the " + item;
+        return actor + " consumes the " + consumableItem;
     }
 }

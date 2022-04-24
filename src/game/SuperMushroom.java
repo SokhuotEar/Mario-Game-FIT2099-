@@ -18,8 +18,8 @@ import java.util.Random;
  */
 
 public class SuperMushroom extends Item implements Consumable {
-    private boolean portable;
     private int mushroomHP;
+    private static final int maxHPIncreaseAmount = 50;
     private int jumpRate;
 
     /***
@@ -28,16 +28,7 @@ public class SuperMushroom extends Item implements Consumable {
      */
     public SuperMushroom() {
         super("Super Mushroom", '^', true);
-        this.portable = true;
-    }
-
-    public int increaseHP(){
-        this.mushroomHP = 50;
-        return this.mushroomHP; 
-    }
-    
-    public void changeBig(Actor player) {
-        player.addCapability(Status.TALL);
+        super.addAction(new ConsumeAction(this));
     }
 
     @Override
@@ -45,80 +36,33 @@ public class SuperMushroom extends Item implements Consumable {
 
     }
 
-    /*
-    public void getAllowableAction() {
-        ConsumeAction consumeAction = new ConsumeAction();
-        consumeAction.magicalItemConsumed(this);
-        addAction(consumeAction);
-    }
-
-     */
-
-    /*
-    public ConsumeAction getConsumeAction(Actor actor) {
-        if(portable)
-            return new ConsumeAction(this);
-        return null;
-    }
-
-     */
-
-    /*
-    @Override
-    public List<Action> getAllowableActions() {
-        List<Action> actions = new ActionList().getUnmodifiableActionList();
-        System.out.println("udah ada di sini");
-        new ActionList().add(new ConsumeAction(this));
-        return actions;
-
-    }
-
-     */
-
-    @Override
-    public PickUpItemAction getPickUpAction(Actor actor) {
-        PickUpItemAction action = new PickUpItemAction(this);
-        System.out.println("ini getPickupaction dari supermushroom");
-        if(portable) {
-            new ActionList().add(new ConsumeAction(this));
-            return action;
-        }
-        return null;
-    }
-
-    /*
-
-    @Override
-    public PickUpItemAction getPickUpAction(Actor actor) {
-        if(portable)
-            return new PickUpItemAction(this);
-
-        PickUpItemAction actions = new PickUpItemAction(this);
-        ActionList actions1 = new ActionList();
-
-        actions1.add(new ConsumeAction((this)));
-
-        return null;
-    }
-
-     */
-
     @Override
     public DropItemAction getDropAction(Actor actor) {
-        getConsumeAction(actor);
         return null;
     }
 
-
+    @Override
     public ConsumeAction getConsumeAction(Actor actor) {
-        if(portable)
-            return new ConsumeAction(this);
-        return null;
+        return new ConsumeAction(this);
+    }
+
+    /**
+     * Returns the item as an instance of an item object. Overridden method from ConsumableInterface
+     * @return the item object
+     */
+    @Override
+    public Item getItem() {
+        return this;
     }
 
 
+    @Override
+    public void consume(Actor actor) {
+        // Increase max HP by 50:
+        actor.increaseMaxHp(maxHPIncreaseAmount);
 
-
-
+        // Give TALL capability (can jump over anything), will change displaychar to uppercase, see player.getDisplayChar:
+        actor.addCapability(Status.TALL);
+    }
 
 }

@@ -9,17 +9,14 @@ import edu.monash.fit2099.engine.positions.GameMap;
 /** I made this only cuz I need a Koompa class for my part. It does not function **/
 
 
-public class Koopa extends Actor {
+public class Koopa extends Enemy {
 
     /**
      * Constructor.
-     *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
      */
-    public Koopa(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public Koopa() {
+        super("Koopa", 'K', 100);
+        addBehaviour(10, new WanderBehaviour());
     }          // to be changed
 
     @Override
