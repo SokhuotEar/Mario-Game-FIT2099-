@@ -33,7 +33,7 @@ public class Tree extends Ground {
     //Methods
 
     //method that changes tree type based on display character
-    public void changeTreeStatus() {
+    private void changeTreeStatus() {
         char treeDisplay = getDisplayChar();
         if (treeDisplay == 't') {
             this.treeType = TreeType.SAPLING;
@@ -44,7 +44,11 @@ public class Tree extends Ground {
     }
 
     // function for trees growing
-    public void grow() {
+    private void grow() {
+        // Increment age:
+        age++;
+
+        // Update status and display char if necessary:
         if (age == 10) {
             // trees grow to sapling in 10 turns
             setDisplayChar('t');
@@ -57,7 +61,7 @@ public class Tree extends Ground {
     }
 
     // function for tree spawning Goomba
-    public void spawnEnemy(Location location) {
+    private void spawnEnemy(Location location) {
 
         treeType = getTreeType(); // get tree type
 
@@ -76,9 +80,9 @@ public class Tree extends Ground {
                     // no enemy is spawned
 
                 case MATURE:
-                    if (new RNG().rng(15))  //15% possibility of spawning Goomba
+                    if (new RNG().rng(15))  //15% possibility of spawning Koopa
                     {
-                        location.addActor(new Goomba());
+                        location.addActor(new Koopa());
                     }
 
             }
@@ -88,9 +92,10 @@ public class Tree extends Ground {
     }
 
     // trees can drop coins
-    public void dropCoin(Location location) {
+    private void dropCoin(Location location) {
         // for RNG purposes
         int probability;
+        /*
         switch (treeType) {
             case SPROUT:
             // no coins are dropped
@@ -110,12 +115,19 @@ public class Tree extends Ground {
                     location.addItem(new Coin());
                 }
 
+        }*/
+        if (treeType == TreeType.SAPLING) {
+            Random rand = new Random();
+            if (rand.nextInt(100) < 10) {  // spawn coin with 10% probability
+                location.addItem(new Coin());
+            }
         }
     }
 
     //method for growing new sprout
-    public void growNewSprout(Location location){
-        if ((getTreeType() == TreeType.SPROUT) && this.getAge()%5 == 0) {
+    private void growNewSprout(Location location){
+        // TODO: fix the way we check if location is ground since checking displaychar is a code smell
+        if ((getTreeType() == TreeType.MATURE) && this.getAge()%5 == 0) {
             // new sprouts are grown
             //check if the location has an actor and if there is already a tree
 
@@ -138,16 +150,20 @@ public class Tree extends Ground {
         }
     }
 
-
+    // Method for withering away
+    private void wither(Location location) {
+        if (this.treeType == TreeType.MATURE && new Random().nextInt(5) == 0) {  // 20% chance to wither and die if mature
+            location.setGround(new Dirt());  // change current location to Dirt
+        }
+    }
 
 
     public void tick(Location location){
-        age++;
         grow();                     // trees can grow
-        //spawnEnemy(location);       // trees can spawn enemies
+        spawnEnemy(location);       // trees can spawn enemies
         dropCoin(location);         // trees can drop coins
         growNewSprout(location);        // trees can grow new sprout
-
+        wither(location);
     }
 
 
