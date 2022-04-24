@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 
@@ -16,7 +17,6 @@ public class PowerStar extends Item implements Consumable {
     }
 
     public void checkLifetime() {
-
     }
 
     @Override

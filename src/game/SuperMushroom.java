@@ -18,7 +18,6 @@ import java.util.Random;
  */
 
 public class SuperMushroom extends Item implements Consumable {
-    private int mushroomHP;
     private static final int maxHPIncreaseAmount = 50;
     private int jumpRate;
 
