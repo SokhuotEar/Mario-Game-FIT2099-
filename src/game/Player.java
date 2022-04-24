@@ -13,6 +13,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 public class Player extends Actor  {
 
 	private final Menu menu = new Menu();
+	private int turnsLeft = 10;
 
 	/**
 	 * Constructor.
@@ -31,6 +32,18 @@ public class Player extends Actor  {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+
+		if(hasCapability((Status.INVINCIBLE)) && turnsLeft != 0) {
+			String sentence = "Mario is INVINCIBLE! \nMario consumes Power Star - " + String.valueOf(turnsLeft) + " turns remaining";
+			turnsLeft--;
+			display.println(sentence);
+			return menu.showMenu(this, actions, display);
+		}
+
+		else {
+			this.removeCapability(Status.INVINCIBLE);
+		}
+
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
