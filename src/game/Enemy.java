@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+import javax.management.MBeanNotificationInfo;
 import java.util.*;
 
 public abstract class Enemy extends Actor {
@@ -59,6 +60,10 @@ public abstract class Enemy extends Actor {
             // If other actor is hostile to enemy, add attack action and add follow behaviour
             actions.add(new AttackAction(this,direction));
             behaviours.put(9, new FollowBehaviour(otherActor));
+            behaviours.put(8, new AttackBehaviour(otherActor));
+        }
+        else {
+            behaviours.remove(8);
         }
         return actions;
     }
