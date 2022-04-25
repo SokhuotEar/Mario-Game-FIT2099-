@@ -129,7 +129,6 @@ public class Tree extends Ground {
 
     //method for growing new sprout
     private void growNewSprout(Location location){
-        // TODO: fix the way we check if location is ground since checking displaychar is a code smell
         if ((getTreeType() == TreeType.MATURE) && this.getAge()%5 == 0 && treeCount <= maxTreeCount) {
             // new sprouts are grown
             //check if the location has an actor and if there is already a tree
@@ -143,7 +142,7 @@ public class Tree extends Ground {
                 //check if it is in map bound
                 if (newX <= location.map().getXRange().min()) {
                     //check if actor the location is clear
-                    if (location.map().at(newX, newY).getDisplayChar() == '.') {
+                    if (location.map().at(newX, newY).getDisplayChar() == new Dirt().getDisplayChar()) {
                         location.map().at(newX, newY).setGround(new Tree());
                     }
                 }
