@@ -1,12 +1,9 @@
 package game;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-import javax.management.MBeanNotificationInfo;
 import java.util.*;
 
 public abstract class Enemy extends Actor {
@@ -22,7 +19,7 @@ public abstract class Enemy extends Actor {
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.behaviours.put(10, new WanderBehaviour());
+        this.behaviours.put(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
         enemyList.add(this);
     }
 
@@ -65,11 +62,11 @@ public abstract class Enemy extends Actor {
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             // If other actor is hostile to enemy, add attack action and add follow behaviour
             actions.add(new AttackAction(this,direction));
-            behaviours.put(9, new FollowBehaviour(otherActor));
-            behaviours.put(8, new AttackBehaviour(otherActor));
+            behaviours.put(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
+            behaviours.put(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour(otherActor));
         }
         else {
-            behaviours.remove(8);
+            behaviours.remove(BehaviourPriority.ATTACK.ordinal());
         }
         return actions;
     }
