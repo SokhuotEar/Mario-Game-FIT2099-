@@ -17,7 +17,9 @@ public class Koopa extends Enemy {
     public Koopa() {
         super("Koopa", 'K', 100);
         addBehaviour(10, new WanderBehaviour());
-        addItemToInventory(new SuperMushroom());
+        SuperMushroom mushroom = new SuperMushroom();
+        mushroom.togglePortability();
+        addItemToInventory(mushroom);
         dormant = false;
     }
 

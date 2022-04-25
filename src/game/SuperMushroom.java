@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpItemAction;
 
 /**
  * Class dedicated for the functionality of SuperMushroom
@@ -19,13 +20,20 @@ public class SuperMushroom extends Item implements Consumable {
      *
      */
     public SuperMushroom() {
-        super("Super Mushroom", '^', true);
+        super("Super Mushroom", '^', false);  // set portable to false so that item can't be dropped unless portability is toggled
         super.addAction(new ConsumeAction(this));
     }
 
+    /**
+     * Create and return an action to pick this Item up. SuperMushroom can always be picked up
+     * If this Item is not portable, returns null.
+     *
+     * @param actor
+     * @return a new PickUpItemAction if this Item is portable, null otherwise.
+     */
     @Override
-    public DropItemAction getDropAction(Actor actor) {
-        return null;
+    public PickUpItemAction getPickUpAction(Actor actor) {
+        return new PickUpItemAction(this);
     }
 
     /**
