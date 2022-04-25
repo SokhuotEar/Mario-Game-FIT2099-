@@ -49,7 +49,7 @@ public class AttackAction extends Action {
 				while (target.isConscious()) {
 					target.hurt(damage);
 				}
-				result = actor + " is invincible! " + target + "is killed." ;
+				result = actor + " is invincible! " + target + " is killed." ;
 			}
 			else {  // Otherwise, attack target normally
 

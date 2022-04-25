@@ -35,9 +35,11 @@ public class Player extends Actor  {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
+		// Display player stats:
+		display.println(name + ": " + printHp() + "HP");  // todo: add money here
 		if(hasCapability((Status.INVINCIBLE))) {
 			if (invincibleTurnsLeft > 0) {
-				String sentence = "Mario is INVINCIBLE! - " + invincibleTurnsLeft + " turns remaining";
+				String sentence = this + " is INVINCIBLE! - " + invincibleTurnsLeft + " turns remaining";
 				invincibleTurnsLeft--;
 				display.println(sentence);
 				return menu.showMenu(this, actions, display);
@@ -64,9 +66,7 @@ public class Player extends Actor  {
 	@Override
 	public void hurt(int points) {
 		// If the player has the tall status, remove the tall status:
-		if (hasCapability(Status.TALL)) {
-			removeCapability(Status.TALL);
-		}
+		removeCapability(Status.TALL);  // the if checking is done by the CapabilitySet.removeCapability method
 		super.hurt(points);
 	}
 
@@ -88,10 +88,5 @@ public class Player extends Actor  {
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
-
-
-
-
-
 
 }

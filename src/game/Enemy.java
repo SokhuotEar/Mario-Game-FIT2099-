@@ -6,21 +6,18 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Enemy extends Actor {
     private static List<Enemy> enemyList = new ArrayList<>();
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
+    private final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
     /**
      * Constructor.
      *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
+     * @param name        the name of the Enemy
+     * @param displayChar the character that will represent the Enemy in the display
+     * @param hitPoints   the Enemy's starting hit points
      */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
@@ -44,6 +41,26 @@ public abstract class Enemy extends Actor {
         }
 
         return result;
+    }
+
+    /**
+     * At the moment, we only make it can be attacked by Player.
+     * @param otherActor the Actor that might perform an action.
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return list of actions
+     * @see Status#HOSTILE_TO_ENEMY
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            // If other actor is hostile to enemy, add attack action and add follow behaviour
+            actions.add(new AttackAction(this,direction));
+            behaviours.put(9, new FollowBehaviour(otherActor));
+        }
+        return actions;
     }
 
     public void addBehaviour(Integer priority, Behaviour behaviour) {

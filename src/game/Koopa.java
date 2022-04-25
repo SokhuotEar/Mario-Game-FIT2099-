@@ -6,9 +6,7 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-
-/** I made this only cuz I need a Koompa class for my part. It does not function **/
-
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
 public class Koopa extends Enemy {
 
@@ -28,5 +26,15 @@ public class Koopa extends Enemy {
                 return action;
         }
         return new DoNothingAction();
+    }
+
+    /**
+     * Creates and returns an intrinsic weapon.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon
+     */
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(30, "punch");
     }
 }
