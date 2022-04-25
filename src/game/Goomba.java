@@ -9,13 +9,12 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
-import java.util.HashMap;
-import java.util.Map;
 /**
  * A little fungus guy.
  */
 
 public class Goomba extends Enemy {
+	private static final int sucicideChacnce = 10;
 	/**
 	 * Creates and returns an intrinsic weapon.
 	 *
@@ -42,6 +41,11 @@ public class Goomba extends Enemy {
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		// 10% Chance to suicide:
+		if (new RNG().rng(sucicideChacnce)) {
+			return new SuicideAction();
+		}
+
 		for(Behaviour Behaviour : getBehaviours().values()) {
 			Action action = Behaviour.getAction(this, map);
 			if (action != null)
