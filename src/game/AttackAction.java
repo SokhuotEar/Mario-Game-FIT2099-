@@ -41,27 +41,34 @@ public class AttackAction extends Action {
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
+		// If the target is not invincible, attack them, otherwise, do nothing:
+		String result;
+		if (!target.hasCapability(Status.INVINCIBLE)){
+			Weapon weapon = actor.getWeapon();
 
-		Weapon weapon = actor.getWeapon();
+			if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+				return actor + " misses " + target + ".";
+			}
 
-		if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
-			return actor + " misses " + target + ".";
+			int damage = weapon.damage();
+			result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+			target.hurt(damage);
+			if (!target.isConscious()) {
+				ActionList dropActions = new ActionList();
+				// drop all items
+				for (Item item : target.getInventory())
+					dropActions.add(item.getDropAction(actor));
+				for (Action drop : dropActions)
+					drop.execute(target, map);
+				// remove actor
+				map.removeActor(target);
+				result += System.lineSeparator() + target + " is killed.";
+			}
+		}
+		else {
+			result = target + " is invincible! " + actor + "'s attack did no damage!";
 		}
 
-		int damage = weapon.damage();
-		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-		target.hurt(damage);
-		if (!target.isConscious()) {
-			ActionList dropActions = new ActionList();
-			// drop all items
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction(actor));
-			for (Action drop : dropActions)
-				drop.execute(target, map);
-			// remove actor
-			map.removeActor(target);
-			result += System.lineSeparator() + target + " is killed.";
-		}
 
 		return result;
 	}
