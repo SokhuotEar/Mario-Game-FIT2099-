@@ -5,6 +5,7 @@ import java.util.Random;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
@@ -49,7 +50,7 @@ public class AttackAction extends Action {
 				while (target.isConscious()) {
 					target.hurt(damage);
 				}
-				result = actor + " is invincible! " + target + " is killed." ;
+				result = actor + " is invincible!" ;
 			}
 			else {  // Otherwise, attack target normally
 
@@ -60,17 +61,24 @@ public class AttackAction extends Action {
 
 				result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
 				target.hurt(damage);
-				if (!target.isConscious()) {
-					ActionList dropActions = new ActionList();
-					// drop all items
-					for (Item item : target.getInventory())
+
+			}
+			if (!target.isConscious()) {
+				ActionList dropActions = new ActionList();
+				// drop all items
+				for (Item item : target.getInventory())
+					if (item.getDropAction(actor) != null) {
 						dropActions.add(item.getDropAction(actor));
-					for (Action drop : dropActions)
-						drop.execute(target, map);
-					// remove actor
-					map.removeActor(target);
-					result += System.lineSeparator() + target + " is killed.";
-				}
+					}
+					else {  // if the item cannot be dropped normally (eg power star or super mushroom) add drop action manually
+						dropActions.add(new DropItemAction(item));
+					}
+
+				for (Action drop : dropActions)
+					drop.execute(target, map);
+				// remove actor
+				map.removeActor(target);
+				result += System.lineSeparator() + target + " is killed.";
 			}
 		}
 		else {
