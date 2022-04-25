@@ -8,8 +8,6 @@ import edu.monash.fit2099.engine.items.Item;
  */
 public interface Consumable {
 
-    public void checkLifetime();
-
     public Item getItem();
 
     public void consume(Actor actor);

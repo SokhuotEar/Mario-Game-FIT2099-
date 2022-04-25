@@ -1,15 +1,8 @@
 package game;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.items.PickUpItemAction;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Class dedicated for the functionality of SuperMushroom
@@ -28,11 +21,6 @@ public class SuperMushroom extends Item implements Consumable {
     public SuperMushroom() {
         super("Super Mushroom", '^', true);
         super.addAction(new ConsumeAction(this));
-    }
-
-    @Override
-    public void checkLifetime() {
-
     }
 
     @Override
