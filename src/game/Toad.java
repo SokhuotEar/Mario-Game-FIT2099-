@@ -49,7 +49,7 @@ public class Toad extends Actor {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions =  new ActionList();
 
-        // Adding the SpeakAction:
+        // Adding a SpeakAction if the other actor is a player:
         if (otherActor.getDisplayChar() == 'm' || otherActor.getDisplayChar() == 'M') {  // Check actor is player TODO: fix this
             List<String> lines = new ArrayList<>();
 

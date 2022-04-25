@@ -13,7 +13,8 @@ import edu.monash.fit2099.engine.displays.Menu;
 public class Player extends Actor  {
 
 	private final Menu menu = new Menu();
-	private int turnsLeft = 10;
+	private int invincibleTurnsLeft;
+	private static final int maxInvincibleTurns = 10;
 
 	/**
 	 * Constructor.
@@ -25,6 +26,7 @@ public class Player extends Actor  {
 	public Player(String name, char displayChar, int hitPoints) {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		invincibleTurnsLeft = 0;
 	}
 
 	@Override
@@ -33,16 +35,19 @@ public class Player extends Actor  {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 
-		if(hasCapability((Status.INVINCIBLE)) && turnsLeft != 0) {
-			String sentence = "Mario is INVINCIBLE! \nMario consumes Power Star - " + String.valueOf(turnsLeft) + " turns remaining";
-			turnsLeft--;
-			display.println(sentence);
-			return menu.showMenu(this, actions, display);
+		if(hasCapability((Status.INVINCIBLE))) {
+			if (invincibleTurnsLeft > 0) {
+				String sentence = "Mario is INVINCIBLE! - " + invincibleTurnsLeft + " turns remaining";
+				invincibleTurnsLeft--;
+				display.println(sentence);
+				return menu.showMenu(this, actions, display);
+			}
+			else {
+				this.removeCapability(Status.INVINCIBLE);
+			}
 		}
 
-		else {
-			this.removeCapability(Status.INVINCIBLE);
-		}
+
 
 
 		// return/print the console menu
@@ -62,6 +67,21 @@ public class Player extends Actor  {
 		if (hasCapability(Status.TALL)) {
 			removeCapability(Status.TALL);
 		}
+		super.hurt(points);
+	}
+
+	/**
+	 * Add a capability to this Player.
+	 *
+	 * @param capability the Capability to add
+	 */
+	@Override
+	public void addCapability(Enum<?> capability) {
+		// Set the number of turns left with invincibility to 10 if the player consumes a power star
+		if (capability == Status.INVINCIBLE) {
+			invincibleTurnsLeft = maxInvincibleTurns;
+		}
+		super.addCapability(capability);
 	}
 
 	@Override
