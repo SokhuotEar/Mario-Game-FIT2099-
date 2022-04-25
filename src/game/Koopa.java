@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
@@ -86,8 +87,18 @@ public class Koopa extends Enemy {
         if (!dormant) {
             return super.allowableActions(otherActor, direction, map);
         }
-        else {  // if the koopa is dormant, it will not have any actions to perform
-            return new ActionList();
+        else {  // if the koopa is dormant, it can only be attacked if the other actor has a wrench
+            if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                ActionList actions =  new ActionList();
+                for (Item item : otherActor.getInventory()) {
+                    if (Wrench.isInstance(item)){
+                        actions.add(new AttackAction(this, direction));
+                        break;
+                    }
+                }
+                return actions;
+            }
         }
+        return new ActionList();
     }
 }

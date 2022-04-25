@@ -48,6 +48,7 @@ public class Application {
 
 			// Adding player:
 			Actor mario = new Player("Player", 'm', 100);
+			mario.addItemToInventory(new Wrench());
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			//Adding SuperMushroom and PowerStar
