@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 import java.util.ArrayList;
@@ -57,7 +58,14 @@ public class Toad extends Actor {
             lines.add("Being imprisoned in these walls can drive a fungus crazy :(");
 
             // TODO: Add wrench line if actor is not holding a wrench (wrench not implemented yet)
-            if (true) {
+            boolean hasWrench = false;
+            for (Item item : otherActor.getInventory()) {
+                if (Wrench.isInstance(item)) {
+                    hasWrench = true;
+                    break;
+                }
+            }
+            if (!hasWrench) {
                 lines.add("You might need a wrench to smash Koopa's hard shells.");
             }
 
