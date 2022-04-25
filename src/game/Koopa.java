@@ -40,5 +40,51 @@ public class Koopa extends Enemy {
         return new IntrinsicWeapon(30, "punch");
     }
 
+    /**
+     * Do some damage to the current Actor.
+     * <p>
+     * If the Actor's hitpoints go down to zero, it will be knocked out.
+     *
+     * @param points number of hitpoints to deduct.
+     */
+    @Override
+    public void hurt(int points) {
 
+        super.hurt(points);  // do the damage
+
+        // Make Koopa go dormant if not conscious:
+        if (!dormant && !isConscious()) {
+                goDormant();
+        }
+
+    }
+
+    // Sets dormant to true and sets the display char to a shell
+    private void goDormant() {
+        resetMaxHp(50);  // set max hp to the damage done by a wrench
+        dormant = true;
+        setDisplayChar('D');
+
+        // remove all behaviours:
+        clearBehaviours();
+    }
+
+
+    /**
+     * At the moment, we only make it can be attacked by Player.
+     * @param otherActor the Actor that might perform an action.
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return list of actions
+     * @see Status#HOSTILE_TO_ENEMY
+     */
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        if (!dormant) {
+            return super.allowableActions(otherActor, direction, map);
+        }
+        else {  // if the koopa is dormant, it will not have any actions to perform
+            return new ActionList();
+        }
+    }
 }

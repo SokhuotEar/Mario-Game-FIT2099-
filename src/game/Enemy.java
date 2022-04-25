@@ -11,7 +11,7 @@ import java.util.*;
 
 public abstract class Enemy extends Actor {
     private static List<Enemy> enemyList = new ArrayList<>();
-    private final Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
+    private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
     /**
      * Constructor.
@@ -80,5 +80,10 @@ public abstract class Enemy extends Actor {
 
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
+    }
+
+    // removes all behaviours from an enemy
+    public void clearBehaviours() {
+        behaviours = new TreeMap<>();
     }
 }

@@ -58,8 +58,10 @@ public class Application {
 			// Adding Toad:
 			Toad toad = new Toad();
 			world.addPlayer(toad, gameMap.at(43,12));
+
 			// FIXME: the Goomba should be generated from the Tree
 			gameMap.at(35, 10).addActor(new Goomba());
+			gameMap.at(35, 5).addActor(new Koopa());
 
 			world.run();
 
