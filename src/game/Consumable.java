@@ -10,8 +10,6 @@ public interface Consumable {
 
     public void checkLifetime();
 
-    public ConsumeAction getConsumeAction(Actor actor);
-
     public Item getItem();
 
     public void consume(Actor actor);

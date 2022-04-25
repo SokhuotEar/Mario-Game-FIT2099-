@@ -1,7 +1,6 @@
 package game;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 
@@ -22,11 +21,6 @@ public class PowerStar extends Item implements Consumable {
     @Override
     public DropItemAction getDropAction(Actor actor) {
         return null;
-    }
-
-    @Override
-    public ConsumeAction getConsumeAction(Actor actor) {
-        return new ConsumeAction(this);
     }
 
     /**

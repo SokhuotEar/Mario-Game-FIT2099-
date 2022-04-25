@@ -40,11 +40,6 @@ public class SuperMushroom extends Item implements Consumable {
         return null;
     }
 
-    @Override
-    public ConsumeAction getConsumeAction(Actor actor) {
-        return new ConsumeAction(this);
-    }
-
     /**
      * Returns the item as an instance of an item object. Overridden method from ConsumableInterface
      * @return the item object
