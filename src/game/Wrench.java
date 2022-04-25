@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Wrench extends WeaponItem implements Weapon {
-    private static List<Wrench> wrenchList = new ArrayList<Wrench>();
+    private static final List<Wrench> wrenchList = new ArrayList<>();
     /**
      * Constructor.
      */
     public Wrench() {
-        super("wrench", 'W', 50, "uses wrench to hit", 80);
+        super("wrench", 'w', 50, "uses wrench to hit", 80);
         wrenchList.add(this);
     }
 
