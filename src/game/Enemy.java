@@ -44,6 +44,12 @@ public abstract class Enemy extends Actor {
         return result;
     }
 
+    public static void removeInstance(Actor actor) {
+        if (isInstance(actor)) {
+            enemyList.remove(actor);
+        }
+    }
+
     /**
      * At the moment, we only make it can be attacked by Player.
      * @param otherActor the Actor that might perform an action.

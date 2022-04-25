@@ -10,13 +10,15 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 
 public class Koopa extends Enemy {
 
+    private boolean dormant;
     /**
      * Constructor.
      */
     public Koopa() {
         super("Koopa", 'K', 100);
         addBehaviour(10, new WanderBehaviour());
-    }          // to be changed
+        dormant = false;
+    }
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -37,4 +39,6 @@ public class Koopa extends Enemy {
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(30, "punch");
     }
+
+
 }

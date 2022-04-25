@@ -16,6 +16,7 @@ public class SuicideAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         map.removeActor(actor);
+        Enemy.removeInstance(actor);
         return menuDescription(actor);
     }
 
