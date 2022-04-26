@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.Location;
 
 import javax.swing.*;
 import java.util.Random;
+import java.util.HashSet;
 
 public class Tree extends Ground {
 
@@ -72,23 +73,24 @@ public class Tree extends Ground {
         //check if an actor is here
         if (!location.containsAnActor()){
             // if not, then do the following
-            switch (treeType) {
-                case SPROUT:
-                    if (new RNG().rng(10))  //10% possibility of spawning Goomba
-                    {
-                        location.addActor(new Goomba());
-                    }
 
-                case SAPLING:
-                    // no enemy is spawned
-
-                case MATURE:
-                    if (new RNG().rng(15))  //15% possibility of spawning Koopa
-                    {
-                        location.addActor(new Koopa());
-                    }
-
+            if (treeType == treeType.SPROUT) {
+                if (new RNG().rng(10))  //10% possibility of spawning Goomba
+                {
+                    location.addActor(new Goomba());
+                }
             }
+            else if (treeType == treeType.SAPLING) {
+                // no enemy spawned
+            }
+
+            else if (treeType == treeType.MATURE) {
+                if (new RNG().rng(15))  //15% possibility of spawning Koopa
+                {
+                    location.addActor(new Koopa());
+                }
+            }
+
 
         }
 
@@ -97,57 +99,74 @@ public class Tree extends Ground {
     // trees can drop coins
     private void dropCoin(Location location) {
         // for RNG purposes
-        int probability;
-        /*
-        switch (treeType) {
-            case SPROUT:
-            // no coins are dropped
-
-            case SAPLING:
-            // 10% chance of dropping coins
-                probability = 10;
-                if (new RNG().rng(probability))
-                {
-                    location.addItem(new Coin());
-                }
-
-            case MATURE:
-                probability = 10;
-                if (new RNG().rng(probability))
-                {
-                    location.addItem(new Coin());
-                }
-
-        }*/
-        if (treeType == TreeType.SAPLING) {
-            Random rand = new Random();
-            if (rand.nextInt(100) < 10) {  // spawn coin with 10% probability
-                location.addItem(new Coin());
-            }
+        int probability = 0;
+        if (treeType == treeType.SPROUT) {
+            probability = 0;
         }
+        else if (treeType == treeType.SAPLING) {
+            probability = 10;
+        }
+
+        else if (treeType == treeType.MATURE) {
+            probability = 10;
+        }
+
+
+        if (new RNG().rng(probability))
+        {
+            location.addItem(new Coin());
+        }
+
     }
+
+
+
+
+
 
     //method for growing new sprout
     private void growNewSprout(Location location){
-        if ((getTreeType() == TreeType.MATURE) && this.getAge()%5 == 0 && treeCount <= maxTreeCount) {
-            // new sprouts are grown
-            //check if the location has an actor and if there is already a tree
+        if ((getTreeType() == TreeType.SPROUT) && this.age%5== 0 & treeCount <= maxTreeCount) {
+
+            // see what location is possible
+            CheckEmptyLocation checkLocation = new CheckEmptyLocation();
+            Boolean canTreeSpawn = false;
+            int newX = location.x();
+            int newY = location.y();
+
+
 
             //get random location
-            int random = new Random().nextInt(3);
+            while (canTreeSpawn == false) {
 
-            if (random == 0) {
-                int newX = location.x() - 1;
-                int newY = location.y();
-                //check if it is in map bound
-                if (newX <= location.map().getXRange().min()) {
-                    //check if actor the location is clear
-                    if (location.map().at(newX, newY).getDisplayChar() == new Dirt().getDisplayChar()) {
-                        location.map().at(newX, newY).setGround(new Tree());
-                    }
+
+                int random = new Random().nextInt(3);//0 = up; 1 = down; 2 = left; 3 = right
+                if (random == 0 & checkLocation.upEmpty(location)) {
+                    //tree spawn can spawn up
+                    canTreeSpawn = true;
+                    newY = newY-1;
+
+                } else if (random == 1 & checkLocation.downEmpty(location)) {
+                    //tree spawn can spawn down
+                    canTreeSpawn = true;
+                    newY = newY+1;
+                } else if (random == 2 & checkLocation.rightEmpty(location)) {
+                    //tree spawn can spawn right
+                    canTreeSpawn = true;
+                    newX = newX+1;
+                } else if (random == 3 & checkLocation.leftEmpty(location)) {
+                    //tree spawn can spawn left
+                    canTreeSpawn = true;
+                    newX = newX-1;
+                } else {
+                    canTreeSpawn = false;
                 }
-
             }
+
+            //spawn trees
+            location.map().at(newX,newY).setGround(new Tree());
+
+
         }
     }
 
@@ -160,11 +179,11 @@ public class Tree extends Ground {
 
 
     public void tick(Location location){
-        grow();                     // trees can grow
-        //spawnEnemy(location);       // trees can spawn enemies
-        dropCoin(location);         // trees can drop coins
+        grow();                         // trees can grow
+        spawnEnemy(location);         // trees can spawn enemies
+        dropCoin(location);             // trees can drop coins
         growNewSprout(location);        // trees can grow new sprout
-        wither(location);
+        wither(location);               // trees can wither
     }
 
 
