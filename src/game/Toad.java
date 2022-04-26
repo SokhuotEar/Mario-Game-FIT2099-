@@ -77,7 +77,6 @@ public class Toad extends Actor {
             actions.add(new SpeakAction(lines.get(rand.nextInt(lines.size()))));
         }
 
-
         // TODO: Add the trading action:
 
         return actions;
