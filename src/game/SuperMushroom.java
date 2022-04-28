@@ -14,6 +14,7 @@ import edu.monash.fit2099.engine.items.PickUpItemAction;
 public class SuperMushroom extends Item implements Consumable {
     private static final int maxHPIncreaseAmount = 50;
     private int jumpRate;
+    static int Price;
 
     /***
      * Constructor.

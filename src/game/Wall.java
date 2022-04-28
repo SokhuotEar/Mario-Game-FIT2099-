@@ -12,7 +12,8 @@ public class Wall extends Ground {
 	@Override
 	public boolean canActorEnter(Actor actor) {
 		if (actor.hasCapability(Status.INVINCIBLE)) {
-			setDisplayChar(new Coin().getDisplayChar());
+			int coinValue = 20;
+			setDisplayChar(new Coin(coinValue).getDisplayChar());
 			return true;
 		}
 		return false;

@@ -13,7 +13,7 @@ public class Tree extends Ground {
     private int age;
     private TreeType treeType;
     private static int treeCount = 0;
-    private static final int maxTreeCount = 40; // new sprouts will only grow if there are less than this number of trees
+    private static final int maxTreeCount = 50; // new sprouts will only grow if there are less than this number of trees
 
     /**
      * Constructor.
@@ -81,7 +81,7 @@ public class Tree extends Ground {
                 }
             }
             else if (treeType == treeType.SAPLING) {
-                // no enemy spawned
+                return;
             }
 
             else if (treeType == treeType.MATURE) {
@@ -101,7 +101,7 @@ public class Tree extends Ground {
         // for RNG purposes
         int probability = 0;
         if (treeType == treeType.SPROUT) {
-            probability = 0;
+            probability = 10;
         }
         else if (treeType == treeType.SAPLING) {
             probability = 10;
@@ -112,9 +112,12 @@ public class Tree extends Ground {
         }
 
 
-        if (new RNG().rng(probability))
-        {
-            location.addItem(new Coin());
+        if (!(location.getItems() instanceof Coin)) {
+            // no coins are spawned if there is already an item there
+            if (new RNG().rng(probability)) {
+                int coinValue = 20;
+                location.addItem(new Coin(coinValue));
+            }
         }
 
     }
@@ -126,45 +129,46 @@ public class Tree extends Ground {
 
     //method for growing new sprout
     private void growNewSprout(Location location){
-        if ((getTreeType() == TreeType.SPROUT) && this.age%5== 0 & treeCount <= maxTreeCount) {
+        if (this.treeType == TreeType.MATURE & this.age%5== 0 & treeCount <= maxTreeCount) {
 
             // see what location is possible
             CheckEmptyLocation checkLocation = new CheckEmptyLocation();
-            Boolean canTreeSpawn = false;
+            Boolean hasTreeSpawn = false;
             int newX = location.x();
             int newY = location.y();
 
 
-
+            int random= new Random().nextInt(3);//0 = up; 1 = down; 2 = left; 3 = right
             //get random location
-            while (canTreeSpawn == false) {
-
-
-                int random = new Random().nextInt(3);//0 = up; 1 = down; 2 = left; 3 = right
+            while (hasTreeSpawn == false) {
                 if (random == 0 & checkLocation.upEmpty(location)) {
                     //tree spawn can spawn up
-                    canTreeSpawn = true;
+                    hasTreeSpawn = true;
                     newY = newY-1;
 
                 } else if (random == 1 & checkLocation.downEmpty(location)) {
                     //tree spawn can spawn down
-                    canTreeSpawn = true;
+                    hasTreeSpawn = true;
                     newY = newY+1;
                 } else if (random == 2 & checkLocation.rightEmpty(location)) {
                     //tree spawn can spawn right
-                    canTreeSpawn = true;
+                    hasTreeSpawn = true;
                     newX = newX+1;
                 } else if (random == 3 & checkLocation.leftEmpty(location)) {
                     //tree spawn can spawn left
-                    canTreeSpawn = true;
+                    hasTreeSpawn = true;
                     newX = newX-1;
                 } else {
-                    canTreeSpawn = false;
+                    hasTreeSpawn = false;
+                    random = new Random().nextInt(3);
                 }
+
             }
 
             //spawn trees
-            location.map().at(newX,newY).setGround(new Tree());
+            if (!(location.map().at(newX,newY).getGround() instanceof Wall)) {
+                location.map().at(newX, newY).setGround(new Tree());
+            }
 
 
         }
@@ -180,10 +184,11 @@ public class Tree extends Ground {
 
     public void tick(Location location){
         grow();                         // trees can grow
-        spawnEnemy(location);         // trees can spawn enemies
+        spawnEnemy(location);           // trees can spawn enemies
         dropCoin(location);             // trees can drop coins
         growNewSprout(location);        // trees can grow new sprout
         wither(location);               // trees can wither
+
     }
 
 

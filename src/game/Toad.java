@@ -52,6 +52,8 @@ public class Toad extends Actor {
 
         // Adding a SpeakAction if the other actor is a player:
         if (otherActor.getDisplayChar() == 'm' || otherActor.getDisplayChar() == 'M') {  // Check actor is player TODO: fix this
+
+            // TODO: maybe don't show Implementatin here. Put it into SpeakAction. It's better for encapsulation.
             List<String> lines = new ArrayList<>();
 
             lines.add("The Princess is depending on you! You are our only hope.");
@@ -75,11 +77,18 @@ public class Toad extends Actor {
             }
             Random rand = new Random();
             actions.add(new SpeakAction(lines.get(rand.nextInt(lines.size()))));
+
+            // TODO: Add the trading action:
+            //added trading action
+            actions.add(new BuySuperMAction());
+            actions.add(new BuyWrenchAction());
+            actions.add(new BuyPowerStarAction());
         }
 
-        // TODO: Add the trading action:
+
 
         return actions;
+
     }
 
 }

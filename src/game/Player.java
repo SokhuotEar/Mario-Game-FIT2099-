@@ -15,6 +15,7 @@ public class Player extends Actor  {
 	private final Menu menu = new Menu();
 	private int invincibleTurnsLeft;
 	private static final int maxInvincibleTurns = 10;
+	private Wallet wallet = new Wallet();
 
 	/**
 	 * Constructor.
@@ -28,6 +29,11 @@ public class Player extends Actor  {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		invincibleTurnsLeft = 0;
 	}
+
+	public Wallet getWallet() {
+		return this.wallet;
+	}
+
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
