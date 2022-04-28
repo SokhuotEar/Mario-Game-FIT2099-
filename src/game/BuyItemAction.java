@@ -31,7 +31,7 @@ public abstract class BuyItemAction extends Action{
 
             }
             else{
-                return "Insufficient Balance";
+                return "You don't have enough coins!";
             }
 
         }
