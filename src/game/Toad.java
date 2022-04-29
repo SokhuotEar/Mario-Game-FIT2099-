@@ -59,7 +59,7 @@ public class Toad extends Actor {
             lines.add("The Princess is depending on you! You are our only hope.");
             lines.add("Being imprisoned in these walls can drive a fungus crazy :(");
 
-            // TODO: Add wrench line if actor is not holding a wrench (wrench not implemented yet)
+            // Add wrench line if actor is not holding a wrench
             boolean hasWrench = false;
             for (Item item : otherActor.getInventory()) {
                 if (Wrench.isInstance(item)) {
@@ -80,13 +80,13 @@ public class Toad extends Actor {
 
             // TODO: Add the trading action:
             //added trading action
-            actions.add(new BuySuperMAction());
-            actions.add(new BuyWrenchAction());
-            actions.add(new BuyPowerStarAction());
+            actions.add(new BuyItemAction(new SuperMushroom()));
+            actions.add(new BuyItemAction(new Wrench()));
+            actions.add(new BuyItemAction(new PowerStar()));
         }
 
 
-
+        //actions.add(new BuyItemAction(new PowerStar()));
         return actions;
 
     }

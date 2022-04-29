@@ -5,46 +5,41 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-public abstract class BuyItemAction extends Action{
+public class BuyItemAction extends Action{
         int price;
         Item item;
 
-    public BuyItemAction(int price, Item item) {
-        this.item = item;
-        this.price = price;
+    public BuyItemAction(Buyable buyable) {
+        this.item = buyable.getItem();
+        this.price = buyable.getPrice();
     }
 
-    public String tradingAction(Actor actor){
-            //check player has enough money
-            boolean isEnough = ((Player) actor).getWallet().getBalance() >= this.price;
-
-            if (isEnough){
-                //player spends the money
-                ((Player) actor).getWallet().spend(price);
-                //player gets the item
-                ((Player) actor).addItemToInventory(this.item);
-
-
-                //prints the following line
-                System.out.println(((Player)actor).getInventory());
-                return "Purchase is successful";
-
-            }
-            else{
-                return "You don't have enough coins!";
-            }
-
+    @Override
+    public String execute(Actor actor, GameMap map) {
+        // Get the player instance:
+        Player player = Player.getInstance(actor);
+        if (player == null)
+        {
+            return null;
         }
+        //check player has enough money
+        boolean isEnough = player.getWallet().getBalance() >= this.price;
 
+        if (isEnough){
+            //player spends the money
+            player.getWallet().spend(price);
+            //player gets the item
+            player.addItemToInventory(this.item);
 
-        @Override
-        public String execute(Actor actor, GameMap map) {
-            return tradingAction(actor);
+            return menuDescription(actor);
         }
-
-        @Override
-        public String menuDescription(Actor actor) {
-
-            return "Player buys a Super Mushroom from Toad";
+        else{
+            return "You don't have enough coins!";
         }
+    }
+
+    @Override
+    public String menuDescription(Actor actor) {
+        return actor + " buys a " + item + " from Toad";
+    }
 }

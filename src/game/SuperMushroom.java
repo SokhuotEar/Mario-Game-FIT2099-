@@ -11,8 +11,9 @@ import edu.monash.fit2099.engine.items.PickUpItemAction;
  * @author Klarissa Jutivannadevi
  */
 
-public class SuperMushroom extends Item implements Consumable {
+public class SuperMushroom extends Item implements Consumable, Buyable {
     private static final int maxHPIncreaseAmount = 50;
+    private static final int PRICE = 400;
     private int jumpRate;
     static int Price;
 
@@ -56,4 +57,8 @@ public class SuperMushroom extends Item implements Consumable {
         actor.addCapability(Status.TALL);
     }
 
+    @Override
+    public int getPrice() {
+        return PRICE;
+    }
 }

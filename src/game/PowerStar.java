@@ -5,8 +5,9 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class PowerStar extends Item implements Consumable {
+public class PowerStar extends Item implements Consumable, Buyable {
     private static final int hpToHealBy = 200;
+    private static final int PRICE = 600;
     private int lifetime;
     /***
      * Constructor.
@@ -70,4 +71,10 @@ public class PowerStar extends Item implements Consumable {
         // Heal by 200 points:
         actor.heal(hpToHealBy);
     }
+
+    @Override
+    public int getPrice() {
+        return PRICE;
+    }
+
 }

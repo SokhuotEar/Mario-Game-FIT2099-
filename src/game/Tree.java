@@ -190,7 +190,7 @@ public class Tree extends Ground implements Resettable {
     @Override
     public void resetInstance() {
         if (new RNG().rng(50)) {
-            setDisplayChar(new Dirt().getDisplayChar());
+            //setDisplayChar(new Dirt().getDisplayChar());
         }
     }
 

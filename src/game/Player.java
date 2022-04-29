@@ -8,16 +8,19 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
 import java.lang.annotation.Repeatable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class representing the Player.
  */
 public class Player extends Actor implements Resettable {
 
-	private final Menu menu = new Menu();
+	private final Menu menu;
 	private int invincibleTurnsLeft;
 	private static final int maxInvincibleTurns = 10;
-	private Wallet wallet = new Wallet();
+	private final Wallet wallet;
+	private static final List<Player> playerList = new ArrayList<>();
 
 	/**
 	 * Constructor.
@@ -31,10 +34,30 @@ public class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		invincibleTurnsLeft = 0;
 		this.registerInstance();
+		this.wallet = new Wallet();
+		this.menu = new Menu();
+		playerList.add(this);
 	}
 
 	public Wallet getWallet() {
 		return this.wallet;
+	}
+
+
+	public static boolean isInstance(Actor actor) {
+		return playerList.contains(actor);
+	}
+
+	public static Player getInstance(Actor actor) {
+		if (isInstance(actor)) {
+			for (Player player : playerList) {
+				if (player == actor) {
+					return player;
+				}
+			}
+		}
+
+		return null;
 	}
 
 
@@ -45,7 +68,7 @@ public class Player extends Actor implements Resettable {
 			return lastAction.getNextAction();
 
 		// Display player stats:
-		display.println(name + ": " + printHp() + "HP");  // todo: add money here
+		display.println(name + ": " + printHp() + "HP, Wallet: $" + wallet.getBalance());  // todo: add money here
 		if(hasCapability((Status.INVINCIBLE))) {
 			if (invincibleTurnsLeft > 0) {
 				String sentence = this + " is INVINCIBLE! - " + invincibleTurnsLeft + " turns remaining";
