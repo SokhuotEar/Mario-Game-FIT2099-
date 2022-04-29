@@ -1,11 +1,12 @@
 package game;
 
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.HashSet;
 
 public class Tree extends Ground implements Resettable {
 
@@ -13,7 +14,7 @@ public class Tree extends Ground implements Resettable {
     private int age;
     private TreeType treeType;
     private static int treeCount = 0;
-    private static final int maxTreeCount = 50; // new sprouts will only grow if there are less than this number of trees
+    private static final int maxTreeCount = 50; // new sprouts will only grow if there are less than this number of trees, avoids overcrowding
 
     /**
      * Constructor.
@@ -27,13 +28,7 @@ public class Tree extends Ground implements Resettable {
     }
 
     //getters
-    public int getAge() {
-        return age;
-    }
 
-    public TreeType getTreeType() {
-        return treeType;
-    }
 
     //Methods
 
@@ -68,105 +63,58 @@ public class Tree extends Ground implements Resettable {
     // function for tree spawning Goomba
     private void spawnEnemy(Location location) {
 
-        treeType = getTreeType(); // get tree type
-
-        //No Goomba is spawned if the player is here so:
         //check if an actor is here
         if (!location.containsAnActor()){
             // if not, then do the following
 
-            if (treeType == treeType.SPROUT) {
+            if (treeType == TreeType.SPROUT) {
                 if (new RNG().rng(10))  //10% possibility of spawning Goomba
                 {
                     location.addActor(new Goomba());
                 }
             }
-            else if (treeType == treeType.SAPLING) {
-                return;
-            }
-
-            else if (treeType == treeType.MATURE) {
+            else if (treeType == TreeType.MATURE) {
                 if (new RNG().rng(15))  //15% possibility of spawning Koopa
                 {
                     location.addActor(new Koopa());
                 }
             }
-
-
         }
-
     }
 
     // trees can drop coins
     private void dropCoin(Location location) {
         // for RNG purposes
         int probability = 0;
-        if (treeType == treeType.SPROUT) {
-            probability = 10;
-        }
-        else if (treeType == treeType.SAPLING) {
+        if (treeType == TreeType.SAPLING) {
             probability = 10;
         }
 
-        else if (treeType == treeType.MATURE) {
-            probability = 10;
-        }
-
-
-        if (!(location.getItems() instanceof Coin)) {
-            // no coins are spawned if there is already an item there
-            if (new RNG().rng(probability)) {
-                int coinValue = 20;
-                location.addItem(new Coin(coinValue));
-            }
+        if (new RNG().rng(probability)) {
+            int coinValue = 20;
+            location.addItem(new Coin(coinValue));
         }
 
     }
 
     //method for growing new sprout
     private void growNewSprout(Location location){
+        // check the tree is mature, and it has been 5 turns since the last growNewSprout, and we have not exceeded the maximum tree count
         if (this.treeType == TreeType.MATURE & this.age%5== 0 & treeCount <= maxTreeCount) {
-
-            // see what location is possible
-            CheckEmptyLocation checkLocation = new CheckEmptyLocation();
-            Boolean hasTreeSpawn = false;
-            int newX = location.x();
-            int newY = location.y();
-
-
-            int random= new Random().nextInt(3);//0 = up; 1 = down; 2 = left; 3 = right
-            //get random location
-            while (hasTreeSpawn == false) {
-                if (random == 0 & checkLocation.upEmpty(location)) {
-                    //tree spawn can spawn up
-                    hasTreeSpawn = true;
-                    newY = newY-1;
-
-                } else if (random == 1 & checkLocation.downEmpty(location)) {
-                    //tree spawn can spawn down
-                    hasTreeSpawn = true;
-                    newY = newY+1;
-                } else if (random == 2 & checkLocation.rightEmpty(location)) {
-                    //tree spawn can spawn right
-                    hasTreeSpawn = true;
-                    newX = newX+1;
-                } else if (random == 3 & checkLocation.leftEmpty(location)) {
-                    //tree spawn can spawn left
-                    hasTreeSpawn = true;
-                    newX = newX-1;
-                } else {
-                    hasTreeSpawn = false;
-                    random = new Random().nextInt(3);
+            // create list to contain fertile surrounding squares:
+            List<Location> fertileLocations = new ArrayList<>();
+            // iterate over surrounding locations to add fertile ground (dirt):
+            for (Exit exit : location.getExits()) {
+                Ground ground = exit.getDestination().getGround();
+                if (Dirt.isInstance(ground)) {
+                    fertileLocations.add(exit.getDestination());
                 }
-
             }
 
-            //spawn trees
-            if (!(location.map().at(newX,newY).getGround() instanceof Wall)) {
-                location.map().at(newX, newY).setGround(new Tree());
+            // Pick a random square to spawn a sprout in:
+            if (!fertileLocations.isEmpty()) {
+                fertileLocations.get(new Random().nextInt(fertileLocations.size())).setGround(new Tree());
             }
-
-
         }
     }
 
@@ -184,7 +132,6 @@ public class Tree extends Ground implements Resettable {
         dropCoin(location);             // trees can drop coins
         growNewSprout(location);        // trees can grow new sprout
         wither(location);               // trees can wither
-
     }
 
     @Override
