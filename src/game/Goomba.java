@@ -42,7 +42,7 @@ public class Goomba extends Enemy {
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 		// 10% Chance to suicide:
-		if (new RNG().rng(sucicideChacnce)) {
+		if (RNG.rng(sucicideChacnce)) {
 			return new SuicideAction();
 		}
 

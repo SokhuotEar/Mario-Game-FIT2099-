@@ -68,13 +68,13 @@ public class Tree extends Ground implements Resettable {
             // if not, then do the following
 
             if (treeType == TreeType.SPROUT) {
-                if (new RNG().rng(10))  //10% possibility of spawning Goomba
+                if (RNG.rng(10))  //10% possibility of spawning Goomba
                 {
                     location.addActor(new Goomba());
                 }
             }
             else if (treeType == TreeType.MATURE) {
-                if (new RNG().rng(15))  //15% possibility of spawning Koopa
+                if (RNG.rng(15))  //15% possibility of spawning Koopa
                 {
                     location.addActor(new Koopa());
                 }
@@ -90,7 +90,7 @@ public class Tree extends Ground implements Resettable {
             probability = 10;
         }
 
-        if (new RNG().rng(probability)) {
+        if (RNG.rng(probability)) {
             int coinValue = 20;
             location.addItem(new Coin(coinValue));
         }
@@ -120,7 +120,7 @@ public class Tree extends Ground implements Resettable {
 
     // Method for withering away
     private void wither(Location location) {
-        if (this.treeType == TreeType.MATURE && new Random().nextInt(5) == 0) {  // 20% chance to wither and die if mature
+        if (this.treeType == TreeType.MATURE && RNG.rng(20)) {  // 20% chance to wither and die if mature
             location.setGround(new Dirt());  // change current location to Dirt
         }
     }
@@ -136,7 +136,7 @@ public class Tree extends Ground implements Resettable {
 
     @Override
     public void resetInstance() {
-        if (new RNG().rng(50)) {
+        if (RNG.rng(50)) {
             //setDisplayChar(new Dirt().getDisplayChar());
         }
     }
