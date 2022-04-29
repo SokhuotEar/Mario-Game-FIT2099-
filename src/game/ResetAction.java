@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 public class ResetAction extends Action {
     ResetAction() {
-        System.out.println("resetaction");
+        System.out.println("resetactions");
     }
 
     @Override
