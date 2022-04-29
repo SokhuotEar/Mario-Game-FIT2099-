@@ -18,14 +18,13 @@ public class BuyItemAction extends Action{
     public String execute(Actor actor, GameMap map) {
         // Get the player instance:
         Player player = Player.getInstance(actor);
-        if (player == null)
-        {
+        if (player == null) {
             return null;
         }
         //check player has enough money
         boolean isEnough = player.getWallet().getBalance() >= this.price;
 
-        if (isEnough){
+        if (isEnough) {
             //player spends the money
             player.getWallet().spend(price);
             //player gets the item
@@ -33,13 +32,13 @@ public class BuyItemAction extends Action{
 
             return menuDescription(actor);
         }
-        else{
+        else {
             return "You don't have enough coins!";
         }
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys a " + item + " from Toad";
+        return actor + " buys " + item + " ($" + price + ")";
     }
 }
