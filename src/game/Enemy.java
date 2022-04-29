@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 
 import java.util.*;
 
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettable{
     private static List<Enemy> enemyList = new ArrayList<>();
     private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
@@ -21,6 +21,7 @@ public abstract class Enemy extends Actor {
         super(name, displayChar, hitPoints);
         this.behaviours.put(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
         enemyList.add(this);
+        this.registerInstance();
     }
 
     /**
@@ -82,5 +83,13 @@ public abstract class Enemy extends Actor {
     // removes all behaviours from an enemy
     public void clearBehaviours() {
         behaviours = new TreeMap<>();
+    }
+
+    @Override
+    public void resetInstance() {
+        for (Enemy enemy : enemyList) {
+            enemy.resetMaxHp(0);
+        }
+
     }
 }

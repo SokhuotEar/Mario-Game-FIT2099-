@@ -7,10 +7,12 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 
+import java.lang.annotation.Repeatable;
+
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  {
+public class Player extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 	private int invincibleTurnsLeft;
@@ -28,6 +30,7 @@ public class Player extends Actor  {
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		invincibleTurnsLeft = 0;
+		this.registerInstance();
 	}
 
 	public Wallet getWallet() {
@@ -93,6 +96,17 @@ public class Player extends Actor  {
 	@Override
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	}
+
+	@Override
+	public void resetInstance() {
+		this.resetMaxHp(getMaxHp());
+		for (Status status : Status.values()) {
+			if (this.hasCapability(status)) {
+				this.removeCapability(status);
+			}
+		}
+
 	}
 
 }

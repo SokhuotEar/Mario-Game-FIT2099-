@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.Random;
 import java.util.HashSet;
 
-public class Tree extends Ground {
+public class Tree extends Ground implements Resettable {
 
     //attribute
     private int age;
@@ -23,6 +23,7 @@ public class Tree extends Ground {
         this.age = 0;
         this.treeType = TreeType.SPROUT;
         treeCount++;
+        this.resetInstance();
     }
 
     //getters
@@ -122,11 +123,6 @@ public class Tree extends Ground {
 
     }
 
-
-
-
-
-
     //method for growing new sprout
     private void growNewSprout(Location location){
         if (this.treeType == TreeType.MATURE & this.age%5== 0 & treeCount <= maxTreeCount) {
@@ -189,6 +185,13 @@ public class Tree extends Ground {
         growNewSprout(location);        // trees can grow new sprout
         wither(location);               // trees can wither
 
+    }
+
+    @Override
+    public void resetInstance() {
+        if (new RNG().rng(50)) {
+            setDisplayChar(new Dirt().getDisplayChar());
+        }
     }
 
 
