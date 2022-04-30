@@ -6,19 +6,26 @@ import edu.monash.fit2099.engine.items.PickUpItemAction;
 import game.Status;
 
 /**
- * Class dedicated for the functionality of SuperMushroom
+ * The class SuperMushroom is a child class of Item class which allow
+ * overriding method to modify its functionality and implements both
+ * Consumable and Buyable since it can be consumed and purchased.
  *
- * @author Klarissa Jutivannadevi
+ * @author Satya Jhaveri, Klarissa Jutivannadevi
  */
 
 public class SuperMushroom extends Item implements Consumable, Buyable {
+    /**
+     * The HP of SuperMushroom to be added to actor who consumed
+     */
     private static final int maxHPIncreaseAmount = 50;
+
+    /**
+     * The price to purchase SuperMushroom
+     */
     private static final int PRICE = 400;
-    private int jumpRate;
-    static int Price;
 
     /***
-     * Constructor.
+     * Constructor creates ConsumeAction.
      *
      */
     public SuperMushroom() {
@@ -48,6 +55,10 @@ public class SuperMushroom extends Item implements Consumable, Buyable {
     }
 
 
+    /**
+     * Allow power up to actor based on the item consumed
+     * @param actor the actor that consumes item
+     */
     @Override
     public void consume(Actor actor) {
         // Increase max HP by 50:
@@ -57,6 +68,10 @@ public class SuperMushroom extends Item implements Consumable, Buyable {
         actor.addCapability(Status.TALL);
     }
 
+    /**
+     * Accessor function of the PRICE attribute of SuperMushroom
+     * @return price of SuperMushroom
+     */
     @Override
     public int getPrice() {
         return PRICE;

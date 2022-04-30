@@ -16,11 +16,17 @@ import game.Status;
 public class PowerStar extends Item implements Consumable, Buyable {
     /**
      * hpToHealBy: The hp added when PowerStar is consumed
-     * PRICE: the cost to buy PowerStar
-     * lifetime: the lifetime of PowerStar once it appears
      */
     private static final int hpToHealBy = 200;
+
+    /**
+     * PRICE: the cost to buy PowerStar
+     */
     private static final int PRICE = 600;
+
+    /**
+     * lifetime: the lifetime of PowerStar once it appears
+     */
     private int lifetime;
 
     /***
