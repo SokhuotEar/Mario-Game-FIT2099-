@@ -6,13 +6,26 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 
+/**
+ * The class PowerStar is a child class of Item class which allow
+ * overriding method to modify its functionality and implements both
+ * Consumable and Buyable since it can be consumed and purchased.
+ *
+ * @author Satya Jhaveri, Klarissa Jutivannadevi
+ */
 public class PowerStar extends Item implements Consumable, Buyable {
+    /**
+     * hpToHealBy: The hp added when PowerStar is consumed
+     * PRICE: the cost to buy PowerStar
+     * lifetime: the lifetime of PowerStar once it appears
+     */
     private static final int hpToHealBy = 200;
     private static final int PRICE = 600;
     private int lifetime;
 
     /***
-     * Constructor.
+     * Constructor of PowerStar which creates a ConsumeAction every time
+     * it is created and lifetime.
      *
      */
     public PowerStar() {
@@ -51,6 +64,11 @@ public class PowerStar extends Item implements Consumable, Buyable {
         }
     }
 
+    /**
+     * Override the method from Action class since the PowerStar will not be dropped
+     * @param actor the actor that executes getDropAction
+     * @return null
+     */
     @Override
     public DropItemAction getDropAction(Actor actor) {
         return null;
@@ -65,6 +83,10 @@ public class PowerStar extends Item implements Consumable, Buyable {
         return this;
     }
 
+    /**
+     * Give the actor power up from consuming PowerStar
+     * @param actor which actor consumes the PowerStar
+     */
     @Override
     public void consume(Actor actor) {
         //Give the invisible buff:
@@ -74,6 +96,10 @@ public class PowerStar extends Item implements Consumable, Buyable {
         actor.heal(hpToHealBy);
     }
 
+    /**
+     * Accessor method for PRICE attribute
+     * @return price of the PowerStar
+     */
     @Override
     public int getPrice() {
         return PRICE;
