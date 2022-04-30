@@ -50,7 +50,6 @@ public class PowerStar extends Item implements Consumable, Buyable {
         super("Power Star", '*', true);
         consumeAction = new ConsumeAction(this);
         super.addAction(consumeAction);
-        super.addCapability(Status.INVINCIBLE);
         lifetime = 10;
         consumed = false;
     }
@@ -75,9 +74,11 @@ public class PowerStar extends Item implements Consumable, Buyable {
             actor.removeItemFromInventory(this);
         }
         else {
-            // add the effects to the player (another item might have removed the buffs, so we must re-add them):
-            for (Enum<?> capability : this.capabilitiesList()) {
-                actor.addCapability(capability);
+            if (consumed) {
+                // add the effects to the player (another item might have removed the buffs, so we must re-add them):
+                for (Enum<?> capability : this.capabilitiesList()) {
+                    actor.addCapability(capability);
+                }
             }
         }
     }
@@ -122,9 +123,7 @@ public class PowerStar extends Item implements Consumable, Buyable {
     @Override
     public void consume(Actor actor) {
         //Give the buffs:
-        for (Enum<?> capability : this.capabilitiesList()) {
-            actor.addCapability(capability);
-        }
+        super.addCapability(Status.INVINCIBLE);
 
         // Heal by 200 points:
         actor.heal(hpToHealBy);

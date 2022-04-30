@@ -1,5 +1,6 @@
 package game.positions;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
@@ -17,7 +18,7 @@ import java.util.Random;
  * Class Tree is a child class of Ground and implement Resettable
  * that is used for reset game.
  */
-public class Tree extends Ground implements Resettable {
+public class Tree extends HighGround implements Resettable {
 
     //attribute
     /**
@@ -48,7 +49,7 @@ public class Tree extends Ground implements Resettable {
         this.age = 0;
         this.treeType = TreeType.SPROUT;
         treeCount++;
-        this.resetInstance();
+        this.registerInstance();
     }
 
     //getters
@@ -153,17 +154,42 @@ public class Tree extends Ground implements Resettable {
 
 
     public void tick(Location location){
+
         grow();                         // trees can grow
         spawnEnemy(location);           // trees can spawn enemies
         dropCoin(location);             // trees can drop coins
         growNewSprout(location);        // trees can grow new sprout
         wither(location);               // trees can wither
+        super.tick(location);
+    }
+
+    @Override
+    public int getJumpChanceSuccess(Actor actor) {
+        int jumpSuccess = 0;
+        switch (treeType) {
+            case MATURE -> jumpSuccess = 70;
+            case SAPLING -> jumpSuccess = 80;
+            case SPROUT -> jumpSuccess = 90;
+        }
+        return jumpSuccess;
+    }
+
+    @Override
+    public int getFallDamage(Actor actor) {
+        int fallDamage = 0;
+        switch (treeType) {
+            case MATURE -> fallDamage = 30;
+            case SAPLING -> fallDamage = 20;
+            case SPROUT -> fallDamage = 10;
+        }
+        return fallDamage;
     }
 
     @Override
     public void resetInstance() {
         if (RNG.rng(50)) {
             //setDisplayChar(new Dirt().getDisplayChar());
+
         }
     }
 

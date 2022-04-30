@@ -31,7 +31,6 @@ public class SuperMushroom extends Item implements Consumable, Buyable {
     public SuperMushroom() {
         super("Super Mushroom", '^', false);  // set portable to false so that item can't be dropped unless portability is toggled
         super.addAction(new ConsumeAction(this));
-        super.addCapability(Status.TALL);
     }
 
     /**
@@ -65,11 +64,8 @@ public class SuperMushroom extends Item implements Consumable, Buyable {
         // Increase max HP by 50:
         actor.increaseMaxHp(maxHPIncreaseAmount);
 
-        // Give TALL capability (can jump over anything), will change displaychar to uppercase, see player.getDisplayChar:
-        //Give the buffs:
-        for (Enum<?> capability : this.capabilitiesList()) {
-            actor.addCapability(capability);
-        }
+        // Give TALL capability (can jump over anything):
+        actor.addCapability(Status.TALL);
     }
 
     /**
