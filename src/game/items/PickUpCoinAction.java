@@ -6,9 +6,19 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Player;
 import game.items.Coin;
 
+/**
+ * Special Action that allows Actors to pick up coins.
+ */
 public class PickUpCoinAction extends Action {
+    /**
+     * coin object
+     */
     private final Coin coin;
 
+    /**
+     * PickUpCoinAction constructor
+     * @param coin the coin
+     */
     public PickUpCoinAction(Coin coin) {
         this.coin = coin;
     }
