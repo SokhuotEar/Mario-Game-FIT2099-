@@ -4,11 +4,21 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.capabilities.CapabilitySet;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actors.Player;
+import game.actors.Toad;
+import game.actors.enemies.Goomba;
+import game.actors.enemies.Koopa;
+import game.items.PowerStar;
+import game.items.SuperMushroom;
+import game.items.Wrench;
+import game.positions.Dirt;
+import game.positions.Floor;
+import game.positions.Tree;
+import game.positions.Wall;
 
 /**
  * The main class for the Mario World game.

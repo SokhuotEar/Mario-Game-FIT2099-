@@ -8,13 +8,13 @@ import java.util.Random;
 
 
 public class RNG {
+    private static final Random rand = new Random();
 
     // method
     // rng(probability):    just input the probability needed, then it will give True and False
     //                      true indicates success, false means fail
 
-    public boolean rng(int probability) {
-        Random rand = new Random();
+    public static boolean rng(int probability) {
         int number = rand.nextInt(99);
 
         return (number < probability);
