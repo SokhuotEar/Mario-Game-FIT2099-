@@ -8,6 +8,10 @@ import game.actors.enemies.Enemy;
  * A class that represents the floor inside a building.
  */
 public class Floor extends Ground {
+
+	/**
+	 * Constructor of Floor
+	 */
 	public Floor() {
 		super('_');
 	}

@@ -13,16 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class Tree is a child class of Ground and implement Resettable
+ * that is used for reset game.
+ */
 public class Tree extends Ground implements Resettable {
 
     //attribute
+    /**
+     * age of tree
+     */
     private int age;
+
+    /**
+     * the stages of tree represented with enumerator
+     */
     private TreeType treeType;
+
+    /**
+     * the count for tree in the map
+     */
     private static int treeCount = 0;
+
+    /**
+     * maximum tree allowed in the map
+     */
     private static final int maxTreeCount = 50; // new sprouts will only grow if there are less than this number of trees, avoids overcrowding
 
     /**
-     * Constructor.
+     * Constructor. Starts to create Tree from sprout
      */
     public Tree() {
         super('+');
@@ -37,7 +56,9 @@ public class Tree extends Ground implements Resettable {
 
     //Methods
 
-    //method that changes tree type based on display character
+    /**
+     * method that changes tree type based on display character
+     */
     private void changeTreeStatus() {
         char treeDisplay = getDisplayChar();
         if (treeDisplay == 't') {

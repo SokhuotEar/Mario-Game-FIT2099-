@@ -1,5 +1,9 @@
 package game.positions;
-/** @author: Sok Ear **/
+/**
+ * Enumerator which shows stages of tree
+ *
+ * @author: Sok Ear
+ * **/
 
 public enum TreeType {
     SPROUT,
