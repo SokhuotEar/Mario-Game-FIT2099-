@@ -10,6 +10,7 @@ public class PowerStar extends Item implements Consumable, Buyable {
     private static final int hpToHealBy = 200;
     private static final int PRICE = 600;
     private int lifetime;
+
     /***
      * Constructor.
      *
