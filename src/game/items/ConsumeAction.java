@@ -35,11 +35,17 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        // IF actor has consumable item in inventory, remove it:
+        // IF actor has consumable item in inventory, remove it unless it should stay in the players inventory:
         if (actor.getInventory().contains(consumableItem.getItem())) {
-            actor.removeItemFromInventory(consumableItem.getItem());
+            if (!consumableItem.stayInInventory()) {
+                actor.removeItemFromInventory(consumableItem.getItem());
+            }
+
         }
-        else {  // Else if the item is on the ground, remove it from the ground
+        else {  // Else if the item is on the ground, remove it from the ground unless it should stay in player's inventory
+            if (consumableItem.stayInInventory()) {
+                actor.addItemToInventory((consumableItem.getItem()));
+            }
             map.locationOf(actor).removeItem(consumableItem.getItem());
         }
 

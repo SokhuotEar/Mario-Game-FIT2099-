@@ -1,5 +1,6 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
@@ -29,6 +30,17 @@ public class PowerStar extends Item implements Consumable, Buyable {
      */
     private int lifetime;
 
+    /**
+     * consumed: whether the PowerStar has been consumed
+     */
+    private boolean consumed;
+
+    /**
+     * Holds the current item's consume action so that it can be added or removed from the list
+     */
+    private final Action consumeAction;
+
+
     /***
      * Constructor of PowerStar which creates a ConsumeAction every time
      * it is created and lifetime.
@@ -36,8 +48,11 @@ public class PowerStar extends Item implements Consumable, Buyable {
      */
     public PowerStar() {
         super("Power Star", '*', true);
-        super.addAction(new ConsumeAction(this));
+        consumeAction = new ConsumeAction(this);
+        super.addAction(consumeAction);
+        super.addCapability(Status.INVINCIBLE);
         lifetime = 10;
+        consumed = false;
     }
 
     /**
@@ -52,7 +67,18 @@ public class PowerStar extends Item implements Consumable, Buyable {
     public void tick(Location currentLocation, Actor actor) {
         lifetime--;
         if (lifetime <= 0) {
+            // remove the special effects from the player:
+            for (Enum<?> capability : this.capabilitiesList()) {
+                actor.removeCapability(capability);
+            }
+            // remove the item from the player's inventory:
             actor.removeItemFromInventory(this);
+        }
+        else {
+            // add the effects to the player (another item might have removed the buffs, so we must re-add them):
+            for (Enum<?> capability : this.capabilitiesList()) {
+                actor.addCapability(capability);
+            }
         }
     }
 
@@ -95,11 +121,22 @@ public class PowerStar extends Item implements Consumable, Buyable {
      */
     @Override
     public void consume(Actor actor) {
-        //Give the invisible buff:
-        actor.addCapability(Status.INVINCIBLE);
+        //Give the buffs:
+        for (Enum<?> capability : this.capabilitiesList()) {
+            actor.addCapability(capability);
+        }
 
         // Heal by 200 points:
         actor.heal(hpToHealBy);
+
+        // change the consumed status of the PowerStar:
+        consumed = true;
+
+        // set the lifetime (turns left) to 10:
+        lifetime = 10;
+
+        // remove the consume action from the item's action list (it will essentially become inert, only exists to reapply buffs every turn):
+        removeAction(consumeAction);
     }
 
     /**
@@ -111,4 +148,8 @@ public class PowerStar extends Item implements Consumable, Buyable {
         return PRICE;
     }
 
+    @Override
+    public boolean stayInInventory() {
+        return true;  // should stay in inventory so that the effect can last for 10 turns
+    }
 }

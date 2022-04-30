@@ -9,7 +9,11 @@ import edu.monash.fit2099.engine.items.Item;
  * @author Satya Jhaveri, Klarissa Jutivannadevi
  */
 public interface Consumable {
-    public Item getItem();
-    public void consume(Actor actor);
+    Item getItem();
+    void consume(Actor actor);
+
+    default boolean stayInInventory() {
+        return false;
+    }
 
 }
