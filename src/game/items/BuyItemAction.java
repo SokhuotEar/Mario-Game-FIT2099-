@@ -6,15 +6,40 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Player;
 
+/**
+ * Special Action that allows Actors to buy items.
+ *
+ * @author Satya Jhaveri
+ */
 public class BuyItemAction extends Action{
-        int price;
-        Item item;
 
+    /**
+     * price of the object
+     */
+    int price;
+
+    /**
+     * item object
+     */
+    Item item;
+
+    /**
+     * Get the price of the buyable objec
+     * @param buyable an object which is buyable
+     */
     public BuyItemAction(Buyable buyable) {
         this.item = buyable.getItem();
         this.price = buyable.getPrice();
     }
 
+    /**
+     * Allow actor to purchase the object if balance in the wallet is enough
+     * to purchase it and return the string based on whether actor can buy or not.
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         // Get the player instance:
@@ -38,6 +63,12 @@ public class BuyItemAction extends Action{
         }
     }
 
+    /**
+     * A string describing the action suitable for displaying in the UI menu.
+     *
+     * @param actor The actor performing the action.
+     * @return string which shows how much are spent on which item
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor + " buys " + item + " ($" + price + ")";
