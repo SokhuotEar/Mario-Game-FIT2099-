@@ -5,6 +5,11 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * The class PowerStar gives details of the functionality that PowerStar has
+ *
+ * @author Satya Jhaveri, Klarissa Jutivannadevi
+ */
 public class PowerStar extends Item implements Consumable {
     private static final int hpToHealBy = 200;
     private int lifetime;
@@ -48,6 +53,11 @@ public class PowerStar extends Item implements Consumable {
         }
     }
 
+    /**
+     * Override DropItemAction to not allow item being dropped
+     * @param actor which actor pick the item
+     * @return null
+     */
     @Override
     public DropItemAction getDropAction(Actor actor) {
         return null;
@@ -62,6 +72,10 @@ public class PowerStar extends Item implements Consumable {
         return this;
     }
 
+    /**
+     * This will change the status and increase the hp of the actor once they consume the SuperMushroom
+     * @param actor which actor consumes the item
+     */
     @Override
     public void consume(Actor actor) {
         //Give the invisible buff:

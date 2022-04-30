@@ -47,6 +47,10 @@ public class SuperMushroom extends Item implements Consumable {
     }
 
 
+    /**
+     * This will change the status and increase the hp of the actor once they consume the SuperMushroom
+     * @param actor which actor consumes the item
+     */
     @Override
     public void consume(Actor actor) {
         // Increase max HP by 50:
