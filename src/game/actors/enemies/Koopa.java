@@ -82,6 +82,9 @@ public class Koopa extends Enemy {
                 goDormant();
         }
 
+        if (isConscious()) {
+            removeInstance(this);
+        }
     }
 
     /**

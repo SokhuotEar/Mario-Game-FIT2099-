@@ -118,4 +118,19 @@ public abstract class Enemy extends Actor implements Resettable {
         }
 
     }
+
+    /**
+     * Do some damage to the current Actor. Removes the Enemy from the Enemy list if it dies
+     * <p>
+     * If the Actor's hitpoints go down to zero, it will be knocked out.
+     *
+     * @param points number of hitpoints to deduct.
+     */
+    @Override
+    public void hurt(int points) {
+        super.hurt(points);
+        if (!isConscious()) {
+            removeInstance(this);
+        }
+    }
 }
