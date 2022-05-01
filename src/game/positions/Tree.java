@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.RNG;
+import game.Status;
 import game.reset.Resettable;
 import game.actors.enemies.Goomba;
 import game.actors.enemies.Koopa;
@@ -129,10 +130,10 @@ public class Tree extends HighGround implements Resettable {
         if (this.treeType == TreeType.MATURE & this.age%5== 0 & treeCount <= maxTreeCount) {
             // create list to contain fertile surrounding squares:
             List<Location> fertileLocations = new ArrayList<>();
-            // iterate over surrounding locations to add fertile ground (dirt):
+            // iterate over surrounding locations to add fertile ground:
             for (Exit exit : location.getExits()) {
                 Ground ground = exit.getDestination().getGround();
-                if (Dirt.isInstance(ground)) {
+                if (ground.hasCapability(Status.FERTILE)) {
                     fertileLocations.add(exit.getDestination());
                 }
             }
