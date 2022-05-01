@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.reset.Resettable;
 
 /**
@@ -15,6 +16,11 @@ public class Coin extends Item implements Resettable {
     private final int value;
 
     /**
+     * Whether the coin will be reset this turn
+     */
+    private boolean reset;
+
+    /**
      * Constructor.
      * @param value the value of the coin
      */
@@ -23,6 +29,19 @@ public class Coin extends Item implements Resettable {
         this.value = value;
         this.registerInstance();
         super.addAction(new PickUpCoinAction(this));
+        reset = false;
+    }
+
+    /**
+     * This method is called once per turn, if the coin is on the ground.
+     *
+     * @param currentLocation The location of the ground
+     */
+    @Override
+    public void tick(Location currentLocation) {
+        if (reset) {
+            currentLocation.removeItem(this);
+        }
     }
 
     /**
@@ -38,8 +57,7 @@ public class Coin extends Item implements Resettable {
      */
     @Override
     public void resetInstance() {
-        //setDisplayChar(new Dirt().getDisplayChar());
-
+        reset = true;
     }
 
 }

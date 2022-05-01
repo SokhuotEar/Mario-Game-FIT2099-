@@ -113,9 +113,7 @@ public abstract class Enemy extends Actor implements Resettable {
      */
     @Override
     public void resetInstance() {
-        for (Enemy enemy : enemyList) {
-            enemy.resetMaxHp(0);
-        }
+        //resetMaxHp(0);
 
     }
 
