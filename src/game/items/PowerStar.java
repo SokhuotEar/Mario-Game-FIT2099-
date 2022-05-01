@@ -13,6 +13,7 @@ import game.Status;
  * Consumable and Buyable since it can be consumed and purchased.
  *
  * @author Satya Jhaveri, Klarissa Jutivannadevi
+ * @version 1.0
  */
 public class PowerStar extends Item implements Consumable, Buyable {
     /**

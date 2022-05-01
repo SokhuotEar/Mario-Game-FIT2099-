@@ -11,6 +11,7 @@ import game.Status;
  * Consumable and Buyable since it can be consumed and purchased.
  *
  * @author Satya Jhaveri, Klarissa Jutivannadevi
+ * @version 1.0
  */
 
 public class SuperMushroom extends Item implements Consumable, Buyable {
@@ -53,7 +54,6 @@ public class SuperMushroom extends Item implements Consumable, Buyable {
     public Item getItem() {
         return this;
     }
-
 
     /**
      * Allow power up to actor based on the item consumed

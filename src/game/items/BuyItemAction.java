@@ -9,7 +9,8 @@ import game.actors.Player;
 /**
  * Special Action that allows Actors to buy items.
  *
- * @author Satya Jhaveri
+ * @author Sok Ear, Satya Jhaveri
+ * @version 1.0
  */
 public class BuyItemAction extends Action{
 
@@ -38,7 +39,7 @@ public class BuyItemAction extends Action{
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return
+     * @return a string describing the action that was exectued
      */
     @Override
     public String execute(Actor actor, GameMap map) {

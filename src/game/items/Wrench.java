@@ -11,9 +11,18 @@ import java.util.List;
  * The class Wrench is a child class of WeaponItem and implements Weapon,
  * which shows that it has a behavior of a weapon, and also Buyable, since
  * it can be purchase.
+ * @author Satya Jhaveri
+ * @version 1.0
  */
 public class Wrench extends WeaponItem implements Weapon, Buyable {
+    /**
+     * Static list of all wrenches
+     */
     private static final List<Wrench> wrenchList = new ArrayList<>();
+
+    /**
+     * The price of the Wrench
+     */
     private static final int PRICE = 200;
 
     /**

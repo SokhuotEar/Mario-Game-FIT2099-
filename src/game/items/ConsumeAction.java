@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * Special Action that allows Actors to consume items.
  *
  * @author Satya Jhaveri, Klarissa Jutivannadevi
+ * @version 1.0
  */
 public class ConsumeAction extends Action {
 

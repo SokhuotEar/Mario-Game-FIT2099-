@@ -3,13 +3,20 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 import game.reset.Resettable;
 
-/** I made this only cuz I need the class to work on my part. Feel free to change the content. **/
-
+/**
+ * Coin class.
+ * @author Sok Ear
+ * @version 1.0
+ */
 public class Coin extends Item implements Resettable {
-    private int value;
-    int age;
-    /***
+    /**
+     * The value of the coin
+     */
+    private final int value;
+
+    /**
      * Constructor.
+     * @param value the value of the coin
      */
     public Coin(int value) {
         super("coin", '$',false); // to be changed
@@ -18,10 +25,17 @@ public class Coin extends Item implements Resettable {
         super.addAction(new PickUpCoinAction(this));
     }
 
+    /**
+     * gets the value of the coin
+     * @return the value of the coin
+     */
     public int getValue() {
         return value;
     }
 
+    /**
+     * Resets the coin
+     */
     @Override
     public void resetInstance() {
         //setDisplayChar(new Dirt().getDisplayChar());

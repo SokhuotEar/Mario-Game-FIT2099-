@@ -4,10 +4,11 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Player;
-import game.items.Coin;
 
 /**
  * Special Action that allows Actors to pick up coins.
+ * @author Satya Jhaveri
+ * @version 1.0
  */
 public class PickUpCoinAction extends Action {
     /**
