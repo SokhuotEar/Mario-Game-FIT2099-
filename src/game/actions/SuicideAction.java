@@ -5,14 +5,20 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.enemies.Enemy;
 
+/**
+ * Special Action for an Actor committing suicide.
+ * @author Satya Jhaveri
+ * @version 1.0
+ * @see edu.monash.fit2099.engine.actions.Action
+ */
 public class SuicideAction extends Action {
 
     /**
-     * Perform the Action.
+     * Performs the Suicide Action.
      *
-     * @param actor The actor performing the action.
+     * @param actor The actor committing suicide.
      * @param map   The map the actor is on.
-     * @return a description of what happened that can be displayed to the user.
+     * @return a description of the suicide that is displayed to the user.
      */
     @Override
     public String execute(Actor actor, GameMap map) {

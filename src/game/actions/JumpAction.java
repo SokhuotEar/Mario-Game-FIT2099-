@@ -6,13 +6,41 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.RNG;
 
+/**
+ * Special Action for jumping to higher ground.
+ * @author Satya Jhaveri
+ * @version 1.0
+ * @see edu.monash.fit2099.engine.actions.Action
+ */
 public class JumpAction extends Action {
 
+    /**
+     * The location to jump to (if the jump is successful)
+     */
     private final Location location;
+
+    /**
+     * The direction the jump is being made in
+     */
     private final String direction;
+
+    /**
+     * The probability of the jump succeeding
+     */
     private final int jumpSuccess;
+
+    /**
+     * The fall damage the actor will take if the jump is not successful
+     */
     private final int fallDamage;
 
+    /**
+     * Constructor.
+     * @param moveToLocation The location to jump to (if the jump is successful)
+     * @param direction The direction the jump is being made in
+     * @param jumpChanceSuccess The probability of the jump succeeding
+     * @param fallDamage The fall damage the actor will take if the jump is not successful
+     */
     public JumpAction(Location moveToLocation, String direction, int jumpChanceSuccess, int fallDamage) {
         this.location = moveToLocation;
         this.direction = direction;
@@ -21,11 +49,11 @@ public class JumpAction extends Action {
     }
 
     /**
-     * Perform the Action.
+     * Perform the JumpAction.
      *
-     * @param actor The actor performing the action.
+     * @param actor The actor performing the jump.
      * @param map   The map the actor is on.
-     * @return a description of what happened that can be displayed to the user.
+     * @return a string describing the outcome of the jump.
      */
     @Override
     public String execute(Actor actor, GameMap map) {

@@ -4,8 +4,17 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+/**
+ * Special Action for Monologue.
+ * @author Satya Jhaveri
+ * @version 1.0
+ * @see edu.monash.fit2099.engine.actions.Action
+ */
 public class SpeakAction extends Action {
-    private String line;
+    /**
+     * The string that will be spoken
+     */
+    private final String line;
 
     /**
      * Overloaded constructor for SpeakAction

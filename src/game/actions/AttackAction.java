@@ -10,9 +10,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
+import game.actors.enemies.Enemy;
 
 /**
  * Special Action for attacking other Actors.
+ * @author FIT2099, extended by Satya Jhaveri
+ * @version 1.0
+ * @see edu.monash.fit2099.engine.actions.Action
  */
 public class AttackAction extends Action {
 
@@ -35,12 +39,19 @@ public class AttackAction extends Action {
 	 * Constructor.
 	 * 
 	 * @param target the Actor to attack
+	 * @param direction the Direction is which the attack is taking place
 	 */
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
 	}
 
+	/**
+	 * Executes the attack action.
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return a string describing the outcome of the action
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		String result;
@@ -79,6 +90,9 @@ public class AttackAction extends Action {
 					drop.execute(target, map);
 				// remove actor
 				map.removeActor(target);
+
+				// if the dead actor is an enemy, remove it from the static Enemy list:
+				Enemy.removeInstance(target);
 				result += System.lineSeparator() + target + " is killed.";
 			}
 		}
@@ -90,6 +104,11 @@ public class AttackAction extends Action {
 		return result;
 	}
 
+	/**
+	 * Returns a descriptive string
+	 * @param actor The actor performing the action.
+	 * @return the text we put on the menu
+	 */
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " " + actor.getWeapon().verb() + " " + target + " at " + direction;
