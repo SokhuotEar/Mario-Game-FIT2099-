@@ -10,8 +10,16 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.enemies.behaviours.Behaviour;
 
-public class WanderBehaviour extends Action implements Behaviour {
-	
+/**
+ * A class that figures out a MoveAction that will move the actor randomly
+ * @author FIT2099
+ * @version 1.0
+ */
+public class WanderBehaviour implements Behaviour {
+
+	/**
+	 * A random object for generating random ints
+	 */
 	private final Random random = new Random();
 
 	/**
@@ -24,7 +32,7 @@ public class WanderBehaviour extends Action implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		ArrayList<Action> actions = new ArrayList<Action>();
+		ArrayList<Action> actions = new ArrayList<>();
 		
 		for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
@@ -40,15 +48,5 @@ public class WanderBehaviour extends Action implements Behaviour {
 			return null;
 		}
 
-	}
-
-	@Override
-	public String execute(Actor actor, GameMap map) {
-		return menuDescription(actor);
-	}
-
-	@Override
-	public String menuDescription(Actor actor) {
-		return "Raagrh...";
 	}
 }
