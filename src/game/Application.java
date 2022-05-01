@@ -22,10 +22,16 @@ import game.positions.Wall;
 
 /**
  * The main class for the Mario World game.
+ * @author FIT2099, modified by Satya Jhaveri, Klarissa Jutivannadevi, Sok Ear
+ * @version 1.0
  *
  */
 public class Application {
 
+	/**
+	 * Runs the main Mario game
+	 * @param args command line args (not needed for current version of application)
+	 */
 	public static void main(String[] args) {
 
 			World world = new World(new Display());
@@ -58,7 +64,6 @@ public class Application {
 
 			// Adding player:
 			Actor mario = new Player("Player", 'm', 100);
-			mario.addItemToInventory(new Wrench());
 			world.addPlayer(mario, gameMap.at(42, 10));
 
 			//Adding SuperMushroom and PowerStar
