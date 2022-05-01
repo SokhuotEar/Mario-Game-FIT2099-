@@ -14,9 +14,17 @@ import game.actors.enemies.behaviours.WanderBehaviour;
 import game.items.SuperMushroom;
 import game.items.Wrench;
 
+/**
+ * Koopa Enemy Class.
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class Koopa extends Enemy {
-
+    /**
+     * Whether the Koopa is in its shell or not
+     */
     private boolean dormant;
+
     /**
      * Constructor.
      */
@@ -29,6 +37,14 @@ public class Koopa extends Enemy {
         dormant = false;
     }
 
+    /**
+     * Figures out what action the Goomba will take next
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return An action that the Koopa will execute
+     */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours().values()) {
@@ -68,10 +84,17 @@ public class Koopa extends Enemy {
 
     }
 
-    // Sets dormant to true and sets the display char to a shell
+    /**
+     * Makes the Koopa go inside its shell
+     */
     private void goDormant() {
-        resetMaxHp(50);  // set max hp to the damage done by a wrench
+        // set max hp to the damage done by a wrench
+        resetMaxHp(50);
+
+        // set the dormant attribute to true
         dormant = true;
+
+        // update the display character
         setDisplayChar('D');
 
         // remove all behaviours:
@@ -80,7 +103,7 @@ public class Koopa extends Enemy {
 
 
     /**
-     * At the moment, we only make it can be attacked by Player.
+     * If the Koopa is dormant, it can only be attacked by an actor with a Wrench. Otherwise, can be attacked by anyone
      * @param otherActor the Actor that might perform an action.
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
@@ -95,6 +118,7 @@ public class Koopa extends Enemy {
         else {  // if the koopa is dormant, it can only be attacked if the other actor has a wrench
             if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
                 ActionList actions =  new ActionList();
+                // iterate over the attackers' inventory to check if they have a wrench
                 for (Item item : otherActor.getInventory()) {
                     if (Wrench.isInstance(item)){
                         actions.add(new AttackAction(this, direction));

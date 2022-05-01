@@ -7,11 +7,15 @@ import game.actions.AttackAction;
 import game.reset.Resettable;
 import game.Status;
 import game.actors.enemies.behaviours.*;
-
 import java.util.*;
 
+/**
+ * An abstract base class for all Enemies to extend from
+ * @author FIT2099, extended by Satya Jhaveri
+ * @version 1.0
+ */
 public abstract class Enemy extends Actor implements Resettable {
-    private static List<Enemy> enemyList = new ArrayList<>();
+    private static final List<Enemy> enemyList = new ArrayList<>();
     private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
 
     /**
@@ -46,6 +50,10 @@ public abstract class Enemy extends Actor implements Resettable {
         return result;
     }
 
+    /**
+     * Removes an enemy from the static enemy list
+     * @param actor the enemy to be removed
+     */
     public static void removeInstance(Actor actor) {
         if (isInstance(actor)) {
             enemyList.remove(actor);
@@ -76,19 +84,33 @@ public abstract class Enemy extends Actor implements Resettable {
         return actions;
     }
 
+    /**
+     * Adds a behaviour to the Map of behaviours
+     * @param priority the priority of the behaviour (smaller number -> higher priority)
+     * @param behaviour the Behaviour to add
+     */
     public void addBehaviour(Integer priority, Behaviour behaviour) {
         behaviours.put(priority, behaviour);
     }
 
+    /**
+     * Gets the map of behaviours
+     * @return A map of the enemies' behaviours
+     */
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
     }
 
-    // removes all behaviours from an enemy
+    /**
+     * Removes all behaviours from an enemy
+     */
     public void clearBehaviours() {
         behaviours = new TreeMap<>();
     }
 
+    /**
+     * Resets the Enemy instance
+     */
     @Override
     public void resetInstance() {
         for (Enemy enemy : enemyList) {
