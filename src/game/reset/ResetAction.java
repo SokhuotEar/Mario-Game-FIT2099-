@@ -8,14 +8,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
  * Special Action that allows Game to be reset
  *
  * @author Klarissa Jutivannadevi
+ * @version 1.0
  */
 public class ResetAction extends Action {
-    /**
-     * ResetAction constructor
-     */
-    ResetAction() {
-        System.out.println("resetactions");
-    }
 
     /**
      * The instance will go through all the resetInstance and reset
@@ -28,7 +23,7 @@ public class ResetAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         ResetManager.getInstance().run();
-        return "Reset Game";
+        return menuDescription(actor);
     }
 
     /**
