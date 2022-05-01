@@ -2,22 +2,24 @@ package game;
 
 import java.util.Random;
 
-/** @Author: Sok Ear
- * Use this whenever you need to generate RNG (or work with probability)
- * **/
-
-
+/**
+ * Random generator class to deal with % probaiblities
+ * @author Sok Ear
+ * @version 1.0
+ */
 public class RNG {
+    /**
+     * Random object for use with the classes methods
+     */
     private static final Random rand = new Random();
 
-    // method
-    // rng(probability):    just input the probability needed, then it will give True and False
-    //                      true indicates success, false means fail
-
+    /**
+     * Probability generator
+     * @param probability the % chance of success
+     * @return true probability% of the time, and false (100-probability)% of the time
+     */
     public static boolean rng(int probability) {
-        int number = rand.nextInt(99);
-
+        int number = rand.nextInt(100);
         return (number < probability);
     }
-
 }
