@@ -15,8 +15,17 @@ import java.rmi.StubNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Abstract higher ground class
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public abstract class HighGround extends Ground {
+    /**
+     * A static list of all high ground instances
+     */
     private static final List<HighGround> highGroundList = new ArrayList<>();
+
     /**
      * Constructor.
      *
@@ -29,27 +38,14 @@ public abstract class HighGround extends Ground {
     }
 
     /**
-     * Override this to implement impassable terrain, or terrain that is only passable if conditions are met.
+     * Actors can only enter if they have Status. INVINCIBLE
      *
      * @param actor the Actor to check
-     * @return true
+     * @return true if the actor is invincible, false otherwise
      */
     @Override
     public boolean canActorEnter(Actor actor) {
         return actor.hasCapability(Status.INVINCIBLE);
-    }
-
-    public static boolean isInstance(Ground ground) {
-        return highGroundList.contains(ground);
-    }
-
-    public static HighGround getInstance(Ground ground) {
-        if (isInstance(ground)) {
-            return highGroundList.get(highGroundList.indexOf(ground));
-        }
-        else {
-            return null;
-        }
     }
 
     /**
@@ -70,6 +66,11 @@ public abstract class HighGround extends Ground {
         super.tick(location);
     }
 
+    /**
+     * Gets the % chance of success when a jump is made
+     * @param actor the actor that is making the jump
+     * @return the % chance of success when making a jump
+     */
     abstract public int getJumpChanceSuccess(Actor actor);
 
     /**
@@ -99,5 +100,10 @@ public abstract class HighGround extends Ground {
         return actions;
     }
 
+    /**
+     * Gets the fall damage that the actor will take if they fail the jump
+     * @param actor the actor that is making the jump
+     * @return the HP the actor will lose if they fail the jump
+     */
     abstract public int getFallDamage(Actor actor);
 }

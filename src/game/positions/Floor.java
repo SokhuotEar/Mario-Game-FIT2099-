@@ -6,6 +6,8 @@ import game.actors.enemies.Enemy;
 
 /**
  * A class that represents the floor inside a building.
+ * @author FIT2099, modified by Satya Jhaveri
+ * @version 1.0
  */
 public class Floor extends Ground {
 
@@ -18,7 +20,7 @@ public class Floor extends Ground {
 
 
 	/**
-	 * Override this to implement impassable terrain, or terrain that is only passable if conditions are met.
+	 * Enemies cannot enter floor tiles
 	 *
 	 * @param actor the Actor to check
 	 * @return true

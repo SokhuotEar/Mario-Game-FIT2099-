@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * A class that represents bare dirt.
+ * @author FIT2099, extended by Satya Jhaveri
+ * @version 1.0
  */
 public class Dirt extends Ground {
 	/**
