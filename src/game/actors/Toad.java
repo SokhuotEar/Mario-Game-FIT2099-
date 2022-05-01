@@ -18,13 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Character.toLowerCase;
-
+/**
+ * A Toad class.
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class Toad extends Actor {
 
     /**
      * Constructor.
-     *
      */
     public Toad() {
         super("Toad", 'O', 100);
@@ -37,7 +39,7 @@ public class Toad extends Actor {
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
-     * @return new DoNothingAction
+     * @return DoNothingAction
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
@@ -56,10 +58,8 @@ public class Toad extends Actor {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions =  new ActionList();
 
-        // Adding a SpeakAction if the other actor is a player:
-        if (otherActor.getDisplayChar() == 'm' || otherActor.getDisplayChar() == 'M') {  // Check actor is player TODO: fix this
-
-            // TODO: maybe don't show Implementatin here. Put it into SpeakAction. It's better for encapsulation.
+        // Adding actions only if the other actor is a player:
+        if (Player.isInstance(otherActor)) {
             List<String> lines = new ArrayList<>();
 
             lines.add("The Princess is depending on you! You are our only hope.");
@@ -89,9 +89,6 @@ public class Toad extends Actor {
             actions.add(new BuyItemAction(new Wrench()));
             actions.add(new BuyItemAction(new PowerStar()));
         }
-
         return actions;
-
     }
-
 }
