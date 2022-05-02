@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.RNG;
 import game.Status;
+import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actors.enemies.Goomba;
 import game.actors.enemies.Koopa;
@@ -223,6 +224,7 @@ public class Tree extends HighGround implements Resettable {
                     break;
                 }
             }
+            ResetManager.getInstance().cleanUp(this);
         }
     }
 

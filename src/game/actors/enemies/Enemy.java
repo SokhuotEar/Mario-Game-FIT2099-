@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
+import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.Status;
 import game.actors.enemies.behaviours.*;
@@ -121,6 +122,7 @@ public abstract class Enemy extends Actor implements Resettable {
 
         map.removeActor(this);
         Enemy.removeInstance(this);
+        ResetManager.getInstance().cleanUp(this);
     }
 
     /**
