@@ -123,7 +123,7 @@ public class PowerStar extends Item implements Consumable, Buyable {
      */
     @Override
     public void consume(Actor actor) {
-        //Give the buffs:
+        //Give the buffs to this item (since the player will hold this item and hence get the capabilities):
         super.addCapability(Status.INVINCIBLE);
 
         // Heal by 200 points:
