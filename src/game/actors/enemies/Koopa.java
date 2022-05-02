@@ -29,7 +29,7 @@ public class Koopa extends Enemy {
      * Constructor.
      */
     public Koopa() {
-        super("Koopa", 'K', 10);
+        super("Koopa", 'K', 100);
         addBehaviour(10, new WanderBehaviour());
         SuperMushroom mushroom = new SuperMushroom();
         addItemToInventory(mushroom);
