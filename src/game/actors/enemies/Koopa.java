@@ -37,7 +37,7 @@ public class Koopa extends Enemy {
     }
 
     /**
-     * Figures out what action the Goomba will take next
+     * Figures out what action the Koopa will take next
      * @param actions    collection of possible Actions for this Actor
      * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
      * @param map        the map containing the Actor
