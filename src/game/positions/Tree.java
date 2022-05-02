@@ -18,7 +18,7 @@ import java.util.Random;
 /**
  * Class Tree is a child class of Ground and implement Resettable
  * that is used for reset game.
- * @author Sok Huot Ea
+ * @author Sok Huot Ear
  * @version 1.0
  */
 public class Tree extends HighGround implements Resettable {
@@ -179,9 +179,9 @@ public class Tree extends HighGround implements Resettable {
     public int getJumpChanceSuccess(Actor actor) {
         int jumpSuccess = 0;
         switch (treeType) {
-            case MATURE -> jumpSuccess = 70;
-            case SAPLING -> jumpSuccess = 80;
-            case SPROUT -> jumpSuccess = 90;
+            case MATURE: jumpSuccess = 70;
+            case SAPLING: jumpSuccess = 80;
+            case SPROUT: jumpSuccess = 90;
         }
         return jumpSuccess;
     }
@@ -195,9 +195,9 @@ public class Tree extends HighGround implements Resettable {
     public int getFallDamage(Actor actor) {
         int fallDamage = 0;
         switch (treeType) {
-            case MATURE -> fallDamage = 30;
-            case SAPLING -> fallDamage = 20;
-            case SPROUT -> fallDamage = 10;
+            case MATURE: fallDamage = 30;
+            case SAPLING: fallDamage = 20;
+            case SPROUT: fallDamage = 10;
         }
         return fallDamage;
     }

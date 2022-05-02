@@ -1,5 +1,6 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import game.reset.Resettable;
 
@@ -8,7 +9,7 @@ import game.reset.Resettable;
  * @author Sok Ear
  * @version 1.0
  */
-public class Coin extends Item implements Resettable {
+public class Coin extends Item implements Resettable{
     /**
      * The value of the coin
      */
@@ -19,7 +20,7 @@ public class Coin extends Item implements Resettable {
      * @param value the value of the coin
      */
     public Coin(int value) {
-        super("coin", '$',false); // to be changed
+        super("coin", '$',false);
         this.value = value;
         this.registerInstance();
         super.addAction(new PickUpCoinAction(this));
@@ -32,6 +33,7 @@ public class Coin extends Item implements Resettable {
     public int getValue() {
         return value;
     }
+
 
     /**
      * Resets the coin
