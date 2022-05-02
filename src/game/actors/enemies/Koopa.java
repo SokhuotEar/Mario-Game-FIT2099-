@@ -32,7 +32,6 @@ public class Koopa extends Enemy {
         super("Koopa", 'K', 100);
         addBehaviour(10, new WanderBehaviour());
         SuperMushroom mushroom = new SuperMushroom();
-        mushroom.togglePortability();
         addItemToInventory(mushroom);
         dormant = false;
     }

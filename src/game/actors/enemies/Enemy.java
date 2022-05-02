@@ -2,6 +2,7 @@ package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.reset.Resettable;
@@ -112,11 +113,14 @@ public abstract class Enemy extends Actor implements Resettable {
      * Resets the Enemy instance
      */
     @Override
-    public void resetInstance() {
-        for (Enemy enemy : enemyList) {
-            enemy.resetMaxHp(0);
+    public void resetInstance(GameMap map) {
+        // drop every item in inventory:
+        for (Item item : getInventory()) {
+            map.locationOf(this).addItem(item);
         }
 
+        map.removeActor(this);
+        Enemy.removeInstance(this);
     }
 
     /**

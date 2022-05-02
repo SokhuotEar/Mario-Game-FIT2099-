@@ -22,7 +22,7 @@ public class ResetAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        ResetManager.getInstance().run();
+        ResetManager.getInstance().run(map);
         return menuDescription(actor);
     }
 

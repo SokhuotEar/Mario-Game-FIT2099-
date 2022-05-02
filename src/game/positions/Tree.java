@@ -2,6 +2,7 @@ package game.positions;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.RNG;
@@ -162,12 +163,13 @@ public class Tree extends HighGround implements Resettable {
      */
     @Override
     public void tick(Location location){
-        grow();                         // trees can grow
-        spawnEnemy(location);           // trees can spawn enemies
-        dropCoin(location);             // trees can drop coins
-        growNewSprout(location);        // trees can grow new sprout
-        wither(location);               // trees can wither
-        super.tick(location);
+            grow();                         // trees can grow
+            spawnEnemy(location);           // trees can spawn enemies
+            dropCoin(location);             // trees can drop coins
+            growNewSprout(location);        // trees can grow new sprout
+            wither(location);               // trees can wither
+            super.tick(location);
+
     }
 
     /**
@@ -206,10 +208,21 @@ public class Tree extends HighGround implements Resettable {
      * Resets the tree object
      */
     @Override
-    public void resetInstance() {
+    public void resetInstance(GameMap map) {
         if (RNG.rng(50)) {
-            //setDisplayChar(new Dirt().getDisplayChar());
-
+            boolean found = false;
+            for (int x : map.getXRange()) {
+                for (int y : map.getYRange()) {
+                    if (map.at(x,y).getGround() == this) {
+                        found = true;
+                        map.at(x,y).setGround(new Dirt());
+                        break;
+                    }
+                }
+                if (found) {
+                    break;
+                }
+            }
         }
     }
 

@@ -21,10 +21,6 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class HighGround extends Ground {
-    /**
-     * A static list of all high ground instances
-     */
-    private static final List<HighGround> highGroundList = new ArrayList<>();
 
     /**
      * Constructor.
@@ -33,8 +29,6 @@ public abstract class HighGround extends Ground {
      */
     public HighGround(char displayChar) {
         super(displayChar);
-        highGroundList.add(this);
-
     }
 
     /**
@@ -60,7 +54,6 @@ public abstract class HighGround extends Ground {
             if (location.getActor().hasCapability(Status.INVINCIBLE)) {
                 location.setGround(new Dirt());
                 location.addItem(new Coin(5));
-                highGroundList.remove(this);
             }
         }
         super.tick(location);

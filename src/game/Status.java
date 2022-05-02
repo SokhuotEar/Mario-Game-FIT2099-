@@ -11,4 +11,5 @@ public enum Status {
     TALL, // use this status to tell that current instance has "grown".
     INVINCIBLE,  // use this for when the power star is consumed
     FERTILE,    // use this for when a ground is fertile
+    HAS_RESET,  // use this for when an actor has the ability to reset the game
 }

@@ -1,5 +1,7 @@
 package game.reset;
 
+import edu.monash.fit2099.engine.positions.GameMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +44,9 @@ public class ResetManager {
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
-    public void run(){
+    public void run(GameMap map){
         for (Resettable resettable : resettableList) {
-            resettable.resetInstance();
+            resettable.resetInstance(map);
         }
     }
 
