@@ -1,7 +1,9 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.positions.Dirt;
 import game.reset.Resettable;
 
 /**
@@ -16,11 +18,6 @@ public class Coin extends Item implements Resettable {
     private final int value;
 
     /**
-     * Whether the coin will be reset this turn
-     */
-    private boolean reset;
-
-    /**
      * Constructor.
      * @param value the value of the coin
      */
@@ -29,20 +26,8 @@ public class Coin extends Item implements Resettable {
         this.value = value;
         this.registerInstance();
         super.addAction(new PickUpCoinAction(this));
-        reset = false;
     }
 
-    /**
-     * This method is called once per turn, if the coin is on the ground.
-     *
-     * @param currentLocation The location of the ground
-     */
-    @Override
-    public void tick(Location currentLocation) {
-        if (reset) {
-            currentLocation.removeItem(this);
-        }
-    }
 
     /**
      * gets the value of the coin
@@ -56,8 +41,20 @@ public class Coin extends Item implements Resettable {
      * Resets the coin
      */
     @Override
-    public void resetInstance() {
-        reset = true;
+    public void resetInstance(GameMap map) {
+        // iterate over the map to find coin, then remove coin
+        boolean found = false;
+        for (int x : map.getXRange()) {
+            for (int y : map.getYRange()) {
+                if (map.at(x,y).getItems().contains(this)) {
+                    found = true;
+                    map.at(x,y).removeItem(this);
+                    break;
+                }
+            }
+            if (found) {
+                break;
+            }
+        }
     }
-
 }

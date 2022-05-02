@@ -2,6 +2,7 @@ package game.positions;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.RNG;
@@ -45,11 +46,6 @@ public class Tree extends HighGround implements Resettable {
     private static final int maxTreeCount = 50; // new sprouts will only grow if there are less than this number of trees, avoids overcrowding
 
     /**
-     * Whether the tree should be reset in the current turn
-     */
-    private boolean reset;
-
-    /**
      * Constructor. Starts to create Tree from sprout
      */
     public Tree() {
@@ -58,7 +54,6 @@ public class Tree extends HighGround implements Resettable {
         this.treeType = TreeType.SPROUT;
         treeCount++;
         this.registerInstance();
-        this.reset = false;
     }
 
 
@@ -168,22 +163,13 @@ public class Tree extends HighGround implements Resettable {
      */
     @Override
     public void tick(Location location){
-        if (reset) {
-            if (RNG.rng(50)) {
-                location.setGround(new Dirt());
-            }
-            else {
-                reset = false;
-            }
-        }
-        else {
             grow();                         // trees can grow
             spawnEnemy(location);           // trees can spawn enemies
             dropCoin(location);             // trees can drop coins
             growNewSprout(location);        // trees can grow new sprout
             wither(location);               // trees can wither
             super.tick(location);
-        }
+
     }
 
     /**
@@ -222,9 +208,21 @@ public class Tree extends HighGround implements Resettable {
      * Resets the tree object
      */
     @Override
-    public void resetInstance() {
+    public void resetInstance(GameMap map) {
         if (RNG.rng(50)) {
-            reset = true;
+            boolean found = false;
+            for (int x : map.getXRange()) {
+                for (int y : map.getYRange()) {
+                    if (map.at(x,y).getGround() == this) {
+                        found = true;
+                        map.at(x,y).setGround(new Dirt());
+                        break;
+                    }
+                }
+                if (found) {
+                    break;
+                }
+            }
         }
     }
 

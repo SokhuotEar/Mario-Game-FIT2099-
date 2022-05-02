@@ -159,7 +159,7 @@ public class Player extends Actor implements Resettable {
 	 * Resets the player
 	 */
 	@Override
-	public void resetInstance() {
+	public void resetInstance(GameMap map) {
 		this.resetMaxHp(getMaxHp());
 		for (Status status : Status.values()) {
 			if (this.hasCapability(status)) {
