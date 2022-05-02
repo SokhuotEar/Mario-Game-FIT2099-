@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Player;
+import game.reset.ResetManager;
 
 /**
  * Special Action that allows Actors to pick up coins.
@@ -34,8 +35,14 @@ public class PickUpCoinAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         if (Player.getInstance(actor) != null) {
+            // add the balance of the coin to the player's wallet
             Player.getInstance(actor).getWallet().addBalance(coin.getValue());
+
+            // remove the Coin from the map:
             map.locationOf(actor).removeItem(coin);
+
+            // if the coin is removed from map, we must remove it from the Reset Manager as well
+            ResetManager.getInstance().cleanUp(coin);
             return menuDescription(actor);
         }
         return null;

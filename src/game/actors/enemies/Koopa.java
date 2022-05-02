@@ -36,23 +36,6 @@ public class Koopa extends Enemy {
         dormant = false;
     }
 
-    /**
-     * Figures out what action the Koopa will take next
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return An action that the Koopa will execute
-     */
-    @Override
-    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours().values()) {
-            Action action = Behaviour.getAction(this, map);
-            if (action != null)
-                return action;
-        }
-        return new DoNothingAction();
-    }
 
     /**
      * Creates and returns an intrinsic weapon.
@@ -79,6 +62,7 @@ public class Koopa extends Enemy {
         // Make Koopa go dormant if not conscious:
         if (!dormant && !isConscious()) {
                 goDormant();
+                addInstance(this);  // add the enemy instance back since the super method removes unconcious
         }
 
         if (isConscious()) {
@@ -99,7 +83,7 @@ public class Koopa extends Enemy {
         // update the display character
         setDisplayChar('D');
 
-        // remove all behaviours:
+        // remove all behaviours (so the Koopa doesn't follow, wander, or attack):
         clearBehaviours();
     }
 

@@ -27,7 +27,6 @@ public class Floor extends Ground {
 	 */
 	@Override
 	public boolean canActorEnter(Actor actor) {
-
 		return !Enemy.isInstance(actor);
 	}
 }

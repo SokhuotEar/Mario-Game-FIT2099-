@@ -160,7 +160,10 @@ public class Player extends Actor implements Resettable {
 	 */
 	@Override
 	public void resetInstance(GameMap map) {
+		// heal to full health
 		this.resetMaxHp(getMaxHp());
+
+		// remove all statuses
 		for (Status status : Status.values()) {
 			if (this.hasCapability(status)) {
 				this.removeCapability(status);

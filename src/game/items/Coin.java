@@ -59,6 +59,8 @@ public class Coin extends Item implements Resettable{
                 break;
             }
         }
+
+        // remove the Coin from the Reset Manager:
         ResetManager.getInstance().cleanUp(this);
     }
 }

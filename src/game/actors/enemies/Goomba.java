@@ -56,12 +56,7 @@ public class Goomba extends Enemy {
 			return new SuicideAction();
 		}
 
-		for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours().values()) {
-			Action action = Behaviour.getAction(this, map);
-			if (action != null)
-				return action;
-		}
-		return new DoNothingAction();
+		return super.playTurn(actions, lastAction, map, display);
 	}
 
 }

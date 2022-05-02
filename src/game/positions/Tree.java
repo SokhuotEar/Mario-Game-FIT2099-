@@ -170,7 +170,6 @@ public class Tree extends HighGround implements Resettable {
             growNewSprout(location);        // trees can grow new sprout
             wither(location);               // trees can wither
             super.tick(location);
-
     }
 
     /**
@@ -181,10 +180,14 @@ public class Tree extends HighGround implements Resettable {
     @Override
     public int getJumpChanceSuccess(Actor actor) {
         int jumpSuccess = 0;
-        switch (treeType) {
-            case MATURE: jumpSuccess = 70;
-            case SAPLING: jumpSuccess = 80;
-            case SPROUT: jumpSuccess = 90;
+        if (treeType == TreeType.MATURE) {
+            jumpSuccess = 70;
+        }
+        else if (treeType == TreeType.SAPLING) {
+            jumpSuccess = 80;
+        }
+        else if (treeType == TreeType.SPROUT){
+            jumpSuccess = 90;
         }
         return jumpSuccess;
     }
@@ -197,10 +200,14 @@ public class Tree extends HighGround implements Resettable {
     @Override
     public int getFallDamage(Actor actor) {
         int fallDamage = 0;
-        switch (treeType) {
-            case MATURE: fallDamage = 30;
-            case SAPLING: fallDamage = 20;
-            case SPROUT: fallDamage = 10;
+        if (treeType == TreeType.MATURE) {
+            fallDamage = 30;
+        }
+        else if (treeType == TreeType.SAPLING) {
+            fallDamage = 20;
+        }
+        else if (treeType == TreeType.SPROUT){
+            fallDamage = 10;
         }
         return fallDamage;
     }

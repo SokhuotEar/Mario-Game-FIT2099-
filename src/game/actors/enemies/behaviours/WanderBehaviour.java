@@ -33,14 +33,16 @@ public class WanderBehaviour implements Behaviour {
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		ArrayList<Action> actions = new ArrayList<>();
-		
+
+		// check neighboring locations are empty
 		for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.canActorEnter(actor)) {
             	actions.add(exit.getDestination().getMoveAction(actor, "around", exit.getHotKey()));
             }
         }
-		
+
+		// return a random action if there are spots to move to
 		if (!actions.isEmpty()) {
 			return actions.get(random.nextInt(actions.size()));
 		}

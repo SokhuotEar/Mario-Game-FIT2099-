@@ -1,7 +1,10 @@
 package game.actors.enemies;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
@@ -63,6 +66,16 @@ public abstract class Enemy extends Actor implements Resettable {
     }
 
     /**
+     * Adds an enemy to the static enemy list
+     * @param enemy the enemy to be added
+     */
+    public static void addInstance(Enemy enemy) {
+        if (enemy != null) {
+            enemyList.add(enemy);
+        }
+    }
+
+    /**
      * At the moment, we only make it can be attacked by Player.
      * @param otherActor the Actor that might perform an action.
      * @param direction  String representing the direction of the other Actor
@@ -75,12 +88,13 @@ public abstract class Enemy extends Actor implements Resettable {
         ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            // If other actor is hostile to enemy, add attack action and add follow behaviour
+            // If other actor is hostile to enemy, add attack action and add follow/attack behaviour
             actions.add(new AttackAction(this,direction));
             behaviours.put(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
             behaviours.put(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour(otherActor));
         }
         else {
+            // remove the attack behaviour if the hostile_to_enemy actor is not adjacent to this enemy
             behaviours.remove(BehaviourPriority.ATTACK.ordinal());
         }
         return actions;
@@ -120,8 +134,10 @@ public abstract class Enemy extends Actor implements Resettable {
             map.locationOf(this).addItem(item);
         }
 
+        // remove Enemy from map and EnemyList
         map.removeActor(this);
         Enemy.removeInstance(this);
+        // remove Enemy from the reset manager (since it is destroyed)
         ResetManager.getInstance().cleanUp(this);
     }
 
@@ -138,5 +154,23 @@ public abstract class Enemy extends Actor implements Resettable {
         if (!isConscious()) {
             removeInstance(this);
         }
+    }
+
+    /**
+     * Figures out what action the Enemy will take next
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return An action that the Enemy will execute
+     */
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours().values()) {
+            Action action = Behaviour.getAction(this, map);
+            if (action != null)
+                return action;
+        }
+        return new DoNothingAction();
     }
 }

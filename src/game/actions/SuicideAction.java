@@ -22,7 +22,10 @@ public class SuicideAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        // remove the actor from the map:
         map.removeActor(actor);
+
+        // remove actor from the Enemy static list (if it is an Enemy,check is done within removeInstance method)
         Enemy.removeInstance(actor);
         return menuDescription(actor);
     }
