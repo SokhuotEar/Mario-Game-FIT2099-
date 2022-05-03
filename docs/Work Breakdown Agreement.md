@@ -96,6 +96,65 @@ Person(s) responsible for testing/reviewing: Satya Jhaveri, Sok Huot Ear
 
 Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
+
+##Assignment 3:
+### Deliverable 1: Lava Zone
+Person(s) responsible for production: Sok Huot Ear
+
+Person(s) responsible for testing/reviewing: Klarissa Jutivannadevi, Satya Jhaveri
+
+Date by which deliverable must be completed: 22/05/2022
+
+### Deliverable 2: More allies and Enemies
+Person(s) responsible for production: Satya Jhaveri
+
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Klarissa Jutivannadevi
+
+Date by which deliverable must be completed: 22/05/2022
+
+### Deliverable 3: Magical Fountain
+Person(s) responsible for production: Klarissa Jutivannadevi
+
+Person(s) responsible for testing/reviewing: Satya Jhaveri, Sok Huot Ear
+
+Date by which deliverable must be completed: 22/05/2022
+
+### Deliverable 4: Flowers
+Person(s) responsible for production: Sok Huot Ear
+
+Person(s) responsible for testing/reviewing: Klarissa Jutivannadevi, Satya Jhaveri
+
+Date by which deliverable must be completed: 22/05/2022
+
+### Deliverable 5: Speaking
+Person(s) responsible for production: Satya Jhaveri
+
+Person(s) responsible for testing/reviewing: Sok Huot Ear, Klarissa Jutivannadevi
+
+Date by which deliverable must be completed: 22/05/2022
+
+### Deliverable 6: UML Class Diagrams
+Person(s) responsible for production: Klarissa Jutivannadevi
+
+Person(s) responsible for testing/reviewing:Satya Jhaveri, Sok Huot Ear
+
+Date by which deliverable must be completed: 22/05/2022
+
+
+### Deliverable 7: One New Interaction Diagram
+Person(s) responsible for production: Klarissa Jutivannadevi
+
+Person(s) responsible for testing/reviewing: Satya Jhaveri, Sok Huot Ear
+
+Date by which deliverable must be completed: 22/05/2022
+
+### Deliverable 8: Updated Design Report/Rationale
+Person(s) responsible for production: Klarissa Jutivannadevi, Satya Jhaveri, Sok Huot Ear
+
+Person(s) responsible for testing/reviewing: Klarissa Jutivannadevi, Satya Jhaveri, Sok Huot Ear
+
+Date by which deliverable must be completed: 22/05/2022
+
 ## Signatures:
 Klarissa Jutivannadevi accepted this WBA
 Satya Jhaveri accepted this WBA
