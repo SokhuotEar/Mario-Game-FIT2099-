@@ -97,7 +97,7 @@ Person(s) responsible for testing/reviewing: Satya Jhaveri, Sok Huot Ear
 Date by which deliverable must be completed: 25/04/2022 (3 days before A2 due)
 
 
-##Assignment 3:
+## Assignment 3:
 
 ### Deliverable 1: Lava Zone
 Person(s) responsible for production: Sok Huot Ear
