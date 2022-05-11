@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import game.actions.FireAttackAction;
+import game.actors.enemies.Enemy;
 import game.reset.ResetAction;
 import game.reset.Resettable;
 import game.Status;
@@ -114,12 +116,19 @@ public class Player extends Actor implements Resettable {
 		if(hasCapability((Status.INVINCIBLE))) {
 			String sentence = this + " is INVINCIBLE!";
 			display.println(sentence);
-
 		}
 
 		// add the reset action:
 		if (this.hasCapability(Status.HAS_RESET)) {
 			actions.add(new ResetAction());
+		}
+
+
+
+		if (hasCapability(Status.FIREATTACK))
+		{
+			String sentence = this + " can attack with Fire!";
+			display.println(sentence);
 		}
 
 		// return/print the console menu
@@ -153,6 +162,19 @@ public class Player extends Actor implements Resettable {
 	@Override
 	public char getDisplayChar(){
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	}
+
+	@Override
+	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+		ActionList actions =  new ActionList();
+		if (Enemy.isInstance(otherActor) & this.hasCapability(Status.FIREATTACK))
+		{
+
+			actions.add(new FireAttackAction(otherActor,direction));
+		}
+
+		return actions;
+
 	}
 
 	/**

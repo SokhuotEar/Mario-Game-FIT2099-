@@ -22,8 +22,8 @@ public class TeleportAction extends Action {
         this.direction = "To the Lava Zone";
     }
 
-    /** This method teleports Player from the Main Map to Lava Zone. Then it creates a method that returns
-     * the player back to Main Map
+    /** This method teleports Player from the Main Map to Lava Zone. Then it creates a new Warp that returns
+     * the player back to Main Map at the exact starting location.
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
@@ -49,7 +49,7 @@ public class TeleportAction extends Action {
         ArrayList<Item> itemToRemove = new ArrayList<>();
         for (Item item: destination.getItems())
         {
-            if (item instanceof WarpPipe)
+            if (WarpPipe.isInstance(item))
             {
                 itemToRemove.add(item);
             }
@@ -74,7 +74,7 @@ public class TeleportAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return "Player teleports to lava Zone";
+        return "Teleport to lava Zone";
     }
 
 

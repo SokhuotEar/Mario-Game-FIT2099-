@@ -8,9 +8,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actors.enemies.Enemy;
+import game.positions.Fire;
 
 /**
  * Special Action for attacking other Actors.
@@ -58,6 +60,7 @@ public class AttackAction extends Action {
 		if (!target.hasCapability(Status.INVINCIBLE)){  // If the target is not invincible, attack them
 			Weapon weapon = actor.getWeapon();
 			int damage = weapon.damage();
+
 			if (actor.hasCapability(Status.INVINCIBLE)) { // if the actor(attacker) is invincible, kill target
 				while (target.isConscious()) {
 					target.hurt(damage);
@@ -114,4 +117,7 @@ public class AttackAction extends Action {
 		return actor + " " + actor.getWeapon().verb() + " " + target + " at " + direction;
 		//return actor + " attacks " + target + " at " + direction;
 	}
+
+
+
 }

@@ -24,3 +24,4 @@ public class Tree extends Ground {
 			setDisplayChar('T');
 	}
 }
+

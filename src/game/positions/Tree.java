@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.RNG;
 import game.Status;
+import game.items.FireFlower;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.actors.enemies.Goomba;
@@ -158,19 +159,7 @@ public class Tree extends HighGround implements Resettable {
     }
 
 
-    /**
-     * Method executed once every turn
-     * @param location The location of the Ground that the tree is on
-     */
-    @Override
-    public void tick(Location location){
-            grow();                         // trees can grow
-            spawnEnemy(location);           // trees can spawn enemies
-            dropCoin(location);             // trees can drop coins
-            growNewSprout(location);        // trees can grow new sprout
-            wither(location);               // trees can wither
-            super.tick(location);
-    }
+
 
     /**
      * Gets the % chance of success when a jump is made
@@ -233,6 +222,34 @@ public class Tree extends HighGround implements Resettable {
             }
             ResetManager.getInstance().cleanUp(this);
         }
+    }
+
+
+    private void spawnFireFlower(Location location)
+    {
+        int probability = 50;
+        int flowerCount = FireFlower.getCount();
+        int flowerMaxCount = FireFlower.getMaxCount();
+        if ((RNG.rng(probability)) & (flowerCount<=flowerMaxCount))
+        {
+            location.addItem(new FireFlower());
+        }
+    }
+
+    /**
+     * Method executed once every turn
+     * @param location The location of the Ground that the tree is on
+     */
+    @Override
+    public void tick(Location location){
+        grow();                         // trees can grow
+        spawnEnemy(location);           // trees can spawn enemies
+        dropCoin(location);             // trees can drop coins
+        growNewSprout(location);        // trees can grow new sprout
+        wither(location);               // trees can wither
+        spawnFireFlower(location);      // trees can spawn fire flower
+        super.tick(location);
+
     }
 
 

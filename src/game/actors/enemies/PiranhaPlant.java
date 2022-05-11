@@ -11,7 +11,7 @@ import game.actors.enemies.behaviours.WanderBehaviour;
 public class PiranhaPlant extends Enemy {
 
     public PiranhaPlant() {
-        super("Piranha Plant",'Y',5, false);
+        super("Piranha Plant",'Y',40, false);
     }
 
 }

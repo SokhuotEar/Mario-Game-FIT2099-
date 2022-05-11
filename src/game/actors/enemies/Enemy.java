@@ -8,6 +8,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
+import game.actions.FireAttackAction;
+import game.actors.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.Status;
@@ -108,7 +110,14 @@ public abstract class Enemy extends Actor implements Resettable {
             // remove the attack behaviour if the hostile_to_enemy actor is not adjacent to this enemy
             behaviours.remove(BehaviourPriority.ATTACK.ordinal());
         }
+
+        // at the moment, only the player can use fire attack
+        if (Player.isInstance(otherActor) & otherActor.hasCapability(Status.FIREATTACK)) {
+            actions.add(new FireAttackAction(this,direction));
+        }
         return actions;
+
+
     }
 
     /**

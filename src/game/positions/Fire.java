@@ -2,37 +2,33 @@ package game.positions;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
-import game.actors.Player;
-import game.items.Coin;
 
-public class Lava extends Ground {
+public class Fire extends Ground {
 
-    private final static int damage = 15;
+    private int lifetime = 10;
+    private final int damage = 20;
 
     /**
      * Constructor.
+     *
      */
-    public Lava() {
-        super('L');
+    public Fire() {
+        super('v');
     }
 
 
-    @Override
-    public boolean canActorEnter(Actor actor) {
-        // an actor can enter if it is an instance of player
-        return Player.isInstance(actor);
-    }
 
     public void takeDamage(Location location, int damage) {
         if (location.containsAnActor()) {
-            Actor player = location.getActor();
+            Actor actor = location.getActor();
             //the player takes damage
-            player.hurt(damage);
+            actor.hurt(damage);
 
-            String println = player + "takes " + damage + " damage due to fire burning.";
+            //printing
+            String println = actor + "takes " + damage + " damage due to fire burning.";
             new Display().println(println);
         }
     }
@@ -44,9 +40,17 @@ public class Lava extends Ground {
      */
     @Override
     public void tick(Location location) {
-        // The player standing on top takes 15 damage per round
+        lifetime--;
+
+        // The player standing on top takes 20 damage per round
         takeDamage(location, this.damage);
         super.tick(location);
-    }
-}
 
+        //spawns dirt after lifeTime ends
+        if (lifetime == 0)
+        {
+            location.setGround(new Dirt());
+        }
+    }
+
+}
