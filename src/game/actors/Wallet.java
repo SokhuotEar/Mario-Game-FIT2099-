@@ -9,7 +9,7 @@ public class Wallet{
     /**
      * The current balance in the wallet
      */
-    private int balance = 0 ;
+    private int balance = 1000 ;
 
     /**
      * Gets the current wallet balance

@@ -34,7 +34,7 @@ public class WanderBehaviour implements Behaviour {
 	public Action getAction(Actor actor, GameMap map) {
 		ArrayList<Action> actions = new ArrayList<>();
 
-		// check neighboring locations are empty
+		//check neighboring locations are empty
 		for (Exit exit : map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.canActorEnter(actor)) {

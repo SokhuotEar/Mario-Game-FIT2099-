@@ -14,6 +14,7 @@ import game.Status;
 import game.actors.enemies.behaviours.*;
 import java.util.*;
 
+
 /**
  * An abstract base class for all Enemies to extend from
  * @author FIT2099, extended by Satya Jhaveri
@@ -22,6 +23,7 @@ import java.util.*;
 public abstract class Enemy extends Actor implements Resettable {
     private static final List<Enemy> enemyList = new ArrayList<>();
     private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
+    private boolean canWander;      //check if the enemy can Wander
 
     /**
      * Constructor.
@@ -30,11 +32,16 @@ public abstract class Enemy extends Actor implements Resettable {
      * @param displayChar the character that will represent the Enemy in the display
      * @param hitPoints   the Enemy's starting hit points
      */
-    public Enemy(String name, char displayChar, int hitPoints) {
+    public Enemy(String name, char displayChar, int hitPoints, boolean canWander) {
         super(name, displayChar, hitPoints);
-        this.behaviours.put(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
+        this.canWander = canWander;
+        if (canWander) {
+            // put wander behaviour only if the enemy can move
+            this.behaviours.put(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
+        }
         enemyList.add(this);
         this.registerInstance();
+
     }
 
     /**
@@ -87,10 +94,14 @@ public abstract class Enemy extends Actor implements Resettable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         // it can be attacked only by the HOSTILE opponent, and this action will not attack the HOSTILE enemy back.
+
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             // If other actor is hostile to enemy, add attack action and add follow/attack behaviour
             actions.add(new AttackAction(this,direction));
-            behaviours.put(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
+            // it will follow only if it can move
+            if (canWander) {
+                behaviours.put(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
+            }
             behaviours.put(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour(otherActor));
         }
         else {

@@ -19,4 +19,5 @@ public class Dirt extends Ground {
 		super('.');
 		super.addCapability(Status.FERTILE);
 	}
+
 }
