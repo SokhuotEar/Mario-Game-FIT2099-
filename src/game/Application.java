@@ -84,6 +84,10 @@ public class Application {
 		gameMap.at(43,14).addItem(pipe2);
 		gameMap.at(45,04).addItem(pipe3);
 
+		//Adding fountains
+		gameMap.at(36, 10).setGround(new HealthFountain());
+		gameMap.at(45, 13).setGround(new PowerFountain());
+
 
 
 		// SECOND MAP
