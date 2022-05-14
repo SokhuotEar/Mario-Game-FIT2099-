@@ -7,4 +7,10 @@ public interface Drinkable {
     void addPowerUp(Actor actor);
 
     Ground getFountain();
+
+    int getCapacity();
+
+    void setVolume(int drink);
+
+    String fountainName();
 }

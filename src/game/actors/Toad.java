@@ -88,9 +88,8 @@ public class Toad extends Actor {
             actions.add(new BuyItemAction(new Wrench()));
             actions.add(new BuyItemAction(new PowerStar()));
 
-            if (Bottle.getInstance().getBottleStatus() == false) {
+            if (!otherActor.getInventory().contains(Bottle.getInstance())) {
                 actions.add(new TakeBottleAction());
-                Bottle.getInstance().setBottleStatus(true);
             }
         }
         return actions;
