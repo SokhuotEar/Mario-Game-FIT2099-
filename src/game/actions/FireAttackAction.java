@@ -41,7 +41,7 @@ public class FireAttackAction extends Action {
         Location targetLocation = map.locationOf(target);
 
         // add fire to the location of the target
-        targetLocation.setGround(new Fire());
+        targetLocation.addItem(new Fire());
 
         return actor.toString() + " attacks " + target + " at " + direction + " using fire ";
     }

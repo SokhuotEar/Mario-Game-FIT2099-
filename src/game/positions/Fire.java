@@ -3,21 +3,27 @@ package game.positions;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 
-public class Fire extends Ground {
+public class Fire extends Item {
 
-    private int lifetime = 10;
+    private int groundLifetime = 3;
     private final int damage = 20;
+
+    /***2
+     *
+     * Constructor.
+     */
+    public Fire() {
+        super("Fire", 'v', false);
+    }
 
     /**
      * Constructor.
      *
      */
-    public Fire() {
-        super('v');
-    }
 
 
 
@@ -40,17 +46,20 @@ public class Fire extends Ground {
      */
     @Override
     public void tick(Location location) {
-        lifetime--;
+        groundLifetime--;
 
         // The player standing on top takes 20 damage per round
         takeDamage(location, this.damage);
         super.tick(location);
 
         //spawns dirt after lifeTime ends
-        if (lifetime == 0)
+        if (groundLifetime == 0)
         {
-            location.setGround(new Dirt());
+            location.removeItem(this);
         }
+
     }
+
+
 
 }

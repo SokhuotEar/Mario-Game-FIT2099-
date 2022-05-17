@@ -10,10 +10,10 @@ import game.actors.Player;
 
 public class FireFlower extends Item implements Consumable {
 
-    private int lifetime = 5;
+    private int lifetime = 20;
     private static int count = 0;
     private boolean consumed = false;
-    private static final int maxCount = 30;
+    private static final int maxCount = 100;
     private Action consumeAction;
 
 
@@ -50,12 +50,16 @@ public class FireFlower extends Item implements Consumable {
             return;
         }
         lifetime--;
+
+        if (lifetime > 0) {
+            String println = lifetime + " rounds left.";
+            new Display().println(println);
+        }
         if (lifetime == 0)
         {
             actor.removeCapability(Status.FIREATTACK);
-        }
-        String println = lifetime + " round left." ;
-        new Display().println(println);
+        };
+
     }
 
     @Override
