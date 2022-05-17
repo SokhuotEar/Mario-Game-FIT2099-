@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
@@ -14,12 +13,9 @@ import edu.monash.fit2099.engine.positions.World;
 import game.actions.TeleportAction;
 import game.actors.Player;
 import game.actors.Toad;
-import game.actors.enemies.Goomba;
-import game.actors.enemies.Koopa;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
 import game.items.WarpPipe;
-import game.items.Wrench;
 import game.positions.*;
 
 /**
@@ -85,7 +81,6 @@ public class Application {
 		gameMap.at(45,04).addItem(pipe3);
 
 
-
 		// SECOND MAP
 		List<String> lavaMap = Arrays.asList(
 				"......LLLLLLLLLLLLLLLLLLLLLLLLLLLL........##..........+.........................",
@@ -95,7 +90,7 @@ public class Application {
 				"......LLLLLLLLLLLLLLLLLLLLLLLLLLLLL............#................................",
 				"................................................#...............................",
 				".................+................................#.............................",
-				".................................................##.............................",
+				"........LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..........##.............................",
 				"................................................##..............................",
 				".........+..............................+#____####.................+............",
 				".......................................+#_____###++.............................",

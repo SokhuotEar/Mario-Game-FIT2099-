@@ -13,7 +13,7 @@ public class FireFlower extends Item implements Consumable {
     private int lifetime = 5;
     private static int count = 0;
     private boolean consumed = false;
-    private static final int maxCount = 100;
+    private static final int maxCount = 30;
     private Action consumeAction;
 
 
