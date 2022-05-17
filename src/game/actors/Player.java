@@ -192,6 +192,9 @@ public class Player extends Actor implements Resettable {
 			}
 		}
 
+		//add back hostility
+		this.addCapability(Status.HOSTILE_TO_ENEMY);
+
 	}
 
 }

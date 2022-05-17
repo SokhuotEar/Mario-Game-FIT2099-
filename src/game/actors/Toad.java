@@ -9,10 +9,8 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
 import game.actions.SpeakAction;
-import game.items.BuyItemAction;
-import game.items.PowerStar;
-import game.items.SuperMushroom;
-import game.items.Wrench;
+import game.items.TakeBottleAction;
+import game.items.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +79,7 @@ public class Toad extends Actor {
             if (!otherActor.hasCapability(Status.INVINCIBLE)) {
                 lines.add("You better get back to finding the Power Stars.");
             }
+
             Random rand = new Random();
             actions.add(new SpeakAction(lines.get(rand.nextInt(lines.size()))));
 
@@ -88,6 +87,10 @@ public class Toad extends Actor {
             actions.add(new BuyItemAction(new SuperMushroom()));
             actions.add(new BuyItemAction(new Wrench()));
             actions.add(new BuyItemAction(new PowerStar()));
+
+            if (!otherActor.getInventory().contains(Bottle.getInstance())) {
+                actions.add(new TakeBottleAction());
+            }
         }
         return actions;
     }
