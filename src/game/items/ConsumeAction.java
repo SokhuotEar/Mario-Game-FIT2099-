@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
+import java.util.Iterator;
+
 /**
  * Special Action that allows Actors to consume items.
  *
@@ -20,10 +22,10 @@ public class ConsumeAction extends Action {
     /**
      * Constructor of consumeAction
      *
-     * @param consumableItem the item to consume
+     * @param consumable the item to consume
      */
-    public ConsumeAction(Consumable consumableItem) {
-        this.consumableItem = consumableItem;
+    public ConsumeAction(Consumable consumable) {
+        this.consumableItem = consumable;
     }
 
     /**
@@ -37,21 +39,28 @@ public class ConsumeAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         // IF actor has consumable item in inventory, remove it unless it should stay in the players inventory:
-        if (actor.getInventory().contains(consumableItem.getItem())) {
-            if (!consumableItem.stayInInventory()) {
-                actor.removeItemFromInventory(consumableItem.getItem());
+        if (actor.getInventory().contains(this.consumableItem.getItem())) {
+            if (this.consumableItem.getItem() == Bottle.getInstance()) {
+                if (Bottle.getInstance().getDrink().size() != 0) {
+                    return actor + " consumes the " + Bottle.getInstance().removeDrink().fountainName();
+                }
+            }
+
+            else if (!this.consumableItem.stayInInventory()) {
+                actor.removeItemFromInventory(this.consumableItem.getItem());
             }
 
         }
+
         else {  // Else if the item is on the ground, remove it from the ground unless it should stay in player's inventory
-            if (consumableItem.stayInInventory()) {
-                actor.addItemToInventory((consumableItem.getItem()));
+            if (this.consumableItem.stayInInventory()) {
+                actor.addItemToInventory((this.consumableItem.getItem()));
             }
-            map.locationOf(actor).removeItem(consumableItem.getItem());
+            map.locationOf(actor).removeItem(this.consumableItem.getItem());
         }
 
         // Add the power ups:
-        consumableItem.consume(actor);
+        this.consumableItem.consume(actor);
 
         return menuDescription(actor);
     }
@@ -64,6 +73,15 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consumes the " + consumableItem;
+        System.out.println("currently item: " + consumableItem);
+        return actor + " consumes the " + this.consumableItem;
     }
+//        if (consumableItem.getItem() == Bottle.getInstance()) {
+//            return actor + " consumes the " + Bottle.getInstance() + " " + Bottle.getInstance().getDrink() + " [" +
+//                    Bottle.getInstance().printContent(Bottle.getInstance().getDrink()).substring(0,
+//                            (Bottle.getInstance().printContent(Bottle.getInstance().getDrink()).length() - 2)) + "]";
+//        }
+//        else
+//            return actor + " consumes the " + consumableItem; }
+
 }
