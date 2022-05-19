@@ -36,7 +36,7 @@ public class Application {
 
 			World world = new World(new Display());
 
-			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new Lava());
+			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Sprout(), new Lava());
 
 			List<String> map = Arrays.asList(
 				"..........................................##..........+.........................",
@@ -65,14 +65,10 @@ public class Application {
 		// Adding player:
 		Actor mario = new Player("Player", 'm', 1000);
 		world.addPlayer(mario, gameMap.at(42, 10));
-		//mario.addItemToInventory(Key.getInstance());
 
 		//Adding SuperMushroom and PowerStar
 		gameMap.at(42, 10).addItem(new SuperMushroom());
 		gameMap.at(42, 10).addItem(new PowerStar());
-
-		// REMOVE THIS:
-		gameMap.at(39, 8).addActor(new FlyingKoopa());
 
 
 		// Adding Toad:
