@@ -2,7 +2,6 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.Player;
 
@@ -20,16 +19,16 @@ public class BuyItemAction extends Action{
     int price;
 
     /**
-     * item object
+     * Buyable item object
      */
-    Item item;
+    Buyable buyable;
 
     /**
      * Get the price of the buyable objec
      * @param buyable an object which is buyable
      */
     public BuyItemAction(Buyable buyable) {
-        this.item = buyable.getItem();
+        this.buyable = buyable;
         this.price = buyable.getPrice();
     }
 
@@ -55,7 +54,7 @@ public class BuyItemAction extends Action{
             //player spends the money
             player.getWallet().spend(price);
             //player gets the item
-            player.addItemToInventory(this.item);
+            player.addItemToInventory(this.buyable.getItem());
 
             return menuDescription(actor);
         }
@@ -72,6 +71,6 @@ public class BuyItemAction extends Action{
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " buys " + item + " ($" + price + ")";
+        return actor + " buys " + buyable + " ($" + price + ")";
     }
 }
