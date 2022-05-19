@@ -9,20 +9,7 @@ import game.positions.Fire;
 
 import java.util.Random;
 
-public class FireAttackAction extends Action {
-
-    /**
-     * The Actor that is to be attacked
-     */
-    protected Actor target;
-
-    /**
-     * The direction of incoming attack.
-     */
-    protected String direction;
-
-
-
+public class FireAttackAction extends AttackAction {
     /**
      * Constructor.
      *
@@ -30,8 +17,7 @@ public class FireAttackAction extends Action {
      * @param direction the Direction is which the attack is taking place
      */
     public FireAttackAction(Actor target, String direction) {
-        this.target = target;
-        this.direction = direction;
+        super(target, direction);
     }
 
 
@@ -43,12 +29,12 @@ public class FireAttackAction extends Action {
         // add fire to the location of the target
         targetLocation.addItem(new Fire());
 
-        return actor.toString() + " attacks " + target + " at " + direction + " using fire ";
+        return super.execute(actor, map) + " with fire!";
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor.toString() +  " uses Fire to attack " + target + " at " + direction + " using fire ";
+        return actor +  " uses Fire to attack " + target + " at " + direction;
     }
 
 }

@@ -99,7 +99,12 @@ public abstract class Enemy extends NPC implements Resettable {
 
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             // If other actor is hostile to enemy, add attack action and add follow/attack behaviour
-            actions.add(new AttackAction(this,direction));
+            if (otherActor.hasCapability(Status.FIREATTACK)) {
+                actions.add(new FireAttackAction(this,direction));
+            }
+            else {
+                actions.add(new AttackAction(this,direction));
+            }
             // it will follow only if it can move
             if (canWander) {
                 this.addBehaviour(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
@@ -111,10 +116,6 @@ public abstract class Enemy extends NPC implements Resettable {
             this.removeBehaviour(BehaviourPriority.ATTACK.ordinal());
         }
 
-        // at the moment, only the player can use fire attack
-        if (Player.isInstance(otherActor) & otherActor.hasCapability(Status.FIREATTACK)) {
-            actions.add(new FireAttackAction(this,direction));
-        }
         return actions;
 
 
