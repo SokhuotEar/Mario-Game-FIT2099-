@@ -5,7 +5,10 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.WinGameAction;
+import game.items.Key;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +54,11 @@ public class PrincessPeach extends NPC{
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = super.allowableActions(otherActor, direction, map);
         // TODO: if the other actor has a key, let them unlock peach and end the game:
-        return super.allowableActions(otherActor, direction, map);
+        if (otherActor.getInventory().contains(Key.getInstance())) {
+            actions.add(new WinGameAction());
+        }
+        return actions;
     }
 }
