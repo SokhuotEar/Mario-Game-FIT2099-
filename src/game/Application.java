@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actions.TeleportAction;
 import game.actors.Player;
+import game.actors.PrincessPeach;
 import game.actors.Toad;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
@@ -113,6 +114,11 @@ public class Application {
 		GameMap lavaZoneMap = new GameMap(groundFactory, lavaMap);
 		world.addGameMap(lavaZoneMap);
 
+		// Adding Princess:
+		lavaZoneMap.at(3, 5).addActor(new PrincessPeach());
+
+
+		// Linking pipes:
 		pipe1.addPipeAction(new TeleportAction(lavaZoneMap.at(0,0)));
 		pipe2.addPipeAction(new TeleportAction(lavaZoneMap.at(0,0)));
 		pipe3.addPipeAction(new TeleportAction(lavaZoneMap.at(0,0)));
