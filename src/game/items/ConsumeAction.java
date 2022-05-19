@@ -44,6 +44,7 @@ public class ConsumeAction extends Action {
                 if (Bottle.getInstance().getDrink().size() != 0) {
                     return actor + " consumes the " + Bottle.getInstance().removeDrink().fountainName();
                 }
+
             }
 
             else if (!this.consumableItem.stayInInventory()) {
