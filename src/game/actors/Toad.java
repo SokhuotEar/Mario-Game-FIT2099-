@@ -21,13 +21,19 @@ import java.util.Random;
  * @author Satya Jhaveri
  * @version 1.0
  */
-public class Toad extends Actor {
+public class Toad extends NPC {
 
     /**
      * Constructor.
      */
     public Toad() {
         super("Toad", 'O', 100);
+        List<String> lines = new ArrayList<>();
+        lines.add("You better get back to finding the Power Stars.");
+        lines.add("The Princess is depending on you! You are our only hope.");
+        lines.add("Being imprisoned in these walls can drive a fungus crazy :(");
+        lines.add("You might need a wrench to smash Koopa's hard shells.");
+        this.setLines(lines);
     }
 
     /**
@@ -41,6 +47,7 @@ public class Toad extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        this.speak(display, this, map);
         return new DoNothingAction();
     }
 

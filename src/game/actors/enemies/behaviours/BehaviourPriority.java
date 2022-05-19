@@ -7,8 +7,8 @@ package game.actors.enemies.behaviours;
  */
 public enum BehaviourPriority {
     // Order is the highest priority to the lowest priority in descending order:
-    DRINK,  //updated: is the highest, will drink if is in the fountain
-    ATTACK,  // is the lowest (hence highest priority in tree map)
+    DRINK,  // is the highest priority, will drink if is in the fountain
+    ATTACK,
     FOLLOW,
-    WANDERER   // is the highest (hence lowest priority in tree map)
+    WANDERER,  // is the  lowest priority
 }
