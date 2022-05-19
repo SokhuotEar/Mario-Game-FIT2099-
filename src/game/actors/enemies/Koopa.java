@@ -14,6 +14,9 @@ import game.actors.enemies.behaviours.WanderBehaviour;
 import game.items.SuperMushroom;
 import game.items.Wrench;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Koopa Enemy Class.
  * @author Satya Jhaveri
@@ -30,10 +33,15 @@ public class Koopa extends Enemy {
      */
     public Koopa() {
         super("Koopa", 'K', 100,true);
-        addBehaviour(10, new WanderBehaviour());
+        //addBehaviour(10, new WanderBehaviour());
         SuperMushroom mushroom = new SuperMushroom();
         addItemToInventory(mushroom);
         dormant = false;
+        List<String> lines = new ArrayList<>();
+        lines.add("Never gonna make you cry!");
+        lines.add("Koopi koopi koopii~!");
+        this.setLines(lines);
+
     }
 
 

@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
+import game.actors.NPC;
 import game.actors.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
@@ -22,10 +23,9 @@ import java.util.*;
  * @author FIT2099, extended by Satya Jhaveri
  * @version 1.0
  */
-public abstract class Enemy extends Actor implements Resettable {
+public abstract class Enemy extends NPC implements Resettable {
     private static final List<Enemy> enemyList = new ArrayList<>();
-    private Map<Integer, Behaviour> behaviours = new TreeMap<>(); // priority, behaviour
-    private boolean canWander;      //check if the enemy can Wander
+    private final boolean canWander;      //check if the enemy can Wander
 
     /**
      * Constructor.
@@ -39,7 +39,7 @@ public abstract class Enemy extends Actor implements Resettable {
         this.canWander = canWander;
         if (canWander) {
             // put wander behaviour only if the enemy can move
-            this.behaviours.put(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
+            this.addBehaviour(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
         }
         enemyList.add(this);
         this.registerInstance();
@@ -102,13 +102,13 @@ public abstract class Enemy extends Actor implements Resettable {
             actions.add(new AttackAction(this,direction));
             // it will follow only if it can move
             if (canWander) {
-                behaviours.put(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
+                this.addBehaviour(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
             }
-            behaviours.put(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour(otherActor));
+            this.addBehaviour(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour(otherActor));
         }
         else {
             // remove the attack behaviour if the hostile_to_enemy actor is not adjacent to this enemy
-            behaviours.remove(BehaviourPriority.ATTACK.ordinal());
+            this.removeBehaviour(BehaviourPriority.ATTACK.ordinal());
         }
 
         // at the moment, only the player can use fire attack
@@ -120,29 +120,6 @@ public abstract class Enemy extends Actor implements Resettable {
 
     }
 
-    /**
-     * Adds a behaviour to the Map of behaviours
-     * @param priority the priority of the behaviour (smaller number -> higher priority)
-     * @param behaviour the Behaviour to add
-     */
-    public void addBehaviour(Integer priority, Behaviour behaviour) {
-        behaviours.put(priority, behaviour);
-    }
-
-    /**
-     * Gets the map of behaviours
-     * @return A map of the enemies' behaviours
-     */
-    public Map<Integer, Behaviour> getBehaviours() {
-        return behaviours;
-    }
-
-    /**
-     * Removes all behaviours from an enemy
-     */
-    public void clearBehaviours() {
-        behaviours = new TreeMap<>();
-    }
 
     /**
      * Resets the Enemy instance
@@ -186,7 +163,8 @@ public abstract class Enemy extends Actor implements Resettable {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours().values()) {
+        this.speak(display, this, map);
+        for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;

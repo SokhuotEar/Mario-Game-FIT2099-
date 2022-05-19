@@ -10,13 +10,18 @@ import java.util.List;
 import java.util.Random;
 
 public class SpeakBehaviour implements Behaviour {
-    private List<String> lines;
+    private final List<String> lines;
     private boolean justSpoke;
 
     public SpeakBehaviour(List<String> lines)
     {
         this.justSpoke = false;
         this.lines = lines;
+    }
+
+    public void addLine(String line)
+    {
+        this.lines.add(line);
     }
 
     @Override

@@ -12,6 +12,9 @@ import game.*;
 import game.actions.SuicideAction;
 import game.actors.enemies.behaviours.WanderBehaviour;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A little fungus guy.
  * @author FIT2099, modifed by Satya Jhaveri
@@ -38,7 +41,12 @@ public class Goomba extends Enemy {
 	 */
 	public Goomba() {
 		super("Goomba", 'g', 50,true);
-		addBehaviour(10, new WanderBehaviour());
+		//addBehaviour(10, new WanderBehaviour());
+		List<String> lines = new ArrayList<>();
+		lines.add("Mugga mugga!");
+		lines.add("Ugha ugha... (Never gonna run around and desert you...)");
+		lines.add("Ooga-Chaka Ooga-Ooga!");
+		this.setLines(lines);
 	}
 
 	/**
