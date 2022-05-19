@@ -8,8 +8,9 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.*;
+import game.actions.BuyItemAction;
 import game.actions.SpeakAction;
-import game.items.TakeBottleAction;
+import game.actions.TakeBottleAction;
 import game.items.*;
 
 import java.util.ArrayList;

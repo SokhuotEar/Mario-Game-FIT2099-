@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpItemAction;
 import game.Status;
+import game.actions.ConsumeAction;
 
 /**
  * The class SuperMushroom is a child class of Item class which allow

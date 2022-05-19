@@ -1,8 +1,9 @@
-package game.items;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.Consumable;
 
 /**
  * A class inheriting Action class used when Player take the

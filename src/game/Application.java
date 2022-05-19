@@ -10,15 +10,14 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
+import game.actions.FireAttackAction;
 import game.actions.TeleportAction;
 import game.actors.Player;
 import game.actors.PrincessPeach;
 import game.actors.Toad;
 import game.actors.enemies.Bowser;
 import game.actors.enemies.FlyingKoopa;
-import game.items.PowerStar;
-import game.items.SuperMushroom;
-import game.items.WarpPipe;
+import game.items.*;
 import game.positions.*;
 
 /**
@@ -66,6 +65,7 @@ public class Application {
 		// Adding player:
 		Actor mario = new Player("Player", 'm', 1000);
 		world.addPlayer(mario, gameMap.at(42, 10));
+		//mario.addItemToInventory(Key.getInstance());
 
 		//Adding SuperMushroom and PowerStar
 		gameMap.at(42, 10).addItem(new SuperMushroom());
@@ -120,7 +120,7 @@ public class Application {
 		world.addGameMap(lavaZoneMap);
 
 		// Adding Princess:
-		lavaZoneMap.at(3, 5).addActor(new PrincessPeach());
+		gameMap.at(42, 9).addActor(new PrincessPeach());
 
 		// Adding Bowser:
 		lavaZoneMap.at(3, 10).addActor(new Bowser());

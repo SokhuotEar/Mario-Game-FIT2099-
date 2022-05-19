@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
+import game.actions.ConsumeAction;
 import game.actors.Player;
 
 public class FireFlower extends Item implements Consumable {

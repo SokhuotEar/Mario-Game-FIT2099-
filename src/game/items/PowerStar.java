@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
+import game.actions.ConsumeAction;
 
 /**
  * The class PowerStar is a child class of Item class which allow

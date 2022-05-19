@@ -1,10 +1,8 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import game.positions.Dirt;
+import game.actions.PickUpCoinAction;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 
