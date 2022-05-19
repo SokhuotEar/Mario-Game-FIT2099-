@@ -11,11 +11,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class Bottle extends Item implements Consumable{
-    private static boolean flag = false;
     private static Bottle existingBottle = null;
     private Stack<Drinkable> bottleDrink = new Stack<>();
-    private static ActionList actions = new ActionList();
-    private Item item;
 
     /***
      * Constructor.
@@ -27,7 +24,6 @@ public class Bottle extends Item implements Consumable{
 
     public static Bottle getInstance(){
         if (existingBottle == null) {
-            flag = true;
             existingBottle = new Bottle();
         }
         return existingBottle;
@@ -36,36 +32,44 @@ public class Bottle extends Item implements Consumable{
 
 
     public Stack<Drinkable> getDrink() {
-        return bottleDrink;
+        return this.bottleDrink;
 
     }
 
     public void addDrink(Drinkable fountainDrink) {
-        bottleDrink.push(fountainDrink);
+        this.bottleDrink.push(fountainDrink);
     }
 
     public Drinkable removeDrink() {
-        return bottleDrink.pop();
+        return this.bottleDrink.pop();
     }
 
     @Override
     public Item getItem() {
-        return Bottle.getInstance();
+        return this.existingBottle;
     }
 
-    public String printContent(Stack<Drinkable> drinkableStack) {
-        String fountainList = "";
-        Drinkable drinks = drinkableStack.peek();
-        drinkableStack.pop();
-        printContent(drinkableStack);
-        fountainList = drinks.fountainName() + ", ";
-        drinkableStack.push(drinks);
+    public String printContent() {
+        String fountainList = "[";
+        ArrayList<Drinkable> tempList = new ArrayList<>();
+
+        while (!this.bottleDrink.isEmpty()) {
+            tempList.add(this.bottleDrink.pop());
+        }
+
+        for (int i = tempList.size() - 1; i > -1; i--) {
+            fountainList += tempList.get(i).fountainName();
+            this.bottleDrink.push(tempList.get(i));
+            if (i != 0) {
+                fountainList += ", ";
+            }
+        }
+        fountainList += "]";
         return fountainList;
     }
 
     @Override
     public void consume(Actor actor) {
         Bottle.getInstance().removeDrink().addPowerUp(actor);
-
     }
 }

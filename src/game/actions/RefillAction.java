@@ -17,7 +17,7 @@ public class RefillAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        Bottle.getInstance().addDrink(drinkable);
+        Bottle.getInstance().addDrink(this.drinkable);
         return menuDescription(actor);
     }
 

@@ -73,15 +73,10 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        System.out.println("currently item: " + consumableItem);
-        return actor + " consumes the " + this.consumableItem;
-    }
-//        if (consumableItem.getItem() == Bottle.getInstance()) {
-//            return actor + " consumes the " + Bottle.getInstance() + " " + Bottle.getInstance().getDrink() + " [" +
-//                    Bottle.getInstance().printContent(Bottle.getInstance().getDrink()).substring(0,
-//                            (Bottle.getInstance().printContent(Bottle.getInstance().getDrink()).length() - 2)) + "]";
-//        }
-//        else
-//            return actor + " consumes the " + consumableItem; }
+        if (consumableItem.getItem() == Bottle.getInstance() && !Bottle.getInstance().getDrink().isEmpty()) {
+            return actor + " consumes the " + Bottle.getInstance() + " " + Bottle.getInstance().printContent();
+        }
+        else
+            return actor + " consumes the " + consumableItem; }
 
 }
