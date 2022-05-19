@@ -14,6 +14,7 @@ import game.actions.TeleportAction;
 import game.actors.Player;
 import game.actors.PrincessPeach;
 import game.actors.Toad;
+import game.actors.enemies.Bowser;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
 import game.items.WarpPipe;
@@ -116,6 +117,9 @@ public class Application {
 
 		// Adding Princess:
 		lavaZoneMap.at(3, 5).addActor(new PrincessPeach());
+
+		// Adding Bowser:
+		lavaZoneMap.at(3, 10).addActor(new Bowser());
 
 
 		// Linking pipes:
