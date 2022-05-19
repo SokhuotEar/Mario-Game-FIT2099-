@@ -53,7 +53,7 @@ public class Player extends Actor implements Resettable {
 	}
 
 	/**
-	 * Gets the player's walet
+	 * Gets the player's wallet
 	 * @return the player's wallet
 	 */
 	public Wallet getWallet() {
