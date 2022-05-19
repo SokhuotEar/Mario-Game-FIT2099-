@@ -5,23 +5,16 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.AttackAction;
 import game.actions.FireAttackAction;
+import game.positions.Fire;
 import game.utils.Status;
 
-/**
- * Special Behaviour for generating Attack Actions
- * @author FIT2099
- * @version 1.0
- * @see edu.monash.fit2099.engine.actions.Action
- */
-public class AttackBehaviour implements Behaviour {
+public class FireAttackBehaviour implements Behaviour{
 
     /**
-     * Generates an AttackAction that the Actor exhibiting this behaviour can execute
      * @param actor the Actor acting
-     * @param map the GameMap containing the Actor
-     * @return An AttackAction on the target
+     * @param map   the GameMap containing the Actor
+     * @return an Action that actor can perform, or null if actor can't do this.
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
@@ -34,11 +27,10 @@ public class AttackBehaviour implements Behaviour {
             if (exit.getDestination().containsAnActor()) {
                 Actor otherActor = exit.getDestination().getActor();
                 if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-                    return new AttackAction(otherActor, exit.getName());
+                    return new FireAttackAction(otherActor, exit.getName());
                 }
             }
         }
         return null;
     }
-
 }

@@ -8,6 +8,7 @@ package game.actors.enemies.behaviours;
 public enum BehaviourPriority {
     // Order is the highest priority to the lowest priority in descending order:
     DRINK,  // is the highest priority, will drink if is in the fountain
+    FIRE_ATTACK,  // used for bowser's attacking behaviour, since it is different to the rest
     ATTACK,
     FOLLOW,
     WANDERER,  // is the  lowest priority

@@ -40,6 +40,7 @@ public abstract class Enemy extends NPC implements Resettable {
             // put wander behaviour only if the enemy can move
             this.addBehaviour(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
         }
+        this.addBehaviour(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour());
         enemyList.add(this);
         this.registerInstance();
 
@@ -108,11 +109,6 @@ public abstract class Enemy extends NPC implements Resettable {
             if (canWander) {
                 this.addBehaviour(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
             }
-            this.addBehaviour(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour(otherActor));
-        }
-        else {
-            // remove the attack behaviour if the hostile_to_enemy actor is not adjacent to this enemy
-            this.removeBehaviour(BehaviourPriority.ATTACK.ordinal());
         }
 
         return actions;
