@@ -15,6 +15,7 @@ import game.actors.Player;
 import game.actors.PrincessPeach;
 import game.actors.Toad;
 import game.actors.enemies.Bowser;
+import game.actors.enemies.FlyingKoopa;
 import game.items.PowerStar;
 import game.items.SuperMushroom;
 import game.items.WarpPipe;
@@ -69,6 +70,9 @@ public class Application {
 		//Adding SuperMushroom and PowerStar
 		gameMap.at(42, 10).addItem(new SuperMushroom());
 		gameMap.at(42, 10).addItem(new PowerStar());
+
+		// REMOVE THIS:
+		gameMap.at(39, 8).addActor(new FlyingKoopa());
 
 
 		// Adding Toad:

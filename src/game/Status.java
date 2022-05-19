@@ -13,4 +13,5 @@ public enum Status {
     FERTILE,    // use this for when a ground is fertile
     FIREATTACK, // use this when an actor can do fireAttack
     HAS_RESET,  // use this for when an actor has the ability to reset the game
+    FLYING,     // use this for when an actor is flying (it can walk over high ground)
 }

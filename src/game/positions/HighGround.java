@@ -32,7 +32,7 @@ public abstract class HighGround extends Ground {
      */
     @Override
     public boolean canActorEnter(Actor actor) {
-        return actor.hasCapability(Status.INVINCIBLE);
+        return actor.hasCapability(Status.INVINCIBLE) | actor.hasCapability(Status.FLYING);
     }
 
     /**
