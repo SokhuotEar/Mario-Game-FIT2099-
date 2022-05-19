@@ -1,10 +1,7 @@
 package game.positions;
 
 import edu.monash.fit2099.engine.positions.Ground;
-import game.Status;
-
-import java.util.ArrayList;
-import java.util.List;
+import game.utils.Status;
 
 /**
  * A class that represents bare dirt.

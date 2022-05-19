@@ -10,10 +10,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
 import game.actors.NPC;
-import game.actors.Player;
 import game.reset.ResetManager;
 import game.reset.Resettable;
-import game.Status;
+import game.utils.Status;
 import game.actors.enemies.behaviours.*;
 import java.util.*;
 

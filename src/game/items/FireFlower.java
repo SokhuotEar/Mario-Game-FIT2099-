@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
+import game.utils.Status;
 import game.actions.ConsumeAction;
 import game.actors.Player;
 
@@ -15,7 +15,7 @@ public class FireFlower extends Item implements Consumable {
     private static int count = 0;
     private boolean consumed = false;
     private static final int maxCount = 100;
-    private Action consumeAction;
+    private final Action consumeAction;
 
 
     /***
@@ -59,7 +59,7 @@ public class FireFlower extends Item implements Consumable {
         if (lifetime == 0)
         {
             actor.removeCapability(Status.FIREATTACK);
-        };
+        }
 
     }
 

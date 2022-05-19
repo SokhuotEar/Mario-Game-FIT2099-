@@ -7,11 +7,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.*;
 import game.actions.BuyItemAction;
 import game.actions.SpeakAction;
 import game.actions.TakeBottleAction;
 import game.items.*;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;

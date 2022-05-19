@@ -10,7 +10,7 @@ import game.actions.FireAttackAction;
 import game.actors.enemies.Enemy;
 import game.reset.ResetAction;
 import game.reset.Resettable;
-import game.Status;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,9 @@
 package game.actions;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Status;
 import game.positions.Fire;
-
-import java.util.Random;
 
 public class FireAttackAction extends AttackAction {
     /**

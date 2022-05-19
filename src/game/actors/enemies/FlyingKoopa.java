@@ -1,6 +1,6 @@
 package game.actors.enemies;
 
-import game.Status;
+import game.utils.Status;
 
 public class FlyingKoopa extends Koopa{
     public FlyingKoopa()

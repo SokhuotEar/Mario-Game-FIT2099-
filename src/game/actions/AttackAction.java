@@ -8,11 +8,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.Status;
+import game.utils.Status;
 import game.actors.enemies.Enemy;
-import game.positions.Fire;
 
 /**
  * Special Action for attacking other Actors.
