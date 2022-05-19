@@ -43,7 +43,6 @@ public abstract class Enemy extends NPC implements Resettable {
         this.addBehaviour(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour());
         enemyList.add(this);
         this.registerInstance();
-
     }
 
     /**

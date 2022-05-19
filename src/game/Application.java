@@ -119,7 +119,7 @@ public class Application {
 		gameMap.at(42, 9).addActor(new PrincessPeach());
 
 		// Adding Bowser:
-		lavaZoneMap.at(3, 10).addActor(new Bowser());
+		lavaZoneMap.at(3, 10).addActor(new Bowser(3, 10));
 
 
 		// Linking pipes:

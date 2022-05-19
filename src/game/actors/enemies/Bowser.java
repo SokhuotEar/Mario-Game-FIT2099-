@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bowser extends Enemy {
+    private int initialXCoord;
+    private int initialYCoord;
     /**
      * Constructor.
      */
-    public Bowser() {
+    public Bowser(int x, int y) {
         super("Bowser", 'B', 500, false);
         List<String> lines = new ArrayList<>();
         lines.add("What was that sound? Oh, just a fire.");
@@ -27,6 +29,8 @@ public class Bowser extends Enemy {
         this.setLines(lines);
         this.addItemToInventory(Key.getInstance());
         this.addBehaviour(BehaviourPriority.FIRE_ATTACK.ordinal(), new FireAttackBehaviour());
+        this.initialXCoord = x;
+        this.initialYCoord = y;
     }
 
     /**
@@ -55,5 +59,28 @@ public class Bowser extends Enemy {
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(80, "punches");
+    }
+
+    /**
+     * Resets the Enemy instance
+     *
+     * @param map
+     */
+    @Override
+    public void resetInstance(GameMap map) {
+        // Move Bowser back to original spot:
+        map.removeActor(this);
+        map.at(this.initialXCoord, this.initialYCoord).addActor(this);
+
+        // If theres an actor there, move the actor to an adjacent square:
+        // TODO:
+
+        // Heal bowser:
+        this.resetMaxHp(this.getMaxHp());
+
+        // Remove follow behaviour if it has it:
+        this.removeBehaviour(BehaviourPriority.FOLLOW.ordinal());
+
+
     }
 }
