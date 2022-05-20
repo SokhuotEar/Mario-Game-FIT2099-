@@ -110,4 +110,5 @@ public class Bottle extends Item implements Consumable{
     public void consume(Actor actor) {
         Bottle.getInstance().removeDrink().addPowerUp(actor);
     }
+
 }

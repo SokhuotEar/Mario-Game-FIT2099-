@@ -54,7 +54,6 @@ public class ConsumeAction extends Action {
             else if (!this.consumableItem.stayInInventory()) {
                 actor.removeItemFromInventory(this.consumableItem.getItem());
             }
-
         }
 
         else {  // Else if the item is on the ground, remove it from the ground unless it should stay in player's inventory

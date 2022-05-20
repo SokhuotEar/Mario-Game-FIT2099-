@@ -73,4 +73,5 @@ public class HealthFountain extends Ground implements Drinkable{
             count++;
         }
     }
+
 }

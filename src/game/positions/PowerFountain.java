@@ -72,5 +72,4 @@ public class PowerFountain extends Ground implements Drinkable{
             count++;
         }
     }
-
 }
