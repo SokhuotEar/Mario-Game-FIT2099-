@@ -11,6 +11,7 @@ public class PowerFountain extends Ground implements Drinkable{
 
     private final int FULL_CAPACITY = 10;
     private int currentVolume;
+    private int count;
 
     /**
      * Constructor.
@@ -54,6 +55,22 @@ public class PowerFountain extends Ground implements Drinkable{
     @Override
     public String fountainName() {
         return "Power water";
+    }
+
+    @Override
+    public String printCapacity() {
+        return "(" + currentVolume + "/" + FULL_CAPACITY + ")";
+    }
+
+    @Override
+    public void tick(Location location) {
+        if (count == 5) {
+            setVolume(FULL_CAPACITY);
+            count = 0;
+        }
+        if (currentVolume <= 0) {
+            count++;
+        }
     }
 
 }

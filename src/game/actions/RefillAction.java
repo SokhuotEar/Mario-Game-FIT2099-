@@ -18,11 +18,12 @@ public class RefillAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         Bottle.getInstance().addDrink(this.drinkable);
+        drinkable.setVolume(drinkable.getCapacity() - 2);
         return menuDescription(actor);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " refill " + drinkable.fountainName();
+        return actor + " refill " + drinkable.fountainName() + " " + drinkable.printCapacity();
     }
 }

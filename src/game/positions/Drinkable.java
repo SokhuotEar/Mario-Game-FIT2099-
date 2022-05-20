@@ -13,4 +13,6 @@ public interface Drinkable {
     void setVolume(int drink);
 
     String fountainName();
+
+    String printCapacity();
 }

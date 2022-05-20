@@ -11,7 +11,8 @@ public class HealthFountain extends Ground implements Drinkable{
 
     private final int HEAL_POINT = 50;
     private final int FULL_CAPACITY = 10;
-    private int currentVolume;
+    private int currentVolume = FULL_CAPACITY;
+    private int count;
 
 
     /**
@@ -49,7 +50,7 @@ public class HealthFountain extends Ground implements Drinkable{
 
     @Override
     public void setVolume(int drink) {
-
+        drink = this.currentVolume;
     }
 
     @Override
@@ -57,5 +58,19 @@ public class HealthFountain extends Ground implements Drinkable{
         return "Health water";
     }
 
+    @Override
+    public String printCapacity() {
+        return "(" + currentVolume + "/" + FULL_CAPACITY + ")";
+    }
 
+    @Override
+    public void tick(Location location) {
+        if (count == 5) {
+            setVolume(FULL_CAPACITY);
+            count = 0;
+        }
+        if (currentVolume <= 0) {
+            count++;
+        }
+    }
 }
