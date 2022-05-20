@@ -1,9 +1,7 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
@@ -11,13 +9,10 @@ import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
-import game.actions.FireAttackAction;
-import game.actions.TeleportAction;
 import game.actors.Player;
 import game.actors.PrincessPeach;
 import game.actors.Toad;
 import game.actors.enemies.Bowser;
-import game.actors.enemies.FlyingKoopa;
 import game.items.*;
 import game.positions.*;
 
