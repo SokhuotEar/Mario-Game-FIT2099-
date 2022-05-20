@@ -3,6 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.utils.Status;
@@ -37,7 +38,7 @@ public class FireFlower extends Item implements Consumable {
      * Constructor.
      */
     public FireFlower() {
-        super ("FireFlower",'f',false);
+        super ("FireFlower",'f',true);
         this.consumeAction = new ConsumeAction(this);
         super.addAction(consumeAction);
     }
@@ -75,6 +76,16 @@ public class FireFlower extends Item implements Consumable {
             actor.removeItemFromInventory(this);
         }
 
+    }
+
+    /**
+     * Override the method from Action class since the PowerStar will not be dropped
+     * @param actor the actor that executes getDropAction
+     * @return null
+     */
+    @Override
+    public DropItemAction getDropAction(Actor actor) {
+        return null;
     }
 
     /**
