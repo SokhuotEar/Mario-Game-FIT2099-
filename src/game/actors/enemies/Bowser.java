@@ -71,8 +71,11 @@ public class Bowser extends Enemy {
     @Override
     public void resetInstance(GameMap map) {
         // Move Bowser back to original spot:
-        map.removeActor(this);
-        this.initialPosition.addActor(this);
+        if (this.initialPosition != null) {
+            map.removeActor(this);
+            this.initialPosition.addActor(this);
+        }
+
 
         // If theres an actor there, move the actor to an adjacent square:
         // TODO:
