@@ -5,6 +5,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.positions.Fire;
 
+/**
+ * Special Action for attacking other Actors with Fire.
+ * @author Sok Huot Ear, Satya Jhaveri
+ * @version 1.0
+ */
 public class FireAttackAction extends AttackAction {
     /**
      * Constructor.
@@ -17,6 +22,12 @@ public class FireAttackAction extends AttackAction {
     }
 
 
+    /**
+     * Executes the FireAttackAction
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return a descriptive string of the action that just took place
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         //get location of the target
@@ -28,6 +39,11 @@ public class FireAttackAction extends AttackAction {
         return super.execute(actor, map) + " with fire!";
     }
 
+    /**
+     *
+     * @param actor The actor performing the action.
+     * @return A descriptive string to display on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor +  " uses Fire to attack " + target + " at " + direction;
