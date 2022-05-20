@@ -63,6 +63,6 @@ public class ResetManager {
      * @param resettable resettable object
      */
     public void cleanUp(Resettable resettable){
-            resettableList.remove(resettable);
+            //resettableList.remove(resettable);
     }
 }

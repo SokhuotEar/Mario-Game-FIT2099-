@@ -5,16 +5,21 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.TeleportAction;
 import game.actors.enemies.PiranhaPlant;
+import game.positions.Dirt;
 import game.positions.HighGround;
+import game.reset.ResetManager;
+import game.reset.Resettable;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WarpPipe extends HighGround {
+public class WarpPipe extends HighGround implements Resettable {
     private int age;
     private boolean spawnPlant;
     private Location destination;
@@ -32,6 +37,7 @@ public class WarpPipe extends HighGround {
         this.destination = null;
         this.location = null;
         pipeList.add(this);
+        this.registerInstance();
     }
 
     public static boolean isInstance(Ground ground) {
@@ -64,7 +70,9 @@ public class WarpPipe extends HighGround {
         super.tick(currentLocation);
         if (age >= 2 && this.spawnPlant && !currentLocation.containsAnActor())
         {
-            currentLocation.addActor(new PiranhaPlant());
+            PiranhaPlant plant = new PiranhaPlant();
+            plant.addCapability(Status.SPAWNED_FROM_PIPE);
+            currentLocation.addActor(plant);
             this.spawnPlant = false;
         }
     }
@@ -108,5 +116,36 @@ public class WarpPipe extends HighGround {
             actions.add(new TeleportAction(this.destination));
         }
         return actions;
+    }
+
+
+    /**
+     * Allows any classes that use this interface to reset abilities, attributes, and/or items.
+     *
+     * @param map
+     */
+    @Override
+    public void resetInstance(GameMap map) {
+        // If the piranha plant is not still on the map, set spawnPlant to true
+        boolean found = false;
+        for (int x : map.getXRange()) {
+            for (int y : map.getYRange()) {
+                if (map.at(x,y).getGround() == this) {
+                    found = true;
+                    // If the location doesnt contain an actor, or if it doesnt contain a piranha plant, set it so the WarpPipe can spawn a new piranha plant
+                    if (map.at(x,y).containsAnActor() && !map.at(x,y).getActor().hasCapability(Status.SPAWNED_FROM_PIPE)) {
+                        this.spawnPlant = true;
+                    }
+                    else if (!map.at(x,y).containsAnActor()) {
+                        this.spawnPlant = true;
+                    }
+                    break;
+                }
+            }
+            if (found) {
+                break;
+            }
+        }
+        ResetManager.getInstance().cleanUp(this);
     }
 }

@@ -14,4 +14,5 @@ public enum Status {
     FIREATTACK, // use this when an actor can do fireAttack
     HAS_RESET,  // use this for when an actor has the ability to reset the game
     FLYING,     // use this for when an actor is flying (it can walk over high ground)
+    SPAWNED_FROM_PIPE, // use this for when an actor spawned from a pipe (exclusively used by WarpPipe)
 }

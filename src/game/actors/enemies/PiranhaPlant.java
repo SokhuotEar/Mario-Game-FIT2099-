@@ -34,4 +34,15 @@ public class PiranhaPlant extends Enemy {
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(90, "chomps");
     }
+
+    /**
+     * Resets the Enemy instance
+     *
+     * @param map
+     */
+    @Override
+    public void resetInstance(GameMap map) {
+        // Increase HP by 50 and heal to max:
+        this.resetMaxHp(this.getMaxHp() + 50);
+    }
 }
