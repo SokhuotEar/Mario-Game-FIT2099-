@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actions.FireAttackAction;
 import game.actions.TeleportAction;
@@ -74,13 +75,6 @@ public class Application {
 		// Adding Toad:
 		gameMap.at(43,12).addActor(new Toad());
 
-		// Adding random warp pipes
-		WarpPipe pipe1 = new WarpPipe();
-		WarpPipe pipe2 = new WarpPipe();
-		WarpPipe pipe3 = new WarpPipe();
-		gameMap.at(41,14).addItem(pipe1);
-		gameMap.at(43,14).addItem(pipe2);
-		gameMap.at(45,04).addItem(pipe3);
 
 		//Adding fountains
 		gameMap.at(36, 10).setGround(new HealthFountain());
@@ -118,10 +112,22 @@ public class Application {
 		lavaZoneMap.at(3, 10).addActor(new Bowser(3, 10));
 
 
-		// Linking pipes:
-		pipe1.addPipeAction(new TeleportAction(lavaZoneMap.at(0,0)));
-		pipe2.addPipeAction(new TeleportAction(lavaZoneMap.at(0,0)));
-		pipe3.addPipeAction(new TeleportAction(lavaZoneMap.at(0,0)));
+		// Adding random warp pipes
+		WarpPipe pipe1 = new WarpPipe();
+		Location pipe1Location = gameMap.at(43, 8);
+		pipe1Location.setGround(pipe1);
+
+		WarpPipe pipe2 = new WarpPipe();
+		Location pipe2Location = gameMap.at(42, 15);
+		pipe2Location.setGround(pipe2);
+
+		WarpPipe lavaMapPipe = new WarpPipe();
+		Location lavaMapPipeLocation = lavaZoneMap.at(0,0);
+		lavaMapPipeLocation.setGround(lavaMapPipe);
+
+		// Linking the warp pipes:
+		WarpPipe.linkPipes(pipe1, pipe1Location, lavaMapPipe, lavaMapPipeLocation);
+		WarpPipe.linkPipes(pipe2, pipe2Location, lavaMapPipe, lavaMapPipeLocation);
 
 
 		world.run();

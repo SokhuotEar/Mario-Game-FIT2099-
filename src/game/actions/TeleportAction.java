@@ -12,72 +12,47 @@ import game.items.WarpPipe;
 import java.util.ArrayList;
 
 public class TeleportAction extends Action {
-
     private Location destination;
-    private String direction;
-    private Location start;
 
-    public TeleportAction(Location destination) {
-        this.destination = destination;
-        this.direction = "To the Lava Zone";
+    public TeleportAction(Location teleportDestination) {
+        this.destination = teleportDestination;
     }
 
-    /** This method teleports Player from the Main Map to Lava Zone. Then it creates a new Warp that returns
-     * the player back to Main Map at the exact starting location.
+    /**
+     * Perform the Action.
      *
      * @param actor The actor performing the action.
-     * @param map The map the actor is on.
-     * @return
+     * @param map   The map the actor is on.
+     * @return a description of what happened that can be displayed to the user.
      */
-
     @Override
     public String execute(Actor actor, GameMap map) {
+        // Set the destination of the destination pipe to the location of the current pipe:
+        Location currentPosition = map.locationOf(actor);
+        WarpPipe.linkPipes(WarpPipe.getInstance(currentPosition.getGround()), currentPosition, WarpPipe.getInstance(destination.getGround()), destination);
 
-        if (!Player.isInstance(actor))
-        {
-            return null;
+        // Remove the actor from its current map:
+        map.removeActor(actor);
+
+        // Remove actors from the destination location so that the teleport can proceed:
+        if (this.destination.containsAnActor()) {
+            this.destination.map().removeActor(this.destination.getActor());
         }
 
-        // record the starting point of the player, as player will need to return to the same location
-        start = map.locationOf(actor);
+        // Add the actor to the destination location:
+        this.destination.addActor(actor);
 
-        // teleport player
-        new MoveActorAction(destination,direction).execute(actor,map);
-
-        // remove any warp item on Lava zone at (0,0) that already exists
-        // to avoid duplication
-        ArrayList<Item> itemToRemove = new ArrayList<>();
-        for (Item item: destination.getItems())
-        {
-            if (WarpPipe.isInstance(item))
-            {
-                itemToRemove.add(item);
-            }
-        }
-
-        for (Item item: itemToRemove)
-        {
-            destination.removeItem(item);
-        }
-
-        // create a returning pipe from Lava Zone to the main map
-        // the pipe can send player back to 'start'
-        WarpPipe returningPipe = new WarpPipe();
-        returningPipe.addPipeAction(new MoveActorAction(start, "To the Main Map"));
-        destination.addItem(returningPipe);
-
-
-
-        return "Player teleports to Lava Zone";
-
+        return this.menuDescription(actor);
     }
 
+    /**
+     * Returns a descriptive string
+     *
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
-        return "Teleport to lava Zone";
+        return actor + " enters the warp pipe";
     }
-
-
-
-
 }
