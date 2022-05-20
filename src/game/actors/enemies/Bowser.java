@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.enemies.behaviours.BehaviourPriority;
 import game.actors.enemies.behaviours.FireAttackBehaviour;
@@ -14,12 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bowser extends Enemy {
-    private int initialXCoord;
-    private int initialYCoord;
+    private Location initialPosition;
     /**
      * Constructor.
      */
-    public Bowser(int x, int y) {
+    public Bowser() {
         super("Bowser", 'B', 500, false);
         List<String> lines = new ArrayList<>();
         lines.add("What was that sound? Oh, just a fire.");
@@ -29,8 +29,7 @@ public class Bowser extends Enemy {
         this.setLines(lines);
         this.addItemToInventory(Key.getInstance());
         this.addBehaviour(BehaviourPriority.FIRE_ATTACK.ordinal(), new FireAttackBehaviour());
-        this.initialXCoord = x;
-        this.initialYCoord = y;
+        this.initialPosition = null;
     }
 
     /**
@@ -44,6 +43,9 @@ public class Bowser extends Enemy {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        if (this.initialPosition == null) {
+            this.initialPosition = map.locationOf(this);
+        }
         this.speak(display, this, map);
         return new DoNothingAction();
     }
@@ -70,7 +72,7 @@ public class Bowser extends Enemy {
     public void resetInstance(GameMap map) {
         // Move Bowser back to original spot:
         map.removeActor(this);
-        map.at(this.initialXCoord, this.initialYCoord).addActor(this);
+        this.initialPosition.addActor(this);
 
         // If theres an actor there, move the actor to an adjacent square:
         // TODO:

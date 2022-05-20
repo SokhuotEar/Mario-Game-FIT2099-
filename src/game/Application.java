@@ -104,7 +104,7 @@ public class Application {
 		lavaZoneMap.at(5, 10).addActor(new PrincessPeach());
 
 		// Adding Bowser:
-		lavaZoneMap.at(3, 10).addActor(new Bowser(3, 10));
+		lavaZoneMap.at(3, 10).addActor(new Bowser());
 
 
 		// Adding random warp pipes
