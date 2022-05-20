@@ -87,6 +87,9 @@ public class Koopa extends Enemy {
         // update the display character
         setDisplayChar('D');
 
+        // remove monologue lines:
+        this.removeLines();
+
         // remove all behaviours (so the Koopa doesn't follow, wander, or attack):
         clearBehaviours();
     }

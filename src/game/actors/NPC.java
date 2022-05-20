@@ -41,6 +41,11 @@ public abstract class NPC extends Actor {
         this.speakBehaviour.addLine(line);
     }
 
+    // Removes all lines for NPC speaking:
+    public void removeLines() {
+        this.speakBehaviour = null;
+    }
+
     // Adds a behaviour:
     public void addBehaviour(Integer key, Behaviour behaviour)
     {
