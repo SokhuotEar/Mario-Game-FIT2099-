@@ -9,75 +9,92 @@ import game.utils.Status;
 import game.actions.ConsumeAction;
 import game.actors.Player;
 
+/**
+ * The class FireFlower is a child class of Item class which allow
+ *  * overriding method to modify its functionality and implements
+ *  * the Consumable interface since it can be consumed.
+ * @author Sok Huot Ear, Satya Jhaveri
+ * @version 1.0
+ */
 public class FireFlower extends Item implements Consumable {
 
+    /**
+     * The lifetime remaining of the FireFlower
+     */
     private int lifetime = 20;
-    private static int count = 0;
+    /**
+     * Whether the FireFlower has been consumed
+     */
     private boolean consumed = false;
-    private static final int maxCount = 100;
+
+    /**
+     * Holds the current item's consume action so that it can be added or removed from the list of allowable actions
+     */
     private final Action consumeAction;
 
 
-    /***
+    /**
      * Constructor.
      */
-
     public FireFlower() {
         super ("FireFlower",'f',false);
         this.consumeAction = new ConsumeAction(this);
         super.addAction(consumeAction);
-        count++;
     }
 
-    public static int getCount() {
-        return count;
-    }
-
-    public static int getMaxCount() {
-        return maxCount;
-    }
-
+    /**
+     * Gets the Item form of a Consumable
+     * @return This item
+     */
     @Override
     public Item getItem() {
         return this;
     }
 
+    /**
+     * Method called once every round
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        super.tick(currentLocation, actor);
-
         // decrement its lifetime only when it is consumed
         if (!this.consumed){
             return;
         }
         lifetime--;
 
-        if (lifetime > 0) {
-            String println = lifetime + " rounds left.";
-            new Display().println(println);
-        }
+        // Im not sure if we should have this dependency with Display
+        //if (lifetime > 0) {
+            //String println = lifetime + " rounds left.";
+            //new Display().println(println);
+        //}
         if (lifetime == 0)
         {
-            actor.removeCapability(Status.FIREATTACK);
+            // remove the expired consumed FireFlower from the Actors inventory
+            actor.removeItemFromInventory(this);
         }
 
     }
 
+    /**
+     * Consumes the FireFlower
+     * @param actor the actor that will consume the FireFlower
+     */
     @Override
     public void consume(Actor actor) {
-        // only actor can consume the fire attack
-        if (!Player.isInstance(actor))
-        {
-            return;
-        }
         //set consumed to true
         consumed = true;
 
-        //temporarily add it to the inventory list
-        actor.addItemToInventory(this);
-        // the player can now perform fire attack
-        actor.addCapability(Status.FIREATTACK);
-        //
+        // add the FireFlower to the player's inventory if they are not already holding it
+        if (!actor.getInventory().contains(this)) {
+            actor.addItemToInventory(this);
+        }
+
+        // the player can now perform fire attack, since it is holding the fireflower, giving fireflower the status also gives it to the player
+        this.addCapability(Status.FIREATTACK);
+
+        // stay in player's inventory, but the player can no longer consume it
         this.removeAction(consumeAction);
     }
 
