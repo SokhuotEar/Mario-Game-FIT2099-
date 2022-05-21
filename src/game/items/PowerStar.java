@@ -33,11 +33,6 @@ public class PowerStar extends Item implements Consumable, Buyable {
     private int lifetime;
 
     /**
-     * consumed: whether the PowerStar has been consumed
-     */
-    private boolean consumed;
-
-    /**
      * Holds the current item's consume action so that it can be added or removed from the list
      */
     private final Action consumeAction;
@@ -50,10 +45,9 @@ public class PowerStar extends Item implements Consumable, Buyable {
      */
     public PowerStar() {
         super("Power Star", '*', true);
-        consumeAction = new ConsumeAction(this);
+        this.consumeAction = new ConsumeAction(this);
         super.addAction(consumeAction);
-        lifetime = 10;
-        consumed = false;
+        this.lifetime = 10;
     }
 
     /**
@@ -68,20 +62,8 @@ public class PowerStar extends Item implements Consumable, Buyable {
     public void tick(Location currentLocation, Actor actor) {
         lifetime--;
         if (lifetime <= 0) {
-            // remove the special effects from the player:
-            for (Enum<?> capability : this.capabilitiesList()) {
-                actor.removeCapability(capability);
-            }
-            // remove the item from the player's inventory:
+            // remove the item from the player's inventory (hence removing Status.INVINCIBLE):
             actor.removeItemFromInventory(this);
-        }
-        else {
-            if (consumed) {
-                // add the effects to the player (another item might have removed the buffs, so we must re-add them):
-                for (Enum<?> capability : this.capabilitiesList()) {
-                    actor.addCapability(capability);
-                }
-            }
         }
     }
 
@@ -125,19 +107,16 @@ public class PowerStar extends Item implements Consumable, Buyable {
     @Override
     public void consume(Actor actor) {
         //Give the buffs to this item (since the player will hold this item and hence get the capabilities):
-        super.addCapability(Status.INVINCIBLE);
+        this.addCapability(Status.INVINCIBLE);
 
         // Heal by 200 points:
         actor.heal(hpToHealBy);
-
-        // change the consumed status of the PowerStar:
-        consumed = true;
 
         // set the lifetime (turns left) to 10:
         lifetime = 10;
 
         // remove the consume action from the item's action list (it will essentially become inert, only exists to reapply buffs every turn):
-        removeAction(consumeAction);
+        removeAction(this.consumeAction);
     }
 
     /**
