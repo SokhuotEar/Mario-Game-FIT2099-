@@ -85,10 +85,12 @@ public abstract class Enemy extends NPC implements Resettable {
             map.locationOf(this).addItem(item);
         }
 
-        // remove Enemy from map
-        map.removeActor(this);
-        // remove Enemy from the reset manager (since it is destroyed)
-        ResetManager.getInstance().cleanUp(this);
+        if (map.contains(this)) {
+            // remove Enemy from map
+            map.removeActor(this);
+            // remove Enemy from the reset manager (since it is destroyed)
+            ResetManager.getInstance().cleanUp(this);
+        }
     }
 
     /**
