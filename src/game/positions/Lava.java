@@ -2,6 +2,7 @@ package game.positions;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Player;
@@ -46,12 +47,24 @@ public class Lava extends Ground {
     public void tick(Location location) {
         // The player standing on top takes 15 damage per round
         if (location.containsAnActor()) {
-            Actor player = location.getActor();
+            Actor actor = location.getActor();
             //the player takes damage
-            player.hurt(Lava.damage);
+            actor.hurt(Lava.damage);
+            String result = actor + "takes " + Lava.damage + " damage from stepping on Lava.";
 
-            String println = player + "takes " + Lava.damage + " damage from stepping on Lava.";
-            new Display().println(println);
+            // If actor not concious, kill it and drop everything in the inventory:
+            if (!actor.isConscious()) {
+                // Drop items:
+                for (Item i : actor.getInventory()) {
+                    if (i.getDropAction(actor) != null) {
+                        i.getDropAction(actor).execute(actor, location.map());
+                    }
+                }
+                // Remove actor from map:
+                location.map().removeActor(actor);
+                result = actor + "died from stepping on Lava.";
+            }
+            new Display().println(result);
         }
         super.tick(location);
     }
