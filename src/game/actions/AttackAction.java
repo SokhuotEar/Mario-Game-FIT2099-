@@ -35,6 +35,8 @@ public class AttackAction extends Action {
 	 */
 	protected Random rand = new Random();
 
+	protected boolean attackSuceeded;
+
 	/**
 	 * Constructor.
 	 * 
@@ -44,6 +46,7 @@ public class AttackAction extends Action {
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
+		this.attackSuceeded = true;
 	}
 
 	/**
@@ -69,6 +72,7 @@ public class AttackAction extends Action {
 
 
 				if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
+					this.attackSuceeded = false;
 					return actor + " misses " + target + ".";
 				}
 

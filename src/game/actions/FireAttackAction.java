@@ -33,10 +33,15 @@ public class FireAttackAction extends AttackAction {
         //get location of the target
         Location targetLocation = map.locationOf(target);
 
-        // add fire to the location of the target
-        targetLocation.addItem(new Fire());
+        String result = super.execute(actor, map);
+        if (this.attackSuceeded) {
+            // Only add fire if the attack did not miss:
+            result += " with fire!";
+            // add fire to the location of the target
+            targetLocation.addItem(new Fire());
+        }
 
-        return super.execute(actor, map) + " with fire!";
+        return result;
     }
 
     /**
