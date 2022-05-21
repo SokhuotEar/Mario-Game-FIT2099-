@@ -49,20 +49,26 @@ public abstract class Tree extends HighGround implements Resettable {
      */
     @Override
     public void resetInstance(GameMap map) {
-        if (RNG.rng(50)) {
-            boolean found = false;
-            for (int x : map.getXRange()) {
-                for (int y : map.getYRange()) {
-                    if (map.at(x,y).getGround() == this) {
-                        found = true;
+        boolean found = false;
+        for (int x : map.getXRange()) {
+            for (int y : map.getYRange()) {
+                if (map.at(x,y).getGround() == this) {
+                    found = true;
+                    // 50% Chance to remove dirt
+                    if (RNG.rng(50)) {
                         map.at(x,y).setGround(new Dirt());
-                        break;
                     }
-                }
-                if (found) {
                     break;
                 }
             }
+            if (found) {
+                break;
+            }
+            ResetManager.getInstance().cleanUp(this);
+        }
+
+        // If not found, then the tree is no longer in the map (could have been replaced by another tree):
+        if (!found) {
             ResetManager.getInstance().cleanUp(this);
         }
     }
