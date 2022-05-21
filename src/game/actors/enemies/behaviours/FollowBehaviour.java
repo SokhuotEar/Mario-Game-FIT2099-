@@ -15,7 +15,9 @@ import game.actors.enemies.behaviours.Behaviour;
  * @version 1.0
  */
 public class FollowBehaviour implements Behaviour {
-
+	/**
+	 * The target that this behaviour will make an actor follow
+	 */
 	private final Actor target;
 
 	/**

@@ -8,12 +8,17 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.FireAttackAction;
 import game.utils.Status;
 
+/**
+ * A special behaviour for generating FireAttackActions
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class FireAttackBehaviour implements Behaviour{
 
     /**
      * @param actor the Actor acting
      * @param map   the GameMap containing the Actor
-     * @return an Action that actor can perform, or null if actor can't do this.
+     * @return a FireAttackAction that actor can perform, or null if actor can't do this.
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
