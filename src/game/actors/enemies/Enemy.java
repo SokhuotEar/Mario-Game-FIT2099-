@@ -23,7 +23,6 @@ import java.util.*;
  * @version 1.0
  */
 public abstract class Enemy extends NPC implements Resettable {
-    private static final List<Enemy> enemyList = new ArrayList<>();
     private final boolean canWander;      //check if the enemy can Wander
 
     /**
@@ -36,53 +35,19 @@ public abstract class Enemy extends NPC implements Resettable {
     public Enemy(String name, char displayChar, int hitPoints, boolean canWander) {
         super(name, displayChar, hitPoints);
         this.canWander = canWander;
+        this.addCapability(Status.CANT_ENTER_FLOOR);
+        this.addCapability(Status.CANT_ENTER_LAVA);
         if (canWander) {
             // put wander behaviour only if the enemy can move
             this.addBehaviour(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
         }
         this.addBehaviour(BehaviourPriority.ATTACK.ordinal(), new AttackBehaviour());
         this.addBehaviour(BehaviourPriority.DRINK.ordinal(), new DrinkBehaviour());
-        enemyList.add(this);
         this.registerInstance();
     }
 
-    /**
-     * Checks if an actor is an enemy or not.
-     *
-     * @param actor     an instance of an Actor subclass
-     * @return true if the actor is an enemy, and false otherwise
-     */
-    public static boolean isInstance(Actor actor) {
-        boolean result = false;
-        for (Enemy current : enemyList) {
-            if (current == actor) {
-                result = true;
-                break;
-            }
-        }
 
-        return result;
-    }
 
-    /**
-     * Removes an enemy from the static enemy list
-     * @param actor the enemy to be removed
-     */
-    public static void removeInstance(Actor actor) {
-        if (isInstance(actor)) {
-            enemyList.remove(actor);
-        }
-    }
-
-    /**
-     * Adds an enemy to the static enemy list
-     * @param enemy the enemy to be added
-     */
-    public static void addInstance(Enemy enemy) {
-        if (enemy != null) {
-            enemyList.add(enemy);
-        }
-    }
 
     /**
      * At the moment, we only make it can be attacked by Player.
@@ -127,9 +92,8 @@ public abstract class Enemy extends NPC implements Resettable {
             map.locationOf(this).addItem(item);
         }
 
-        // remove Enemy from map and EnemyList
+        // remove Enemy from map
         map.removeActor(this);
-        Enemy.removeInstance(this);
         // remove Enemy from the reset manager (since it is destroyed)
         ResetManager.getInstance().cleanUp(this);
     }
@@ -144,9 +108,6 @@ public abstract class Enemy extends NPC implements Resettable {
     @Override
     public void hurt(int points) {
         super.hurt(points);
-        if (!isConscious()) {
-            removeInstance(this);
-        }
     }
 
     /**

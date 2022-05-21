@@ -169,18 +169,18 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
 
+	/*
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 		ActionList actions =  new ActionList();
-		if (Enemy.isInstance(otherActor) & this.hasCapability(Status.FIREATTACK))
+		if (this.hasCapability(Status.FIREATTACK))
 		{
-
 			actions.add(new FireAttackAction(otherActor,direction));
 		}
 
 		return actions;
 
-	}
+	}*/
 
 	/**
 	 * Resets the player

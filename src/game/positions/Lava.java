@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.Player;
 import game.actors.enemies.Enemy;
+import game.utils.Status;
 
 public class Lava extends Ground {
 
@@ -22,7 +23,7 @@ public class Lava extends Ground {
     @Override
     public boolean canActorEnter(Actor actor) {
         // an actor can not enter if it is an instance of Enemy
-        return !Enemy.isInstance(actor);
+        return !actor.hasCapability(Status.CANT_ENTER_LAVA);
     }
 
     public void takeDamage(Location location, int damage) {
