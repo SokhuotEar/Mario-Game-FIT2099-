@@ -42,10 +42,22 @@ public class Fire extends Item {
             Actor actor = location.getActor();
             // the Actor takes damage
             actor.hurt(damage);
+            String result = actor + "takes " + damage + " damage due to fire burning.";
 
-            // printing feedback to the display
-            String println = actor + "takes " + damage + " damage due to fire burning.";
-            new Display().println(println);
+            // If actor not concious, drop all items and remove from map:
+            if (!actor.isConscious()) {
+                // Drop items:
+                for (Item i : actor.getInventory()) {
+                    if (i.getDropAction(actor) != null) {
+                        i.getDropAction(actor).execute(actor, location.map());
+                    }
+                }
+                // Remove actor from map:
+                location.map().removeActor(actor);
+                result = actor + "died from stepping on fire.";
+            }
+
+            new Display().println(result);
         }
 
         super.tick(location);
