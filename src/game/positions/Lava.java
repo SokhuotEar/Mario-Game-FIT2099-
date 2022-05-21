@@ -52,7 +52,7 @@ public class Lava extends Ground {
             actor.hurt(Lava.damage);
             String result = actor + "takes " + Lava.damage + " damage from stepping on Lava.";
 
-            // If actor not concious, kill it and drop everything in the inventory:
+            // If actor not conscious, kill it and drop everything in the inventory:
             if (!actor.isConscious()) {
                 // Drop items:
                 for (Item i : actor.getInventory()) {
@@ -62,7 +62,7 @@ public class Lava extends Ground {
                 }
                 // Remove actor from map:
                 location.map().removeActor(actor);
-                result = actor + "died from stepping on Lava.";
+                result = actor + " died from stepping on Lava.";
             }
             new Display().println(result);
         }

@@ -44,7 +44,7 @@ public class Fire extends Item {
             actor.hurt(damage);
             String result = actor + "takes " + damage + " damage due to fire burning.";
 
-            // If actor not concious, drop all items and remove from map:
+            // If actor not conscious, drop all items and remove from map:
             if (!actor.isConscious()) {
                 // Drop items:
                 for (Item i : actor.getInventory()) {
@@ -54,7 +54,7 @@ public class Fire extends Item {
                 }
                 // Remove actor from map:
                 location.map().removeActor(actor);
-                result = actor + "died from stepping on fire.";
+                result = actor + " died from stepping on fire.";
             }
 
             new Display().println(result);
