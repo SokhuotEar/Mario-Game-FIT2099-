@@ -123,9 +123,9 @@ public abstract class Fountain extends Ground {
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = super.allowableActions(actor, location, direction);
 
-        // Let the actor drink if they
+        // Let the actor refill their bottle if they have it
         if (this.capacity > 0 && location.getActor() == actor) {
-            actions.add(new DrinkAction(this));
+            //actions.add(new DrinkAction(this));
 
             if (actor.getInventory().contains(Bottle.getInstance())) {
                 actions.add(new RefillAction(this));
