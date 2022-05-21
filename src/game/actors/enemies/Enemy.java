@@ -14,7 +14,6 @@ import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.utils.Status;
 import game.actors.enemies.behaviours.*;
-import java.util.*;
 
 
 /**
@@ -23,7 +22,7 @@ import java.util.*;
  * @version 1.0
  */
 public abstract class Enemy extends NPC implements Resettable {
-    private final boolean canWander;      //check if the enemy can Wander
+    private final boolean canMove;      //check if the enemy can Wander
 
     /**
      * Constructor.
@@ -32,12 +31,12 @@ public abstract class Enemy extends NPC implements Resettable {
      * @param displayChar the character that will represent the Enemy in the display
      * @param hitPoints   the Enemy's starting hit points
      */
-    public Enemy(String name, char displayChar, int hitPoints, boolean canWander) {
+    public Enemy(String name, char displayChar, int hitPoints, boolean canMove) {
         super(name, displayChar, hitPoints);
-        this.canWander = canWander;
+        this.canMove = canMove;
         this.addCapability(Status.CANT_ENTER_FLOOR);
         this.addCapability(Status.CANT_ENTER_LAVA);
-        if (canWander) {
+        if (canMove) {
             // put wander behaviour only if the enemy can move
             this.addBehaviour(BehaviourPriority.WANDERER.ordinal(), new WanderBehaviour());
         }
@@ -67,17 +66,14 @@ public abstract class Enemy extends NPC implements Resettable {
             else {
                 actions.add(new AttackAction(this,direction));
             }
-            // it will follow only if it can move
-            if (canWander) {
+            // it will follow a hostile actor only if this can can move
+            if (canMove) {
                 this.addBehaviour(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(otherActor));
             }
         }
 
         return actions;
-
-
     }
-
 
     /**
      * Resets the Enemy instance

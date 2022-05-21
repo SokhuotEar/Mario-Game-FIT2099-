@@ -2,12 +2,9 @@ package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AttackAction;
 import game.items.SuperMushroom;
-import game.items.Wrench;
 import game.utils.Status;
 
 import java.util.ArrayList;
@@ -29,6 +26,22 @@ public class Koopa extends Enemy {
      */
     public Koopa() {
         super("Koopa", 'K', 100,true);
+        //addBehaviour(10, new WanderBehaviour());
+        SuperMushroom mushroom = new SuperMushroom();
+        addItemToInventory(mushroom);
+        dormant = false;
+        List<String> lines = new ArrayList<>();
+        lines.add("Never gonna make you cry!");
+        lines.add("Koopi koopi koopii~!");
+        this.setLines(lines);
+        this.setBaseAttackDamage(30);
+    }
+
+    /**
+     * Overloaded Constructor that accepts custom name.
+     */
+    public Koopa(String name) {
+        super(name, 'K', 100,true);
         //addBehaviour(10, new WanderBehaviour());
         SuperMushroom mushroom = new SuperMushroom();
         addItemToInventory(mushroom);
@@ -106,6 +119,10 @@ public class Koopa extends Enemy {
         return new ActionList();
     }
 
+    /**
+     * Gets the verb of the Koopa's attack
+     * @return the verb of Koopa's attack
+     */
     @Override
     public String getVerb() {
         return "punch";

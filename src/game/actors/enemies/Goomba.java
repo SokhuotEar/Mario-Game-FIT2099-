@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.SuicideAction;
 import game.utils.RNG;
 
@@ -55,6 +54,10 @@ public class Goomba extends Enemy {
 		return super.playTurn(actions, lastAction, map, display);
 	}
 
+	/**
+	 * Gets the verb of the Goomba's attack
+	 * @return the verb of Goomba's attack
+	 */
 	@Override
 	public String getVerb() {
 		return "kick";
