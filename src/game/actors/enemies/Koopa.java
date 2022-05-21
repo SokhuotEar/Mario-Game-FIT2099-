@@ -40,8 +40,8 @@ public class Koopa extends Enemy {
     /**
      * Overloaded Constructor that accepts custom name.
      */
-    public Koopa(String name) {
-        super(name, 'K', 100,true);
+    public Koopa(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints,true);
         //addBehaviour(10, new WanderBehaviour());
         SuperMushroom mushroom = new SuperMushroom();
         addItemToInventory(mushroom);

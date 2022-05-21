@@ -14,9 +14,7 @@ public class FlyingKoopa extends Koopa{
      */
     public FlyingKoopa()
     {
-        super("Flying Koopa");
-        this.setDisplayChar('F');
-        this.resetMaxHp(150);
+        super("Flying Koopa", 'F', 150);
         this.addCapability(Status.FLYING);
         this.addLine("Pam pam pam!");
     }
