@@ -24,16 +24,6 @@ public class Goomba extends Enemy {
 	private static final int suicidedChance = 10;
 
 	/**
-	 * Creates and returns an intrinsic weapon.
-	 *
-	 * @return a freshly-instantiated IntrinsicWeapon
-	 */
-	@Override
-	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(10, "kick");
-	}
-
-	/**
 	 * Constructor
 	 */
 	public Goomba() {
@@ -44,6 +34,7 @@ public class Goomba extends Enemy {
 		lines.add("Ugha ugha... (Never gonna run around and desert you...)");
 		lines.add("Ooga-Chaka Ooga-Ooga!");
 		this.setLines(lines);
+		this.setBaseAttackDamage(10);
 	}
 
 	/**
@@ -64,4 +55,8 @@ public class Goomba extends Enemy {
 		return super.playTurn(actions, lastAction, map, display);
 	}
 
+	@Override
+	public String getVerb() {
+		return "kick";
+	}
 }

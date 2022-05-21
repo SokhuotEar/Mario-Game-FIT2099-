@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actors.enemies.behaviours.Behaviour;
 import game.actors.enemies.behaviours.SpeakBehaviour;
 
@@ -12,9 +13,10 @@ import java.util.*;
 /**
  * This is a class that all non playable actors will extend from. It encapsulates the speaking that all NPCs will do
  */
-public abstract class NPC extends Actor {
+public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
     private SpeakBehaviour speakBehaviour;  // might change this
     private Map<Integer, Behaviour> behaviours; // priority, behaviour
+    private int baseAttackDamage;
 
     /**
      * Constructor.
@@ -27,6 +29,8 @@ public abstract class NPC extends Actor {
         super(name, displayChar, hitPoints);
         this.speakBehaviour = null;
         this.behaviours = new TreeMap<>();
+        this.baseAttackDamage = 0;
+        this.registerIntrinsicWeaponInstance();
     }
 
     // Sets the lines for the NPCs speaking:
@@ -87,4 +91,31 @@ public abstract class NPC extends Actor {
         }
     }
 
+    @Override
+    public int getAttackDamage() {
+        return this.baseAttackDamage;
+    }
+
+    /**
+     * Creates and returns an intrinsic weapon.
+     * <p>
+     * By default, the Actor 'punches' for 5 damage. Override this method to create
+     * an Actor with more interesting descriptions and/or different damage.
+     *
+     * @return a freshly-instantiated IntrinsicWeapon
+     */
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(this.getAttackDamage(), this.getVerb());
+    }
+
+    @Override
+    public void increaseBaseAttack(int extraAttack) {
+        this.baseAttackDamage += extraAttack;
+    }
+
+    @Override
+    public void setBaseAttackDamage(int baseDamage) {
+        this.baseAttackDamage = baseDamage;
+    }
 }

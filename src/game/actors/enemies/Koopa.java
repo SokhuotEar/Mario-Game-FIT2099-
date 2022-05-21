@@ -37,19 +37,9 @@ public class Koopa extends Enemy {
         lines.add("Never gonna make you cry!");
         lines.add("Koopi koopi koopii~!");
         this.setLines(lines);
-
+        this.setBaseAttackDamage(30);
     }
 
-
-    /**
-     * Creates and returns an intrinsic weapon.
-     *
-     * @return a freshly-instantiated IntrinsicWeapon
-     */
-    @Override
-    protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(30, "punch");
-    }
 
     /**
      * Do some damage to the current Actor.
@@ -122,5 +112,10 @@ public class Koopa extends Enemy {
             }
         }
         return new ActionList();
+    }
+
+    @Override
+    public String getVerb() {
+        return "punch";
     }
 }

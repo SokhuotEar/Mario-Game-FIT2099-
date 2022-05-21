@@ -103,4 +103,9 @@ public class Toad extends NPC {
         }
         return actions;
     }
+
+    @Override
+    public String getVerb() {
+        return "does nothing to";
+    }
 }

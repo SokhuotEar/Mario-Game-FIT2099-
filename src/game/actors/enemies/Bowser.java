@@ -30,6 +30,7 @@ public class Bowser extends Enemy {
         this.addItemToInventory(Key.getInstance());
         this.addBehaviour(BehaviourPriority.FIRE_ATTACK.ordinal(), new FireAttackBehaviour());
         this.initialPosition = null;
+        this.setBaseAttackDamage(80);
     }
 
     /**
@@ -48,19 +49,6 @@ public class Bowser extends Enemy {
         }
         this.speak(display, this, map);
         return new DoNothingAction();
-    }
-
-    /**
-     * Creates and returns an intrinsic weapon.
-     * <p>
-     * By default, the Actor 'punches' for 5 damage. Override this method to create
-     * an Actor with more interesting descriptions and/or different damage.
-     *
-     * @return a freshly-instantiated IntrinsicWeapon
-     */
-    @Override
-    protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(80, "punches");
     }
 
     /**
@@ -87,5 +75,10 @@ public class Bowser extends Enemy {
         this.removeBehaviour(BehaviourPriority.FOLLOW.ordinal());
 
 
+    }
+
+    @Override
+    public String getVerb() {
+        return "punches";
     }
 }

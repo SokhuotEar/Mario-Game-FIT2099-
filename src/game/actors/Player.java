@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.FireAttackAction;
 import game.actors.enemies.Enemy;
 import game.reset.ResetAction;
@@ -19,7 +20,7 @@ import java.util.List;
  * Class representing the Player.
  * @author FIT2099, extended by Satya Jhaveri
  */
-public class Player extends Actor implements Resettable {
+public class Player extends Actor implements Resettable, IntrinsicWeaponBooster {
 	/**
 	 * A menu instance to allow the player to select their choice of action
 	 */
@@ -34,6 +35,8 @@ public class Player extends Actor implements Resettable {
 	 * Static list of all player instances
 	 */
 	private static final List<Player> playerList = new ArrayList<>();
+
+	private int baseAttackDamage;
 
 	/**
 	 * Constructor.
@@ -50,6 +53,8 @@ public class Player extends Actor implements Resettable {
 		this.wallet = new Wallet();
 		this.menu = new Menu();
 		playerList.add(this);
+		this.baseAttackDamage = 10;
+		this.registerIntrinsicWeaponInstance();
 	}
 
 	/**
@@ -112,7 +117,7 @@ public class Player extends Actor implements Resettable {
 			return lastAction.getNextAction();
 
 		// Display player stats:
-		display.println(name + ": " + printHp() + "HP, Wallet: $" + wallet.getBalance());
+		display.println(name + ": " + printHp() + "HP, Wallet: $" + wallet.getBalance() + ", Intrinsic Attack Damage: " + this.baseAttackDamage + "HP");
 		if(hasCapability((Status.INVINCIBLE))) {
 			String sentence = this + " is INVINCIBLE!";
 			display.println(sentence);
@@ -197,4 +202,28 @@ public class Player extends Actor implements Resettable {
 
 	}
 
+	@Override
+	public void increaseBaseAttack(int extraAttack) {
+		this.baseAttackDamage += extraAttack;
+	}
+
+	@Override
+	public int getAttackDamage() {
+		return this.baseAttackDamage;
+	}
+
+	@Override
+	public void setBaseAttackDamage(int baseDamage) {
+		this.baseAttackDamage = baseDamage;
+	}
+
+	@Override
+	public String getVerb() {
+		return "punches";
+	}
+
+	@Override
+	protected IntrinsicWeapon getIntrinsicWeapon() {
+		return new IntrinsicWeapon(this.getAttackDamage(), "punches");
+	}
 }

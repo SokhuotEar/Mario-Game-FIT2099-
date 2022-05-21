@@ -20,20 +20,9 @@ public class PiranhaPlant extends Enemy {
         lines.add("Slsstssthshs~! (Never gonna say goodbye~)");
         lines.add("Ohmnom nom nom nom.");
         this.setLines(lines);
+        this.setBaseAttackDamage(90);
     }
 
-    /**
-     * Creates and returns an intrinsic weapon.
-     * <p>
-     * By default, the Actor 'punches' for 5 damage. Override this method to create
-     * an Actor with more interesting descriptions and/or different damage.
-     *
-     * @return a freshly-instantiated IntrinsicWeapon
-     */
-    @Override
-    protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(90, "chomps");
-    }
 
     /**
      * Resets the Enemy instance
@@ -44,5 +33,10 @@ public class PiranhaPlant extends Enemy {
     public void resetInstance(GameMap map) {
         // Increase HP by 50 and heal to max:
         this.resetMaxHp(this.getMaxHp() + 50);
+    }
+
+    @Override
+    public String getVerb() {
+        return "chomps";
     }
 }
