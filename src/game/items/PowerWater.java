@@ -19,7 +19,7 @@ public class PowerWater extends Item implements Drinkable{
         if (InstrinsicWeaponBoostedManager.isInstance(actor)) {
             IntrinsicWeaponBooster actorWeaponBooster = InstrinsicWeaponBoostedManager.getInstance(actor);
             if (actorWeaponBooster != null) {
-                actorWeaponBooster.increaseBaseAttack(50);
+                actorWeaponBooster.increaseBaseAttack(15);
             }
         }
     }

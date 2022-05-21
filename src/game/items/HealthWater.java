@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.items.Item;
 public class HealthWater extends Item implements Drinkable {
     private static final int HEAL_POINTS = 50;
 
-    /***
+    /**
      * Constructor.
      */
     public HealthWater() {
