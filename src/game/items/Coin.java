@@ -28,7 +28,6 @@ public class Coin extends Item implements Resettable{
         super.addAction(new PickUpCoinAction(this));
     }
 
-
     /**
      * gets the value of the coin
      * @return the value of the coin
@@ -36,7 +35,6 @@ public class Coin extends Item implements Resettable{
     public int getValue() {
         return value;
     }
-
 
     /**
      * Resets the coin

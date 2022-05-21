@@ -12,12 +12,12 @@ public interface Buyable {
      * Gets the price of the Buyable
      * @return the price of the buyable
      */
-    public int getPrice();
+    int getPrice();
 
     /**
      * Gets the buyable item as an item object
      * @return the buyable item as an instance of Item
      */
-    public Item getItem();
+    Item getItem();
 
 }

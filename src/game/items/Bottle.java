@@ -1,19 +1,15 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.DrinkAction;
 import game.actions.DrinkFromBottleAction;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 /**
  * Bottle Class that creates a Singleton to create 1 instance of bottle
- * @author Klarissa Jutivannadevi
+ * @author Klarissa Jutivannadevi, Satya Jhaveri
  * @version 1.0
  */
 public class Bottle extends Item {
@@ -24,12 +20,15 @@ public class Bottle extends Item {
     /**
      * Stack to insert the content of the water refilled
      */
-    private Stack<Drinkable> bottleDrink = new Stack<>();
+    private final Stack<Drinkable> bottleDrink = new Stack<>();
 
+    /**
+     * Whether the bottle has been taken by the Player
+     */
     private static boolean bottleTaken = false;
 
-    /***
-     * Constructor of Bottle that will add an action to allow consume bottle.
+    /**
+     * Constructor.
      */
     private Bottle() {
         super("Bottle", 'b', false);
@@ -46,11 +45,19 @@ public class Bottle extends Item {
         return existingBottle;
     }
 
+    /**
+     * Method used when a TakeBottleAction is executed, sets bottleTaken attribute to true
+     * @return the Bottle instance
+     */
     public static Bottle takeBottle() {
         bottleTaken = true;
         return getInstance();
     }
 
+    /**
+     * Checks if the bottle has been taken by an actor yet
+     * @return true if the bottle has been taken, false otherwise
+     */
     public static boolean isBottleTaken() {
         return bottleTaken;
     }
@@ -107,7 +114,10 @@ public class Bottle extends Item {
         return fountainList;
     }
 
-
+    /**
+     * Generates DrinkFromBottleActions if the bottle is not empty
+     * @return DrinkFromBottleAction if the bottle is not empty
+     */
     @Override
     public List<Action> getAllowableActions() {
         List<Action> actions = new ArrayList<>();

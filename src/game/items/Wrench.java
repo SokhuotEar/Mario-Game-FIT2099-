@@ -5,9 +5,6 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.utils.Status;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * The class Wrench is a child class of WeaponItem and implements Weapon,
  * which shows that it has a behavior of a weapon, and also Buyable, since

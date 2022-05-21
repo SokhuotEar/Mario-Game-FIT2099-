@@ -149,6 +149,10 @@ public class PowerStar extends Item implements Consumable, Buyable {
         return PRICE;
     }
 
+    /**
+     * Whether the consumable should stay in the Actor's inventory
+     * @return true
+     */
     @Override
     public boolean stayInInventory() {
         return true;  // should stay in inventory so that the effect can last for 10 turns

@@ -2,13 +2,11 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.utils.Status;
 import game.actions.ConsumeAction;
-import game.actors.Player;
 
 /**
  * The class FireFlower is a child class of Item class which allow
@@ -65,11 +63,6 @@ public class FireFlower extends Item implements Consumable {
         }
         lifetime--;
 
-        // Im not sure if we should have this dependency with Display
-        //if (lifetime > 0) {
-            //String println = lifetime + " rounds left.";
-            //new Display().println(println);
-        //}
         if (lifetime == 0)
         {
             // remove the expired consumed FireFlower from the Actors inventory

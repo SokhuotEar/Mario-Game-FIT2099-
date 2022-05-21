@@ -13,7 +13,7 @@ public class Key extends Item {
      * The instance of this item, since there is only one key to use to free Peach
      */
     private static Key instance = null;
-    /***
+    /**
      * Constructor.
      */
     private Key() {
@@ -21,6 +21,10 @@ public class Key extends Item {
         this.addCapability(Status.CAN_FREE_PEACH);
     }
 
+    /**
+     * Gets the key
+     * @return The Key
+     */
     public static Key getInstance() {
         if (Key.instance == null) {
             instance = new Key();
