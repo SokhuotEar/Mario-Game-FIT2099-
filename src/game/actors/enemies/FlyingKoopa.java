@@ -11,4 +11,9 @@ public class FlyingKoopa extends Koopa{
         this.addCapability(Status.FLYING);
         this.addLine("Pam pam pam!");
     }
+
+    @Override
+    public String toString() {
+        return "Flying Koopa";
+    }
 }
