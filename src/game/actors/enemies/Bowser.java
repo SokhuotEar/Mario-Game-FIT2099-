@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actors.enemies.behaviours.BehaviourPriority;
 import game.actors.enemies.behaviours.FireAttackBehaviour;
 import game.items.Key;
+import game.reset.ResetManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,14 @@ public class Bowser extends Enemy {
      */
     @Override
     public void resetInstance(GameMap map) {
+        map = this.initialPosition.map();
+
+        // If Bowser is not in the map, don't do anything, otherwise, return him to original position:
+        if (!map.contains(this)) {
+            ResetManager.getInstance().cleanUp(this);
+            return;
+        }
+
         // If there's an actor in the initial spot, move the actor to an adjacent square:
         if (this.initialPosition.containsAnActor()) {
             boolean moved = false;
