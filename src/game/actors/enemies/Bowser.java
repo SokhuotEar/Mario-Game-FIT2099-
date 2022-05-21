@@ -28,7 +28,7 @@ public class Bowser extends Enemy {
         lines.add("Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!");
         this.setLines(lines);
         this.addItemToInventory(Key.getInstance());
-        this.addBehaviour(BehaviourPriority.FIRE_ATTACK.ordinal(), new FireAttackBehaviour());
+        this.addBehaviour(BehaviourPriority.ATTACK.ordinal(), new FireAttackBehaviour());
         this.initialPosition = null;
         this.setBaseAttackDamage(80);
     }
