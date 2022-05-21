@@ -6,9 +6,21 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.positions.WarpPipe;
 
+/**
+ * Special Action for an Actor entering a warp pipe
+ * @author Sok Huot Ear, Satya Jhaveri
+ * @version 1.0
+ */
 public class TeleportAction extends Action {
-    private Location destination;
+    /**
+     * The destination location for this teleport action
+     */
+    private final Location destination;
 
+    /**
+     * Constructor
+     * @param teleportDestination The location to teleport to if this action is executed
+     */
     public TeleportAction(Location teleportDestination) {
         this.destination = teleportDestination;
     }

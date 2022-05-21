@@ -7,15 +7,28 @@ import game.actors.enemies.behaviours.FollowBehaviour;
 import game.items.Drinkable;
 import game.positions.Fountain;
 
+/**
+ * Special Action that allows Actors to drink.
+ *
+ * @author Satya Jhaveri, Klarissa Jutivannadevi
+ * @version 1.0
+ */
 public class DrinkAction extends Action {
-    private Fountain fountain;
+    /**
+     * The Fountain that the drink action will be drinking from if it is executed
+     */
+    private final Fountain fountain;
 
+    /**
+     * Constructor.
+     * @param drinkFountain the fountain that the drink action will be drinking from if it is executed
+     */
     public DrinkAction(Fountain drinkFountain) {
         this.fountain = drinkFountain;
     }
 
     /**
-     * Perform the Action.
+     * Perform the DrinkAction.
      *
      * @param actor The actor performing the action.
      * @param map   The map the actor is on.

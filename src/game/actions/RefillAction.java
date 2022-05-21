@@ -7,9 +7,22 @@ import game.items.Bottle;
 import game.items.Drinkable;
 import game.positions.Fountain;
 
+/**
+ * Special Action that allows Actors with a Bottle to fill up the bottle from a Fountain
+ *
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class RefillAction extends Action {
-    private Fountain fountain;
+    /**
+     * The fountain that the Bottle will be filled from if this action is executed
+     */
+    private final Fountain fountain;
 
+    /**
+     * Constructor.
+     * @param drinkFountain The fountain that the Bottle will be filled from if this action is executed
+     */
     public RefillAction(Fountain drinkFountain) {
         this.fountain = drinkFountain;
     }

@@ -25,8 +25,8 @@ public class BuyItemAction extends Action{
     Buyable buyable;
 
     /**
-     * Get the price of the buyable objec
-     * @param buyable an object which is buyable
+     * Get the price of the buyable object
+     * @param buyable an object which implements buyable
      */
     public BuyItemAction(Buyable buyable) {
         this.buyable = buyable;

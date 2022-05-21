@@ -91,7 +91,7 @@ public class Toad extends NPC {
 
 
             if (!Bottle.isBottleTaken()) {
-                actions.add(new TakeBottleAction());
+                actions.add(new TakeBottleAction(this));
             }
         }
         return actions;

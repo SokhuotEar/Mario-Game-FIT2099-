@@ -4,7 +4,12 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-public class WinGameAction extends Action {
+/**
+ * Special Action for Freeing Peach and winning the game
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
+public class FreePeachAction extends Action {
     /**
      * Perform the Action.
      *

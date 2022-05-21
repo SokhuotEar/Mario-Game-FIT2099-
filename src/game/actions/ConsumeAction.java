@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class ConsumeAction extends Action {
 
     /**
-     * Current item
+     * The consumable item
      */
     private final Consumable consumableItem;
 

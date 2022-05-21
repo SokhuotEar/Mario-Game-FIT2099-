@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.utils.Status;
-import game.actors.enemies.Enemy;
 
 /**
  * Special Action for attacking other Actors.
@@ -35,7 +34,10 @@ public class AttackAction extends Action {
 	 */
 	protected Random rand = new Random();
 
-	protected boolean attackSuceeded;
+	/**
+	 * Whether the attack succeeded
+	 */
+	protected boolean attackSucceeded;
 
 	/**
 	 * Constructor.
@@ -46,7 +48,7 @@ public class AttackAction extends Action {
 	public AttackAction(Actor target, String direction) {
 		this.target = target;
 		this.direction = direction;
-		this.attackSuceeded = true;
+		this.attackSucceeded = true;
 	}
 
 	/**
@@ -72,7 +74,7 @@ public class AttackAction extends Action {
 
 
 				if (!(rand.nextInt(100) <= weapon.chanceToHit())) {
-					this.attackSuceeded = false;
+					this.attackSucceeded = false;
 					return actor + " misses " + target + ".";
 				}
 
@@ -115,7 +117,6 @@ public class AttackAction extends Action {
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " " + actor.getWeapon().verb() + " " + target + " at " + direction;
-		//return actor + " attacks " + target + " at " + direction;
 	}
 
 
