@@ -9,22 +9,46 @@ import game.actions.RefillAction;
 import game.items.Bottle;
 import game.items.Drinkable;
 import game.utils.Status;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An abstract class that different types of fountains will extend
+ * @author Satya Jhaveri, Klarissa Jutivannadevi
+ * @version 1.0
+ */
 public abstract class Fountain extends Ground {
-    private static List<Fountain> fountainList = new ArrayList<>();
-    private static int maxCapacity = 10;
+    /**
+     * Static list of all fountains
+     */
+    private static final List<Fountain> fountainList = new ArrayList<>();
+
+    /**
+     * The maximum capacity of drinks that a fountain can supply
+     */
+    private static final int maxCapacity = 10;
+
+    /**
+     * The fountains current capacity
+     */
     private int capacity;
-    private int emptyCount;  // number of turns it's been empty for
-    private Drinkable drink;
+
+    /**
+     * A count for the number of turns the fountain has been empty for
+     */
+    private int emptyCount;
+
+    /**
+     * The drink that the fountain can provide
+     */
+    private final Drinkable drink;
 
 
     /**
      * Constructor.
      *
      * @param displayChar character to display for this type of Fountain
+     * @param drinkType The Drinkable item that this fountain will supply
      */
     public Fountain(char displayChar, Drinkable drinkType) {
         super(displayChar);
@@ -36,19 +60,37 @@ public abstract class Fountain extends Ground {
     }
 
     // gets capacity of the fountain
+
+    /**
+     * Gets the fountains capacity
+     * @return The capacity of the fountain
+     */
     public int getCapacity() {
         return this.capacity;
     }
 
+    /**
+     * Gets the fountain's maximum capacity
+     * @return The maximum capacity of the fountain
+     */
     public int getMaxCapacity() {
         return maxCapacity;
     }
 
+    /**
+     * Gets a drink from the Fountain
+     * @return A Drinkable instance
+     */
     public Drinkable getDrink() {
         this.capacity--;
         return this.drink;
     }
 
+    /**
+     * Gets an instance of the Fountain
+     * @param ground A ground item to get the Fountain instance of
+     * @return A fountain
+     */
     public static Fountain getInstance(Ground ground) {
         if (fountainList.contains(ground)) {
             for (Fountain f : fountainList) {
@@ -60,6 +102,10 @@ public abstract class Fountain extends Ground {
         return null;
     }
 
+    /**
+     * Gets the name of the drink
+     * @return The name of the drink that this fountain provides
+     */
     public String getDrinkName() {
         return this.drink.toString();
     }
@@ -91,7 +137,6 @@ public abstract class Fountain extends Ground {
 
     /**
      * Method called once every turn
-     *
      * @param location The location of the Ground
      */
     @Override

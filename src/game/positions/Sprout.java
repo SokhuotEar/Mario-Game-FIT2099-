@@ -4,10 +4,17 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.enemies.Goomba;
 import game.items.FireFlower;
-import game.reset.ResetManager;
 import game.utils.RNG;
 
+/**
+ * Sprout Tree Class.
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class Sprout extends Tree{
+    /**
+     * Constructor
+     */
     public Sprout() {
         super('+');
     }

@@ -14,33 +14,60 @@ import game.utils.Status;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Warp Pipe class
+ * @author Sok Huot Ear, Satya Jhaveri
+ * @version 1.0
+ */
 public class WarpPipe extends HighGround implements Resettable {
+    /**
+     * The age of the warp pipe
+     */
     private int age;
-    private boolean spawnPlant;
-    private Location destination;
-    private Location location;
-    private static List<WarpPipe> pipeList = new ArrayList<>();
 
-    /***
-     * Constructor
-     * This is used to create a Warp pipe
+    /**
+     * Whether the pipe should spawn a Piranha plant
+     */
+    private boolean spawnPlant;
+
+    /**
+     * The destination that the warp pipe will teleport to
+     */
+    private Location destination;
+
+    /**
+     * Collection of all WarpPipes
+     */
+    private static final List<WarpPipe> pipeList = new ArrayList<>();
+
+    /**
+     * Constructor.
      */
     public WarpPipe() {
         super('c');
         this.spawnPlant = true;
         this.age = 0;
         this.destination = null;
-        this.location = null;
         pipeList.add(this);
         this.registerInstance();
     }
 
+    /**
+     * Checks if a ground is a WarpPipe
+     * @param ground the ground to check
+     * @return true if the ground is a WarpPipe
+     */
     public static boolean isInstance(Ground ground) {
         return pipeList.contains(ground);
     }
 
+    /**
+     * Gets a WarpPipe from Ground
+     * @param ground The ground
+     * @return The WarpPipe
+     */
     public static WarpPipe getInstance(Ground ground) {
-        if (isInstance(ground)) {
+        if (WarpPipe.isInstance(ground)) {
             for (WarpPipe pipe : pipeList) {
                 if (pipe == ground) {
                     return pipe;
@@ -50,19 +77,27 @@ public class WarpPipe extends HighGround implements Resettable {
         return null;
     }
 
-
-    // Links two pipes together
+    /**
+     * Links two warp pipes together
+     * @param pipe1 A warp pipe
+     * @param position1 The location of pipe1
+     * @param pipe2 A second warp pipe
+     * @param position2 The location of pipe2
+     */
     public static void linkPipes(WarpPipe pipe1, Location position1, WarpPipe pipe2, Location position2) {
         pipe1.destination = position2;
-        pipe1.location = position1;
         pipe2.destination = position1;
-        pipe2.location = position2;
     }
 
+    /**
+     * Method called once every turn
+     * @param currentLocation The location that the WarpPipe is on
+     */
     @Override
     public void tick(Location currentLocation) {
         this.age++;
         super.tick(currentLocation);
+        // If the age is over 2, spawn a piranha plant if an actor is not blocking
         if (age >= 2 && this.spawnPlant && !currentLocation.containsAnActor())
         {
             PiranhaPlant plant = new PiranhaPlant();
@@ -115,9 +150,9 @@ public class WarpPipe extends HighGround implements Resettable {
 
 
     /**
-     * Allows any classes that use this interface to reset abilities, attributes, and/or items.
+     * Resets the WarpPipe
      *
-     * @param map
+     * @param map The map that the Warp Pipe is on
      */
     @Override
     public void resetInstance(GameMap map) {

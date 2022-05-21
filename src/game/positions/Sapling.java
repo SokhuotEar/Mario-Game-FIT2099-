@@ -6,7 +6,15 @@ import game.items.Coin;
 import game.items.FireFlower;
 import game.utils.RNG;
 
+/**
+ * Sapling Tree Class.
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class Sapling extends Tree{
+    /**
+     * Constructor
+     */
     public Sapling() {
         super('t');
     }

@@ -1,40 +1,24 @@
 package game.positions;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
 import game.utils.RNG;
-import game.utils.Status;
-import game.items.FireFlower;
 import game.reset.ResetManager;
 import game.reset.Resettable;
-import game.actors.enemies.Goomba;
-import game.actors.enemies.Koopa;
-import game.items.Coin;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
- * Class Tree is a child class of Ground and implement Resettable
- * that is used for reset game.
- * @author Sok Huot Ear
+ * The abstract Tree Class
+ * @author Sok Huot Ear, Satya Jhaveri
  * @version 1.0
  */
 public abstract class Tree extends HighGround implements Resettable {
-
-    //attribute
     /**
-     * age of tree
+     * the age of the tree
      */
     private int age;
 
 
     /**
-     * Constructor. Starts to create Tree from sprout
+     * Constructor.
      * @param displayChar the character used to represent the tree on the map
      */
 
@@ -44,16 +28,24 @@ public abstract class Tree extends HighGround implements Resettable {
         this.registerInstance();
     }
 
+    /**
+     * Increments the age of the tree
+     */
     public void incrementAge() {
         age++;
     }
 
+    /**
+     * Gets the age of the tree
+     * @return the age of the tree
+     */
     public int getAge() {
         return age;
     }
 
     /**
      * Resets the tree object
+     * @param map The map that the Tree is on
      */
     @Override
     public void resetInstance(GameMap map) {

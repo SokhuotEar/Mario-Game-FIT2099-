@@ -8,11 +8,15 @@ import game.actors.enemies.FlyingKoopa;
 import game.actors.enemies.Koopa;
 import game.utils.RNG;
 import game.utils.Status;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Mature Tree Class.
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class Mature extends Tree{
     /**
      * Constructor. Starts to create Tree from sprout
@@ -64,7 +68,7 @@ public class Mature extends Tree{
             }
         }
 
-        // If old enough, spawn new tree:
+        // Every 5 rounds, spawn new tree:
         if (this.getAge()%5== 0) {
             // create list to contain fertile surrounding squares:
             List<Location> fertileLocations = new ArrayList<>();

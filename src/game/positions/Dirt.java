@@ -10,7 +10,7 @@ import game.utils.Status;
  */
 public class Dirt extends Ground {
 	/**
-	 * Constructor which create and add dirt to dirtList
+	 * Constructor
 	 */
 	public Dirt() {
 		super('.');
