@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.enemies.FlyingKoopa;
 import game.actors.enemies.Koopa;
+import game.reset.ResetManager;
 import game.utils.RNG;
 import game.utils.Status;
 import java.util.ArrayList;
@@ -89,6 +90,8 @@ public class Mature extends Tree{
         // 20% chance to wither and die:
         if (RNG.rng(20)) {
             location.setGround(new Dirt());
+            // Remove from the reset manager:
+            ResetManager.getInstance().cleanUp(this);
         }
     }
 }
