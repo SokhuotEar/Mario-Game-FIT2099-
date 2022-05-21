@@ -11,11 +11,24 @@ import game.actors.enemies.behaviours.SpeakBehaviour;
 import java.util.*;
 
 /**
- * This is a class that all non playable actors will extend from. It encapsulates the speaking that all NPCs will do
+ * This is a class that all non playable actors will extend from. It encapsulates the speaking that all NPCs will do.
+ * @author Satya Jhaveri
+ * @version 1.0
  */
 public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
-    private SpeakBehaviour speakBehaviour;  // might change this
+    /**
+     * A special SpeakBehaviour attribute for implementing speaking
+     */
+    private SpeakBehaviour speakBehaviour;
+
+    /**
+     * An ordered collection of behaviours and their priorities
+     */
     private Map<Integer, Behaviour> behaviours; // priority, behaviour
+
+    /**
+     * The base attack damage that the NPC can inflict
+     */
     private int baseAttackDamage;
 
     /**
@@ -33,42 +46,62 @@ public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
         this.registerIntrinsicWeaponInstance();
     }
 
-    // Sets the lines for the NPCs speaking:
+    /**
+     * Sets the lines for the NPC's speaking
+     * @param lines A list of string that the NPC can say
+     */
     public void setLines(List<String> lines)
     {
         this.speakBehaviour = new SpeakBehaviour(lines);
     }
 
-    // Adds a line for the NPC speaking:
+    /**
+     * Adds a new line that the NPC can say
+     * @param line a new line that the NPC can say
+     */
     public void addLine(String line)
     {
         this.speakBehaviour.addLine(line);
     }
 
-    // Removes all lines for NPC speaking:
+    /**
+     * Removes all lines for the NPC speaking
+     */
     public void removeLines() {
         this.speakBehaviour = null;
     }
 
-    // Adds a behaviour:
+    /**
+     * Adds a behaviour to the NPC
+     * @param key The priority of the Behaviour being added
+     * @param behaviour The behaviour to add
+     */
     public void addBehaviour(Integer key, Behaviour behaviour)
     {
         this.behaviours.put(key, behaviour);
     }
 
-    // Removes a behaviour:
+    /**
+     * Removes a behaviour
+     * @param key the priority of the behaviour to remove
+     */
     public void removeBehaviour(Integer key)
     {
         this.behaviours.remove(key);
     }
 
-    // Clears all behaviours:
+    /**
+     * Removes all behaviours
+     */
     public void clearBehaviours()
     {
         this.behaviours = new TreeMap<>();
     }
 
-    // Gets a list of behaviours:
+    /**
+     * Gets a list of all Behaviours
+     * @return a list of the NPCs Behaviours
+     */
     public List<Behaviour> getBehaviours()
     {
         return new ArrayList<>(this.behaviours.values());
@@ -77,6 +110,13 @@ public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
 
 
     // Allows the NPC to speak:
+
+    /**
+     * Allows the NPC to speak
+     * @param display a display to print the line to
+     * @param actor the actor that is speaking
+     * @param map the map that the actor is on
+     */
     public void speak(Display display, Actor actor, GameMap map)
     {
         if (this.speakBehaviour != null)
@@ -91,6 +131,10 @@ public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
         }
     }
 
+    /**
+     * Gets the current attack damage
+     * @return the current attack damage
+     */
     @Override
     public int getAttackDamage() {
         return this.baseAttackDamage;
@@ -98,10 +142,6 @@ public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
 
     /**
      * Creates and returns an intrinsic weapon.
-     * <p>
-     * By default, the Actor 'punches' for 5 damage. Override this method to create
-     * an Actor with more interesting descriptions and/or different damage.
-     *
      * @return a freshly-instantiated IntrinsicWeapon
      */
     @Override
@@ -109,11 +149,19 @@ public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
         return new IntrinsicWeapon(this.getAttackDamage(), this.getVerb());
     }
 
+    /**
+     * Increases the base attack damage
+     * @param extraAttack the amount of attack damage to increase by
+     */
     @Override
     public void increaseBaseAttack(int extraAttack) {
         this.baseAttackDamage += extraAttack;
     }
 
+    /**
+     * Sets the base attack damage
+     * @param baseDamage the new base attack damage
+     */
     @Override
     public void setBaseAttackDamage(int baseDamage) {
         this.baseAttackDamage = baseDamage;

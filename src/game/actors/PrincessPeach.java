@@ -12,12 +12,14 @@ import game.items.Key;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing the Player.
+ * @author Satya Jhaveri
+ * @version 1.0
+ */
 public class PrincessPeach extends NPC{
-
-
     /**
      * Constructor.
-     *
      */
     public PrincessPeach() {
         super("Princess Peach", 'P', 100);
@@ -61,6 +63,10 @@ public class PrincessPeach extends NPC{
         return actions;
     }
 
+    /**
+     * Gets the verb of the attack
+     * @return the verb of attack
+     */
     @Override
     public String getVerb() {
         return "does nothing to";

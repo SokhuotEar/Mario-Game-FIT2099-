@@ -7,8 +7,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.FireAttackAction;
-import game.actors.enemies.Enemy;
 import game.reset.ResetAction;
 import game.reset.Resettable;
 import game.utils.Status;
@@ -19,6 +17,7 @@ import java.util.List;
 /**
  * Class representing the Player.
  * @author FIT2099, extended by Satya Jhaveri
+ * @version 1.0
  */
 public class Player extends Actor implements Resettable, IntrinsicWeaponBooster {
 	/**
@@ -103,7 +102,7 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 
 
 	/**
-	 * ALlow the player to choose what to do next
+	 * Allow the player to choose what to do next
 	 * @param actions    collection of possible Actions for this Actor
 	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
 	 * @param map        the map containing the Actor
@@ -169,21 +168,9 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
 	}
 
-	/*
-	@Override
-	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-		ActionList actions =  new ActionList();
-		if (this.hasCapability(Status.FIREATTACK))
-		{
-			actions.add(new FireAttackAction(otherActor,direction));
-		}
-
-		return actions;
-
-	}*/
-
 	/**
 	 * Resets the player
+	 * @param map The map that the player is on
 	 */
 	@Override
 	public void resetInstance(GameMap map) {
@@ -202,26 +189,46 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 
 	}
 
+	/**
+	 * Increases the base attack damage
+	 * @param extraAttack the amount of attack damage to increase by
+	 */
 	@Override
 	public void increaseBaseAttack(int extraAttack) {
 		this.baseAttackDamage += extraAttack;
 	}
 
+	/**
+	 * Gets the current attack damage
+	 * @return the current attack damage
+	 */
 	@Override
 	public int getAttackDamage() {
 		return this.baseAttackDamage;
 	}
 
+	/**
+	 * Sets the base attack damage
+	 * @param baseDamage the new base attack damage
+	 */
 	@Override
 	public void setBaseAttackDamage(int baseDamage) {
 		this.baseAttackDamage = baseDamage;
 	}
 
+	/**
+	 * Gets the verb of the Player's attack
+	 * @return the verb of Player's attack
+	 */
 	@Override
 	public String getVerb() {
 		return "punches";
 	}
 
+	/**
+	 * Creates and returns an intrinsic weapon.
+	 * @return a freshly-instantiated IntrinsicWeapon
+	 */
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
 		return new IntrinsicWeapon(this.getAttackDamage(), "punches");

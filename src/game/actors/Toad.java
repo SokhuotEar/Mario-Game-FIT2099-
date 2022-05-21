@@ -97,6 +97,10 @@ public class Toad extends NPC {
         return actions;
     }
 
+    /**
+     * Gets the verb of the attack
+     * @return the verb of attack
+     */
     @Override
     public String getVerb() {
         return "does nothing to";
