@@ -48,6 +48,7 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 		super(name, displayChar, hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.HAS_RESET);
+		this.addCapability(Status.CAN_BUY_FROM_TOAD);
 		this.registerInstance();
 		this.wallet = new Wallet();
 		this.menu = new Menu();
@@ -90,15 +91,6 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 		return null;
 	}
 
-	/**
-	 * Removes a player from the static player list
-	 * @param actor the player to remove from the static player list
-	 */
-	private static void removeInstance(Actor actor) {
-		if (isInstance(actor)) {
-			playerList.remove(actor);
-		}
-	}
 
 
 	/**
@@ -152,10 +144,6 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 		removeCapability(Status.TALL);  // the if checking is done by the CapabilitySet.removeCapability method
 		super.hurt(points);
 
-		// If player is not conscious, remove it from the Player List
-		if (!isConscious()) {
-			removeInstance(this);
-		}
 	}
 
 
@@ -184,8 +172,9 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 			}
 		}
 
-		//add back hostility
+		//add back hostility and ability to buy from toad:
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
+		this.addCapability(Status.CAN_BUY_FROM_TOAD);
 
 	}
 

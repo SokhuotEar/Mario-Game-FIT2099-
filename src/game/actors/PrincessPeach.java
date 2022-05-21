@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.FreePeachAction;
 import game.items.Key;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,8 @@ public class PrincessPeach extends NPC{
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = super.allowableActions(otherActor, direction, map);
-        // TODO: if the other actor has a key, let them unlock peach and end the game:
-        if (otherActor.getInventory().contains(Key.getInstance())) {
+        // if the other actor can free peach, let them unlock peach and end the game:
+        if (otherActor.hasCapability(Status.CAN_FREE_PEACH)) {
             actions.add(new FreePeachAction());
         }
         return actions;

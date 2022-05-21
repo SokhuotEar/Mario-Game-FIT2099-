@@ -19,4 +19,6 @@ public enum Status {
     CANT_ENTER_LAVA,  // use this when an actor cannot walk on lava tiles
     DRINKABLE,  // use this for when a ground can geenrate drink actions
     CAN_DESTROY_KOOPA_SHELLS,  // use this when a weapon can destroy Koopa shells
+    CAN_BUY_FROM_TOAD,  // use this when an actor can buy from toad
+    CAN_FREE_PEACH,  // use this when an item gives teh ability to free peach
 }

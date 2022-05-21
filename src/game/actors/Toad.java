@@ -64,7 +64,7 @@ public class Toad extends NPC {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions =  new ActionList();
 
-        // Adding actions only if the other actor is a player:
+        // Adding actions only if the other actor can buy from Toad:
         if (Player.isInstance(otherActor)) {
             List<String> lines = new ArrayList<>();
 
