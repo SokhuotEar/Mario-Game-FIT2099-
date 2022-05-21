@@ -84,6 +84,17 @@ public class Bowser extends Enemy {
             return;
         }
 
+        // Heal bowser:
+        this.resetMaxHp(this.getMaxHp());
+
+        // Remove follow behaviour if it has it:
+        this.removeBehaviour(BehaviourPriority.FOLLOW.ordinal());
+
+        // If Bowser is in initial position, do nothing:
+        if (this.initialPosition.getActor() == this) {
+            return;
+        }
+
         // If there's an actor in the initial spot, move the actor to an adjacent square:
         if (this.initialPosition.containsAnActor()) {
             boolean moved = false;
@@ -111,11 +122,6 @@ public class Bowser extends Enemy {
             this.initialPosition.addActor(this);
         }
 
-        // Heal bowser:
-        this.resetMaxHp(this.getMaxHp());
-
-        // Remove follow behaviour if it has it:
-        this.removeBehaviour(BehaviourPriority.FOLLOW.ordinal());
     }
 
     /**
