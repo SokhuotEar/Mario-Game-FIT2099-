@@ -80,11 +80,6 @@ public abstract class Enemy extends NPC implements Resettable {
      */
     @Override
     public void resetInstance(GameMap map) {
-        // drop every item in inventory:
-        for (Item item : getInventory()) {
-            map.locationOf(this).addItem(item);
-        }
-
         if (map.contains(this)) {
             // remove Enemy from map
             map.removeActor(this);
