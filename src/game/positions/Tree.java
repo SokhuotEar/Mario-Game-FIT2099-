@@ -57,6 +57,7 @@ public abstract class Tree extends HighGround implements Resettable {
                     // 50% Chance to remove dirt
                     if (RNG.rng(50)) {
                         map.at(x,y).setGround(new Dirt());
+                        ResetManager.getInstance().cleanUp(this);
                     }
                     break;
                 }
@@ -64,12 +65,6 @@ public abstract class Tree extends HighGround implements Resettable {
             if (found) {
                 break;
             }
-            ResetManager.getInstance().cleanUp(this);
-        }
-
-        // If not found, then the tree is no longer in the map (could have been replaced by another tree):
-        if (!found) {
-            ResetManager.getInstance().cleanUp(this);
         }
     }
 
