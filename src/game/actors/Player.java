@@ -108,7 +108,7 @@ public class Player extends Actor implements Resettable, IntrinsicWeaponBooster 
 			return lastAction.getNextAction();
 
 		// Display player stats:
-		display.println(name + ": " + printHp() + "HP, Wallet: $" + wallet.getBalance() + ", Intrinsic Attack Damage: " + this.baseAttackDamage + "HP");
+		display.println(name + ": " + printHp() + "HP, Wallet: $" + wallet.getBalance() + ", Attack Damage: " + this.getWeapon().damage() + "HP");
 		if(hasCapability((Status.INVINCIBLE))) {
 			String sentence = this + " is INVINCIBLE!";
 			display.println(sentence);
