@@ -1,11 +1,14 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
-import game.actions.ConsumeAction;
-import game.positions.Drinkable;
+import game.actions.DrinkAction;
+import game.actions.DrinkFromBottleAction;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -13,7 +16,7 @@ import java.util.Stack;
  * @author Klarissa Jutivannadevi
  * @version 1.0
  */
-public class Bottle extends Item implements Consumable{
+public class Bottle extends Item {
     /**
      * Static attribute for Bottle singleton
      */
@@ -23,12 +26,13 @@ public class Bottle extends Item implements Consumable{
      */
     private Stack<Drinkable> bottleDrink = new Stack<>();
 
+    private static boolean bottleTaken = false;
+
     /***
      * Constructor of Bottle that will add an action to allow consume bottle.
      */
     private Bottle() {
         super("Bottle", 'b', false);
-        super.addAction(new ConsumeAction(this));
     }
 
     /**
@@ -40,6 +44,15 @@ public class Bottle extends Item implements Consumable{
             existingBottle = new Bottle();
         }
         return existingBottle;
+    }
+
+    public static Bottle takeBottle() {
+        bottleTaken = true;
+        return getInstance();
+    }
+
+    public static boolean isBottleTaken() {
+        return bottleTaken;
     }
 
     /**
@@ -63,18 +76,10 @@ public class Bottle extends Item implements Consumable{
      * Removing the drink that is consumed by the Player
      * @return the consumed (removed) drink
      */
-    public Drinkable removeDrink() {
+    public Drinkable popDrink() {
         return this.bottleDrink.pop();
     }
 
-    /**
-     * An override method from Consumable interface to access the Bottle
-     * @return Bottle() Item instance in the existingBottle
-     */
-    @Override
-    public Item getItem() {
-        return this.existingBottle;
-    }
 
     /**
      * To print the stack in the form of string to be displayed in ConsumeAction
@@ -92,7 +97,7 @@ public class Bottle extends Item implements Consumable{
         }
 
         for (int i = tempList.size() - 1; i > -1; i--) {
-            fountainList += tempList.get(i).fountainName();
+            fountainList += tempList.get(i).toString();
             this.bottleDrink.push(tempList.get(i));
             if (i != 0) {
                 fountainList += ", ";
@@ -102,13 +107,13 @@ public class Bottle extends Item implements Consumable{
         return fountainList;
     }
 
-    /**
-     * Method used by the ConsumeAction when the actor decided to consume the drink.
-     * @param actor the actor that will consume the consumable
-     */
-    @Override
-    public void consume(Actor actor) {
-        Bottle.getInstance().removeDrink().addPowerUp(actor);
-    }
 
+    @Override
+    public List<Action> getAllowableActions() {
+        List<Action> actions = new ArrayList<>();
+        if (this.bottleDrink.size() > 0) {
+            actions.add(new DrinkFromBottleAction(this));
+        }
+        return actions;
+    }
 }

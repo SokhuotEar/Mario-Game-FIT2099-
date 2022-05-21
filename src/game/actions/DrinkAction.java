@@ -3,14 +3,14 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.Bottle;
+import game.actors.enemies.behaviours.FollowBehaviour;
 import game.items.Drinkable;
 import game.positions.Fountain;
 
-public class RefillAction extends Action {
+public class DrinkAction extends Action {
     private Fountain fountain;
 
-    public RefillAction(Fountain drinkFountain) {
+    public DrinkAction(Fountain drinkFountain) {
         this.fountain = drinkFountain;
     }
 
@@ -23,14 +23,9 @@ public class RefillAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (actor.getInventory().contains(Bottle.getInstance())) {
-            Bottle bottle = Bottle.getInstance();
-            bottle.addDrink(this.fountain.getDrink());
-            return menuDescription(actor);
-        }
-        else {
-            return actor + " did not refill from the fountain, as they did not have the Bottle";
-        }
+        Drinkable drink = this.fountain.getDrink();
+        drink.drink(actor);
+        return menuDescription(actor);
     }
 
     /**
@@ -41,6 +36,6 @@ public class RefillAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " refills bottle from the " + this.fountain + "(" + this.fountain.getCapacity() + "/" + this.fountain.getMaxCapacity() + ")";
+        return actor + " drinks the " + this.fountain.getDrinkName();
     }
 }

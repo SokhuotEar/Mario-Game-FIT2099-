@@ -42,16 +42,7 @@ public class ConsumeAction extends Action {
     public String execute(Actor actor, GameMap map) {
         // IF actor has consumable item in inventory, remove it unless it should stay in the players inventory:
         if (actor.getInventory().contains(this.consumableItem.getItem())) {
-            if (this.consumableItem.getItem() == Bottle.getInstance()) {
-                if (Bottle.getInstance().getDrink().size() != 0) {
-                    String fountain = Bottle.getInstance().getDrink().peek().fountainName();
-                    Bottle.getInstance().consume(actor);
-                    return actor + " consumes the " + fountain;
-                }
-
-            }
-
-            else if (!this.consumableItem.stayInInventory()) {
+            if (!this.consumableItem.stayInInventory()) {
                 actor.removeItemFromInventory(this.consumableItem.getItem());
             }
         }
@@ -77,10 +68,7 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        if (consumableItem.getItem() == Bottle.getInstance() && !Bottle.getInstance().getDrink().isEmpty()) {
-            return actor + " consumes the " + Bottle.getInstance() + " " + Bottle.getInstance().printContent();
-        }
-        else
-            return actor + " consumes the " + consumableItem; }
+        return actor + " consumes the " + consumableItem;
+    }
 
 }

@@ -3,27 +3,20 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.items.Bottle;
 import game.items.Consumable;
 
 /**
- * A class inheriting Action class used when Player take the
- * Bottle from Toad.
+ * A class inheriting Action class used when Player takes the Bottle from Toad.
  * @author Klarissa Jutivannadevi
  * @version 1.0
  */
 public class TakeBottleAction extends Action {
 
     /**
-     * An object from Consumable class
+     * Constructor.
      */
-    private Consumable consumableItem;
-
-    /**
-     * Constructor of TakeBottleAction
-     * @param consumable which is the Bottle.
-     */
-    public TakeBottleAction(Consumable consumable) {
-        this.consumableItem = consumable;
+    public TakeBottleAction() {
     }
 
     /**
@@ -35,7 +28,7 @@ public class TakeBottleAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        actor.addItemToInventory(this.consumableItem.getItem());
+        actor.addItemToInventory(Bottle.takeBottle());
         return menuDescription(actor);
     }
 
@@ -46,6 +39,6 @@ public class TakeBottleAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " obtains the " + this.consumableItem + " from Toad";
+        return actor + " obtains the Bottle from Toad";
     }
 }

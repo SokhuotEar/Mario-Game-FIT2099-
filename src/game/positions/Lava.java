@@ -31,7 +31,7 @@ public class Lava extends Ground {
             //the player takes damage
             player.hurt(damage);
 
-            String println = player + "takes " + damage + " damage due to fire burning.";
+            String println = player + "takes " + damage + " damage from stepping on Lava.";
             new Display().println(println);
         }
     }

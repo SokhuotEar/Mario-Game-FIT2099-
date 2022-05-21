@@ -96,8 +96,9 @@ public class Toad extends NPC {
             actions.add(new BuyItemAction(new Wrench()));
             actions.add(new BuyItemAction(new PowerStar()));
 
-            if (!otherActor.getInventory().contains(Bottle.getInstance())) {
-                actions.add(new TakeBottleAction(Bottle.getInstance()));
+
+            if (!Bottle.isBottleTaken()) {
+                actions.add(new TakeBottleAction());
             }
         }
         return actions;
