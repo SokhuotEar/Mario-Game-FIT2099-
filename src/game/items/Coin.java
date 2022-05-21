@@ -48,6 +48,8 @@ public class Coin extends Item implements Resettable{
                 if (map.at(x,y).getItems().contains(this)) {
                     found = true;
                     map.at(x,y).removeItem(this);
+                    // remove the Coin from the Reset Manager:
+                    ResetManager.getInstance().cleanUp(this);
                     break;
                 }
             }
@@ -55,8 +57,5 @@ public class Coin extends Item implements Resettable{
                 break;
             }
         }
-
-        // remove the Coin from the Reset Manager:
-        ResetManager.getInstance().cleanUp(this);
     }
 }
