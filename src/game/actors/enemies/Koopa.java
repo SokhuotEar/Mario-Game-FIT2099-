@@ -82,6 +82,9 @@ public class Koopa extends Enemy {
         // set the dormant attribute to true
         dormant = true;
 
+        // make the koopa immune to fire:
+        this.addCapability(Status.IMMUNE_TO_FIRE);
+
         // update the display character
         setDisplayChar('D');
 

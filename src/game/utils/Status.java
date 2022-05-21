@@ -21,4 +21,5 @@ public enum Status {
     CAN_DESTROY_KOOPA_SHELLS,  // use this when a weapon can destroy Koopa shells
     CAN_BUY_FROM_TOAD,  // use this when an actor can buy from toad
     CAN_FREE_PEACH,  // use this when an item gives teh ability to free peach
+    IMMUNE_TO_FIRE, // use this when actor does not take damage from fire
 }
