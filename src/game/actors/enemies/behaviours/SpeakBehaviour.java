@@ -4,8 +4,6 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.SpeakAction;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -21,7 +19,7 @@ public class SpeakBehaviour implements Behaviour {
     private final List<String> lines;
 
     /**
-     * Whether or not the exhibitor of this behaviour spoke in the previous round
+     * Whether the exhibitor of this behaviour spoke in the previous round
      */
     private boolean justSpoke;
 

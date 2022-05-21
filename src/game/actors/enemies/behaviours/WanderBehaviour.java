@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.enemies.behaviours.Behaviour;
 
 /**
  * A class that figures out a MoveAction that will move the actor randomly
