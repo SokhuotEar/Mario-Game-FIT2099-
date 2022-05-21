@@ -15,7 +15,7 @@ public class ResetManager {
      * A list of resettable instances (any classes that implements Resettable,
      * such as Player implements Resettable will be stored in here)
      */
-    private final List<Resettable> resettableList;
+    private List<Resettable> resettableList;
 
     /**
      * A singleton reset manager instance
@@ -45,9 +45,20 @@ public class ResetManager {
      * By doing this way, it will avoid using `instanceof` all over the place.
      */
     public void run(GameMap map){
-        for (Resettable resettable : resettableList) {
-            resettable.resetInstance(map);
+        List<Resettable> newResettableList = new ArrayList<>();
+        for (int i = 0; i < resettableList.size(); i++) {
+            Resettable resettable = resettableList.get(i);
+            if (resettable != null) {
+                resettable.resetInstance(map);
+            }
+
+            // If the resettable is still not null after resetting it, keep it:
+            if (resettableList.get(i) != null) {
+                newResettableList.add(resettableList.get(i));
+            }
         }
+
+        this.resettableList = newResettableList;
     }
 
     /**
@@ -63,6 +74,8 @@ public class ResetManager {
      * @param resettable resettable object
      */
     public void cleanUp(Resettable resettable){
-            //resettableList.remove(resettable);
+        if (resettableList.contains(resettable)) {
+            resettableList.set( resettableList.indexOf(resettable), null);
+        }
     }
 }
