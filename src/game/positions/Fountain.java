@@ -8,6 +8,7 @@ import game.actions.DrinkAction;
 import game.actions.RefillAction;
 import game.items.Bottle;
 import game.items.Drinkable;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public abstract class Fountain extends Ground {
     private static List<Fountain> fountainList = new ArrayList<>();
     private static int maxCapacity = 10;
     private int capacity;
-    private int emptyCount;  // nubmer of turns it's been empty for
+    private int emptyCount;  // number of turns it's been empty for
     private Drinkable drink;
 
 
@@ -31,6 +32,7 @@ public abstract class Fountain extends Ground {
         this.emptyCount = 0;
         this.drink = drinkType;
         fountainList.add(this);
+        this.addCapability(Status.DRINKABLE);
     }
 
     // gets capacity of the fountain
@@ -45,10 +47,6 @@ public abstract class Fountain extends Ground {
     public Drinkable getDrink() {
         this.capacity--;
         return this.drink;
-    }
-
-    public static boolean isInstance(Ground ground) {
-        return fountainList.contains(ground);
     }
 
     public static Fountain getInstance(Ground ground) {

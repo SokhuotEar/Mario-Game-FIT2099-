@@ -46,9 +46,6 @@ public abstract class Enemy extends NPC implements Resettable {
         this.registerInstance();
     }
 
-
-
-
     /**
      * At the moment, we only make it can be attacked by Player.
      * @param otherActor the Actor that might perform an action.

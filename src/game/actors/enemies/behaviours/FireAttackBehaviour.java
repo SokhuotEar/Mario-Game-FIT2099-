@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.FireAttackAction;
-import game.positions.Fire;
 import game.utils.Status;
 
 public class FireAttackBehaviour implements Behaviour{

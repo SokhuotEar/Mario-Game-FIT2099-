@@ -3,7 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.positions.Fire;
+import game.items.Fire;
 
 /**
  * Special Action for attacking other Actors with Fire.

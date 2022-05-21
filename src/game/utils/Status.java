@@ -17,4 +17,5 @@ public enum Status {
     SPAWNED_FROM_PIPE, // use this for when an actor spawned from a pipe (exclusively used by WarpPipe)
     CANT_ENTER_FLOOR,   // use this when an actor cannot walk on floor tiles
     CANT_ENTER_LAVA,  // use this when an actor cannot walk on lava tiles
+    DRINKABLE,  // use this for when a ground can geenrate drink actions
 }

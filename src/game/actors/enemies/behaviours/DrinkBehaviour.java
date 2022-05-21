@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.DrinkAction;
 import game.items.Drinkable;
 import game.positions.Fountain;
+import game.utils.Status;
 
 /**
  * A class that generate DrinkAction when stand in the fountain
@@ -31,7 +32,7 @@ public class DrinkBehaviour implements Behaviour {
         }
         else {
             Location actorLocation = map.locationOf(actor);
-            if (Fountain.isInstance(actorLocation.getGround())) {
+            if (actorLocation.getGround().hasCapability(Status.DRINKABLE)) {
                 Fountain fountain = Fountain.getInstance(actorLocation.getGround());
                 this.justDrank = true;
                 return new DrinkAction(fountain);

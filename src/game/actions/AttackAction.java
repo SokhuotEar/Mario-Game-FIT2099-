@@ -96,8 +96,6 @@ public class AttackAction extends Action {
 				// remove actor
 				map.removeActor(target);
 
-				// if the dead actor is an enemy, remove it from the static Enemy list:
-				Enemy.removeInstance(target);
 				result += System.lineSeparator() + target + " is killed.";
 			}
 		}

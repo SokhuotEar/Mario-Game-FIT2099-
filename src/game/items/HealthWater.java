@@ -15,7 +15,7 @@ public class HealthWater extends Item implements Drinkable {
 
     @Override
     public void drink(Actor actor) {
-        // Health water increases the max HP by 50
-        actor.increaseMaxHp(HEAL_POINTS);
+        // Health water heals Actor by 50HP
+        actor.heal(HEAL_POINTS);
     }
 }

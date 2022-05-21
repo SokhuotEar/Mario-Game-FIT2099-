@@ -56,11 +56,6 @@ public class Koopa extends Enemy {
         // Make Koopa go dormant if not conscious:
         if (!dormant && !isConscious()) {
                 goDormant();
-                addInstance(this);  // add the enemy instance back since the super method removes unconcious
-        }
-
-        if (isConscious()) {
-            removeInstance(this);
         }
     }
 
