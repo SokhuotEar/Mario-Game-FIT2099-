@@ -3,6 +3,10 @@ package game.actors.enemies.behaviours;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import game.actions.DrinkAction;
+import game.items.Drinkable;
+import game.positions.Fountain;
 
 /**
  * A class that generate DrinkAction when stand in the fountain
@@ -11,23 +15,28 @@ import edu.monash.fit2099.engine.positions.GameMap;
  */
 
 public class DrinkBehaviour implements Behaviour {
+    private boolean justDrank;
+
+    public DrinkBehaviour() {
+        // Let enemies drink only every other turn, otherwise while they drink the player can easily kill them, or they get too overpowered by the water
+        this.justDrank = false;
+    }
 
 //    private final Drinkable drinkable;
 
     @Override
     public Action getAction(Actor actor, GameMap map) {
-
-//        if(!map.contains(target) || !map.contains(actor))
-//            return null;
-//
-//        Location here = map.locationOf(actor);
-//        Location there = map.locationOf(target);
-//        for (Exit exit : here.getExits()) {
-//            Location destination = exit.getDestination();
-//            if (destination == there) {
-//                return new AttackAction(target, exit.getName());
-//            }
-//        }
+        if (this.justDrank) {
+            this.justDrank = false;
+        }
+        else {
+            Location actorLocation = map.locationOf(actor);
+            if (Fountain.isInstance(actorLocation.getGround())) {
+                Fountain fountain = Fountain.getInstance(actorLocation.getGround());
+                this.justDrank = true;
+                return new DrinkAction(fountain);
+            }
+        }
         return null;
     }
 }
