@@ -1,4 +1,4 @@
-package game.actors.enemies.behaviours;
+package game.actors.behaviours;
 
 /**
  * Enumeration to track priorities of Behaviours

@@ -8,8 +8,8 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actors.enemies.behaviours.BehaviourPriority;
-import game.actors.enemies.behaviours.FireAttackBehaviour;
+import game.actors.behaviours.BehaviourPriority;
+import game.actors.behaviours.FireAttackBehaviour;
 import game.items.Key;
 import game.reset.ResetManager;
 

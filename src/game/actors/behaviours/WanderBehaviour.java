@@ -1,4 +1,4 @@
-package game.actors.enemies.behaviours;
+package game.actors.behaviours;
 
 import java.util.ArrayList;
 import java.util.Random;

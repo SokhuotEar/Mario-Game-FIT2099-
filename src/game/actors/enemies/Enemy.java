@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.actions.FireAttackAction;
@@ -13,7 +12,7 @@ import game.actors.NPC;
 import game.reset.ResetManager;
 import game.reset.Resettable;
 import game.utils.Status;
-import game.actors.enemies.behaviours.*;
+import game.actors.behaviours.*;
 
 
 /**
@@ -111,7 +110,7 @@ public abstract class Enemy extends NPC implements Resettable {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         this.speak(display, this, map);
-        for(game.actors.enemies.behaviours.Behaviour Behaviour : getBehaviours()) {
+        for(game.actors.behaviours.Behaviour Behaviour : getBehaviours()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
