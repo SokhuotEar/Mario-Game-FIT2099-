@@ -72,14 +72,7 @@ public class Toad extends NPC {
             lines.add("Being imprisoned in these walls can drive a fungus crazy :(");
 
             // Add wrench line if actor is not holding a wrench
-            boolean hasWrench = false;
-            for (Item item : otherActor.getInventory()) {
-                if (Wrench.isInstance(item)) {
-                    hasWrench = true;
-                    break;
-                }
-            }
-            if (!hasWrench) {
+            if (!otherActor.hasCapability(Status.CAN_DESTROY_KOOPA_SHELLS)) {
                 lines.add("You might need a wrench to smash Koopa's hard shells.");
             }
 

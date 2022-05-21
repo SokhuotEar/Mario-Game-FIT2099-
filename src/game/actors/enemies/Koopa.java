@@ -96,12 +96,9 @@ public class Koopa extends Enemy {
         else {  // if the koopa is dormant, it can only be attacked if the other actor has a wrench
             if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
                 ActionList actions =  new ActionList();
-                // iterate over the attackers' inventory to check if they have a wrench
-                for (Item item : otherActor.getInventory()) {
-                    if (Wrench.isInstance(item)){
-                        actions.add(new AttackAction(this, direction));
-                        break;
-                    }
+                // check if they have a wrench
+                if (otherActor.hasCapability(Status.CAN_DESTROY_KOOPA_SHELLS)) {
+                    actions.add(new AttackAction(this, direction));
                 }
                 return actions;
             }

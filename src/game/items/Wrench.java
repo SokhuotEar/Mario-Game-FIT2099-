@@ -3,6 +3,7 @@ package game.items;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +16,6 @@ import java.util.List;
  * @version 1.0
  */
 public class Wrench extends WeaponItem implements Weapon, Buyable {
-    /**
-     * Static list of all wrenches
-     */
-    private static final List<Wrench> wrenchList = new ArrayList<>();
 
     /**
      * The price of the Wrench
@@ -31,17 +28,9 @@ public class Wrench extends WeaponItem implements Weapon, Buyable {
      */
     public Wrench() {
         super("wrench", 'w', 50, "uses wrench to hit", 80);
-        wrenchList.add(this);
+        this.addCapability(Status.CAN_DESTROY_KOOPA_SHELLS);
     }
 
-    /**
-     * Check whether wrenchList contains wrench
-     * @param item the item to be checked
-     * @return boolean to tell whether it exist or not
-     */
-    public static boolean isInstance(Item item) {
-        return wrenchList.contains(item);
-    }
 
     /**
      * Accessor function for the price of the Wrench

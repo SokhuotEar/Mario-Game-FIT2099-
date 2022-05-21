@@ -18,4 +18,5 @@ public enum Status {
     CANT_ENTER_FLOOR,   // use this when an actor cannot walk on floor tiles
     CANT_ENTER_LAVA,  // use this when an actor cannot walk on lava tiles
     DRINKABLE,  // use this for when a ground can geenrate drink actions
+    CAN_DESTROY_KOOPA_SHELLS,  // use this when a weapon can destroy Koopa shells
 }
