@@ -20,14 +20,6 @@ public class Wallet{
     }
 
     /**
-     * Sets the balance of the wallet
-     * @param balance the balance to put in the wallet
-     */
-    public void setBalance(int balance){
-        this.balance = balance;
-    }
-
-    /**
      * Adds a certain amount of money to the wallet
      * @param value the money to be added
      */
