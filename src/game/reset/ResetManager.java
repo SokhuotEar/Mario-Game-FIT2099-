@@ -43,6 +43,7 @@ public class ResetManager {
     /**
      * Reset the game by traversing through all the list
      * By doing this way, it will avoid using `instanceof` all over the place.
+     * @param map the map that is to be reset
      */
     public void run(GameMap map){
         List<Resettable> newResettableList = new ArrayList<>();
@@ -63,6 +64,7 @@ public class ResetManager {
 
     /**
      * Add the Resettable instance to the list
+     * @param reset the resettable instance to add to the list
      */
     public void appendResetInstance(Resettable reset){
         resettableList.add(reset);
