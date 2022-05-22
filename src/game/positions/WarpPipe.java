@@ -98,7 +98,7 @@ public class WarpPipe extends HighGround implements Resettable {
         this.age++;
         super.tick(currentLocation);
         // If the age is over 2, spawn a piranha plant if an actor is not blocking
-        if (age >= 2 && this.spawnPlant && !currentLocation.containsAnActor())
+        if (age >= 1 && this.spawnPlant && !currentLocation.containsAnActor())
         {
             PiranhaPlant plant = new PiranhaPlant();
             plant.addCapability(Status.SPAWNED_FROM_PIPE);
