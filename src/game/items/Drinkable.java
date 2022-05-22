@@ -14,4 +14,10 @@ public interface Drinkable {
      * @param actor The actor drinking this object
      */
     void drink(Actor actor);
+
+    /**
+     * Gets a descriptive string of the drink
+     * @return A string of the Drink
+     */
+    String toString();
 }

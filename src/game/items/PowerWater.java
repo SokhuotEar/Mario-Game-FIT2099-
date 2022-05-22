@@ -1,7 +1,6 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import game.actors.IntrinsicWeaponBoostedManager;
 import game.actors.IntrinsicWeaponBooster;
 
@@ -10,13 +9,7 @@ import game.actors.IntrinsicWeaponBooster;
  * @author Satya Jhaveri
  * @version 1.0
  */
-public class PowerWater extends Item implements Drinkable{
-    /**
-     * Constructor.
-     */
-    public PowerWater() {
-        super("Power Water", 'p', false);
-    }
+public class PowerWater implements Drinkable{
 
     /**
      * Method executed when this is 'drunk'
@@ -31,5 +24,14 @@ public class PowerWater extends Item implements Drinkable{
                 actorWeaponBooster.increaseBaseAttack(15);
             }
         }
+    }
+
+    /**
+     * Gets a descriptive string of the drink
+     * @return A string of the Drink
+     */
+    @Override
+    public String toString() {
+        return "Power Water";
     }
 }
