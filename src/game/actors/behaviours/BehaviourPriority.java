@@ -7,8 +7,23 @@ package game.actors.behaviours;
  */
 public enum BehaviourPriority {
     // Order is the highest priority to the lowest priority in descending order:
+    /**
+     * Priority for DrinkBehaviour
+     */
     DRINK,  // is the highest priority
+
+    /**
+     * Priority for AttackBehaviour
+     */
     ATTACK,
+
+    /**
+     * Priority for FollowBehaviour
+     */
     FOLLOW,
+
+    /**
+     * Priority for WanderBehaviour
+     */
     WANDERER,  // is the  lowest priority
 }
