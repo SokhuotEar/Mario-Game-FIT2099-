@@ -126,7 +126,7 @@ public abstract class NPC extends Actor implements IntrinsicWeaponBooster{
             // If the getAction method doesn't return null, print its execution to the display:
             if (speakAction != null)
             {
-                display.println("[" + actor + "]: \"" + speakAction.execute(actor, map) + '"');
+                display.println( speakAction.execute(actor, map));
             }
         }
     }

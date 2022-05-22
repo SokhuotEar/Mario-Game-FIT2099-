@@ -58,7 +58,7 @@ public class SpeakBehaviour implements Behaviour {
         else
         {
             this.justSpoke = true;
-            return new SpeakAction(lines.get(new Random().nextInt(lines.size())));
+            return new SpeakAction(lines.get(new Random().nextInt(lines.size())), actor);
         }
     }
 }

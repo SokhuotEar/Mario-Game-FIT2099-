@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BuyItemAction;
 import game.actions.SpeakAction;
@@ -82,7 +81,7 @@ public class Toad extends NPC {
             }
 
             Random rand = new Random();
-            actions.add(new SpeakAction(lines.get(rand.nextInt(lines.size()))));
+            actions.add(new SpeakAction(lines.get(rand.nextInt(lines.size())), this));
 
             //add the trading actions:
             actions.add(new BuyItemAction(new SuperMushroom()));

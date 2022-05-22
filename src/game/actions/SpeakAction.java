@@ -17,12 +17,19 @@ public class SpeakAction extends Action {
     private final String line;
 
     /**
-     * Overloaded constructor for SpeakAction
+     * The Actor that is saying the line
+     */
+    private final Actor speaker;
+
+    /**
+     * Constructor for SpeakAction
      *
      * @param line the line of monologue that will be spoken when this action is executed.
+     * @param speaker the actor that is speaking
      */
-    public SpeakAction(String line) {
+    public SpeakAction(String line, Actor speaker) {
         this.line = line;
+        this.speaker = speaker;
     }
 
     /**
@@ -34,7 +41,7 @@ public class SpeakAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        return line;
+        return "[" + this.speaker + "]: \"" + this.line + "\"";
     }
 
 
@@ -46,6 +53,6 @@ public class SpeakAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " speaks to Toad";
+        return actor + " speaks to " + this.speaker;
     }
 }
