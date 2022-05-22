@@ -38,7 +38,10 @@ public class Koopa extends Enemy {
     }
 
     /**
-     * Overloaded Constructor that accepts custom name.
+     * Overloaded constructor to allow for different types of Koopas
+     * @param name the name of the Koopa
+     * @param displayChar the display char that will be used to represent the Koopa
+     * @param hitPoints The starting HP of the Koopa
      */
     public Koopa(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints,true);
