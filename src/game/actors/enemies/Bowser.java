@@ -10,8 +10,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actors.behaviours.BehaviourPriority;
 import game.actors.behaviours.FireAttackBehaviour;
+import game.actors.behaviours.FollowBehaviour;
 import game.items.Key;
 import game.reset.ResetManager;
+import game.utils.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +68,15 @@ public class Bowser extends Enemy {
             this.initialPosition = map.locationOf(this);
         }
         this.speak(display, this, map);
-        return new DoNothingAction();
+        Location loc = map.locationOf(this);
+        for (Exit e : loc.getExits()) {
+            if (e.getDestination().containsAnActor()) {
+                if (e.getDestination().getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                    this.addBehaviour(BehaviourPriority.FOLLOW.ordinal(), new FollowBehaviour(e.getDestination().getActor()));
+                }
+            }
+        }
+        return super.playTurn(actions, lastAction, map, display);
     }
 
 

@@ -59,8 +59,10 @@ public class Application {
 		world.addGameMap(gameMap);
 
 		// Adding player:
-		Actor mario = new Player("Player", 'm', 1000);
+		Player mario = new Player("Player", 'm', 100000);
+		mario.setBaseAttackDamage(9000);
 		world.addPlayer(mario, gameMap.at(42, 10));
+
 
 		//Adding SuperMushroom and PowerStar
 		gameMap.at(42, 10).addItem(new SuperMushroom());
